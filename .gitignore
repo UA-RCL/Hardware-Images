@@ -1,0 +1,5 @@
+#Vivado Files
+vivado/.Xil
+vivado/RISC-V
+*.log
+vc707-riscv-release*/*
