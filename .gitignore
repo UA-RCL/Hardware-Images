@@ -1,0 +1,4 @@
+*build*
+.ipcache/
+*log*
+*.Xil*

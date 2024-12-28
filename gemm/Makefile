@@ -1,17 +1,11 @@
 PLATFORM := xilinx_u280_gen3x16_xdma_1_202211_1
-KERNEL_CONFIG_FILE :=krnl_build_options.cfg
 BUILD_DIR := ./build
 
 VPP_TEMP_DIRS :=vpp_temp_dir
 VPP_LOG_DIRS :=vpp_log_dir
 
-XCLBIN := binary.xclbin
-
 ############## Kernel Source Files  Dependencies
-# KERNEL_SRC_CPP := ./filter2d_hw.cpp ./krnl_vadd.cpp
-# KERNEL_SRC_HEADERS := ./conv2d/common.h
-# KERNEL_SRC_HEADERS := ./conv2d/common.h
-# KERNEL_INCLUDES := -I$(SRC_REPO)
+KERNEL_SRC_CPP := ./matrix_multiply.cpp 
 
 ############## Check the version of gcc avaiable and select
 ifneq ($(shell expr $(shell g++ -dumpversion) \>= 5), 1)
@@ -22,25 +16,6 @@ ifneq ($(shell expr $(shell g++ -dumpversion) \>= 5), 1)
       $(warning [WARNING]: g++ version is older. Using g++ provided by the Vitis tool : $(CXX))
    endif
 endif
-
-############## Set "HOST" Compiler Paths and Flags
-# CXXFLAGS += -I$(XILINX_XRT)/include/
-# CXXFLAGS += -I$(XILINX_VIVADO)/include/
-# ifneq ($(INPUT_TYPE), random)
-# CXXFLAGS += -I$(OPENCV_INCLUDE)/
-# endif
-# CXXFLAGS += -I$(SRC_REPO)
-# CXXFLAGS += -O3 -Wall -fmessage-length=0 -std=c++14
-
-############## Set "HOST" Set Linker Paths and Flags
-# CXXLDFLAGS := -L$(XILINX_XRT)/lib/
-# ifneq ($(INPUT_TYPE),random)
-# CXXLDFLAGS += -L$(OPENCV_LIB)/
-# endif
-# CXXLDFLAGS += -lOpenCL -pthread -lrt -lstdc++ -lxilinxopencl -fopenmp
-# ifneq ($(INPUT_TYPE),random)
-# CXXLDFLAGS += -Wl,-rpath=$(OPENCV_LIB)/ -lopencv_core -lopencv_highgui
-# endif
 
 ############## Kernel Compiler and Linker Flags
 # VPPFLAGS := -t $(TARGET)
@@ -59,12 +34,14 @@ create_dirs:
 	mkdir -p $(BUILD_DIR)/$(VPP_LOG_DIRS)
 
 ############## Kernel XO and Xclbin File Generation
+# Compile Kernel 
+$(BUILD_DIR)/mmult.xo: $(KERNEL_SRC_HEADERS) ${KERNEL_SRC_CPP}
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/$(VPP_TEMP_DIRS)
+	mkdir -p $(BUILD_DIR)/$(VPP_LOG_DIRS)
+	v++ $(VPPFLAGS) -c -k matrix_multiply  $(KERNEL_INCLUDES) ${KERNEL_SRC_CPP} -o $@
 
-# Link Kernel
-$(BUILD_DIR)/$(XCLBIN):
-	v++ $(VPPFLAGS) --config $(KERNEL_CONFIG_FILE) -l -o $@ ZIP/build/zip.xo
-
-xclbin: $(BUILD_DIR)/$(XCLBIN)
+xo: $(BUILD_DIR)/mmult.xo
 
 clean:
 	rm -rf $(BUILD_DIR)
