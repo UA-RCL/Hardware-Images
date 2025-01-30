@@ -7,12 +7,6 @@ VPP_LOG_DIRS :=vpp_log_dir
 
 XCLBIN := binary.xclbin
 
-############## Kernel Source Files  Dependencies
-# KERNEL_SRC_CPP := ./filter2d_hw.cpp ./krnl_vadd.cpp
-# KERNEL_SRC_HEADERS := ./conv2d/common.h
-# KERNEL_SRC_HEADERS := ./conv2d/common.h
-# KERNEL_INCLUDES := -I$(SRC_REPO)
-
 ############## Check the version of gcc avaiable and select
 ifneq ($(shell expr $(shell g++ -dumpversion) \>= 5), 1)
    ifndef XILINX_VIVADO
@@ -23,35 +17,12 @@ ifneq ($(shell expr $(shell g++ -dumpversion) \>= 5), 1)
    endif
 endif
 
-############## Set "HOST" Compiler Paths and Flags
-# CXXFLAGS += -I$(XILINX_XRT)/include/
-# CXXFLAGS += -I$(XILINX_VIVADO)/include/
-# ifneq ($(INPUT_TYPE), random)
-# CXXFLAGS += -I$(OPENCV_INCLUDE)/
-# endif
-# CXXFLAGS += -I$(SRC_REPO)
-# CXXFLAGS += -O3 -Wall -fmessage-length=0 -std=c++14
-
-############## Set "HOST" Set Linker Paths and Flags
-# CXXLDFLAGS := -L$(XILINX_XRT)/lib/
-# ifneq ($(INPUT_TYPE),random)
-# CXXLDFLAGS += -L$(OPENCV_LIB)/
-# endif
-# CXXLDFLAGS += -lOpenCL -pthread -lrt -lstdc++ -lxilinxopencl -fopenmp
-# ifneq ($(INPUT_TYPE),random)
-# CXXLDFLAGS += -Wl,-rpath=$(OPENCV_LIB)/ -lopencv_core -lopencv_highgui
-# endif
 
 ############## Kernel Compiler and Linker Flags
 # VPPFLAGS := -t $(TARGET)
 VPPFLAGS += --platform $(PLATFORM) -R1 --save-temps
 VPPFLAGS += --temp_dir $(BUILD_DIR)/$(VPP_TEMP_DIRS)
 VPPFLAGS += --log_dir $(BUILD_DIR)/$(VPP_LOG_DIRS)
-# VPPFLAGS += --profile.data all:all:all:all
-# VPPFLAGS += --profile.trace_memory $(TRACE_DDR)
-# ifeq ($(ENABLE_STALL_TRACE),yes)
-# 	VPPFLAGS += --profile.stall all:all:all
-# endif
 
 create_dirs: 
 	mkdir -p $(BUILD_DIR)

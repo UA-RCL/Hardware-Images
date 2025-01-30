@@ -1,8 +1,8 @@
 // #include <ap_int.h>
 #include <stdint.h>
 
-#define KERNEL_SIZE 7
-#define PADDING 3  // Padding size
+#define DATA_WIDTH 16 
+#define KERNEL_SIZE 3
 
 typedef float data_t;
 
@@ -17,38 +17,26 @@ void Filter2DKernel(data_t *input, data_t *output, data_t kernel[KERNEL_SIZE][KE
 #pragma HLS INTERFACE s_axilite port=cols bundle=control    // Input width
 #pragma HLS INTERFACE s_axilite port=return bundle=control  // Control interface
 
-    const int padded_rows = rows + 2 * PADDING;
-    const int padded_cols = cols + 2 * PADDING;
-
     data_t input_buffer[KERNEL_SIZE][1024]; // Buffer for sliding window
 #pragma HLS ARRAY_PARTITION variable=input_buffer complete dim=1
 
     // Initialize sliding window buffer (First KERNEL_SIZE rows)
     for (int r = 0; r < KERNEL_SIZE - 1; r++) {
-        for (int c = 0; c < padded_cols; c++) {
+        for (int c = 0; c < cols; c++) {
 #pragma HLS PIPELINE
-            if (r < PADDING || c < PADDING || r >= rows + PADDING || c >= cols + PADDING) {
-                input_buffer[r][c] = 0;  // Pad with zeros
-            } else {
-                input_buffer[r][c] = input[(r - PADDING) * cols + (c - PADDING)];
-            }
+            input_buffer[r][c] = input[r * cols + c];
         }
     }
 
     // Sliding window convolution
-    for (int r = 0; r < padded_rows; r++) {
-        for (int c = 0; c < padded_cols; c++) {
+    for (int r = 0; r < rows; r++) {
+        for (int c = 0; c < cols; c++) {
 #pragma HLS PIPELINE
             // Shift buffer to simulate sliding window
             for (int k = KERNEL_SIZE - 1; k > 0; k--) {
                 input_buffer[k][c] = input_buffer[k - 1][c];
             }
-
-            if (r < PADDING || c < PADDING || r >= rows + PADDING || c >= cols + PADDING) {
-                input_buffer[0][c] = 0;  // Pad with zeros
-            } else {
-                input_buffer[0][c] = input[(r - PADDING) * cols + (c - PADDING)];
-            }
+            input_buffer[0][c] = input[r * cols + c];
 
             // Perform convolution only if the window is valid
             if (r >= KERNEL_SIZE - 1 && c >= KERNEL_SIZE - 1) {

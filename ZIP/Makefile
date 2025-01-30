@@ -6,7 +6,6 @@ VPP_LOG_DIRS :=vpp_log_dir
 
 ############## Kernel Source Files  Dependencies
 KERNEL_SRC_CPP := ./zip.cpp
-# KERNEL_SRC_HEADERS := 
 
 ############## Check the version of gcc avaiable and select
 ifneq ($(shell expr $(shell g++ -dumpversion) \>= 5), 1)
@@ -23,11 +22,6 @@ endif
 VPPFLAGS += --platform $(PLATFORM) -R1 --save-temps
 VPPFLAGS += --temp_dir $(BUILD_DIR)/$(VPP_TEMP_DIRS)
 VPPFLAGS += --log_dir $(BUILD_DIR)/$(VPP_LOG_DIRS)
-# VPPFLAGS += --profile.data all:all:all:all
-# VPPFLAGS += --profile.trace_memory $(TRACE_DDR)
-# ifeq ($(ENABLE_STALL_TRACE),yes)
-# 	VPPFLAGS += --profile.stall all:all:all
-# endif
 
 create_dirs: 
 	mkdir -p $(BUILD_DIR)
