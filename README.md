@@ -17,6 +17,12 @@
     - VADD:
         - Basic vector addition (already covered by ZIP-ADD)
 
+    - Conv2D: 
+        - Kernel size: 3
+        - Stride = 1
+        - Dilation = 1
+        - Padding = 1
+
 - Firstly, all the accelerators are packaged into IPs, and then the build flow performs synthesis, P&R on the FPGA board.
 
 - Keep in mind that accelerators in this repository are still under development and requires rigorous testing. 
