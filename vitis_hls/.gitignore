@@ -1,0 +1,11 @@
+# Ignore HLS build folders
+mmult/mmult/
+Conv2D/conv_filter_prj/
+ZIP/ZIP_prj/
+# Ignore IP export directory
+IPs
+# and our logging dotfile
+.vitis_hls.log
+mmult/*/vitis_hls.log
+Conv2D/*/vitis_hls.log
+ZIP/*/vitis_hls.log

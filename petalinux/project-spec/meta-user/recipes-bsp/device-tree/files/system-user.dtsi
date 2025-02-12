@@ -1,0 +1,30 @@
+/include/ "system-conf.dtsi"
+/ {
+  udmabuf0: udmabuf@0x00 {
+    compatible = "ikwzm,u-dma-buf";
+    device-name = "udmabuf0";
+    // 1 MiB = 1048576 B = 0x100000
+    size = <0x00100000>;
+  };
+  
+  udmabuf1: udmabuf@0x04 {
+    compatible = "ikwzm,u-dma-buf";
+    device-name = "udmabuf1";
+    // 1 MiB = 1048576 B = 0x100000
+    size = <0x00100000>;
+  };
+  
+  udmabuf2: udmabuf@0x08 {
+    compatible = "ikwzm,u-dma-buf";
+    device-name = "udmabuf2";
+    // 1 MiB = 1048576 B = 0x100000
+    size = <0x00100000>;
+  };
+};
+
+&fft_0_dma {
+  compatible = "generic-uio";
+};
+&fft_1_dma {
+  compatible = "generic-uio";
+};
