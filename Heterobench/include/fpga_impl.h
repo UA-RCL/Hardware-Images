@@ -1,0 +1,37 @@
+#include <iostream>
+#include <ap_int.h>
+#include <hls_stream.h>
+#include <ap_axi_sdata.h>
+
+// #define CONV2D_STRIDE 1
+// #define CONV2D_PADDING 1
+// #define CONV2D_BIAS 0.1
+// #define POOLING_SIZE 2
+// #define POOLING_STRIDE 2
+// #define INPUT_SIZE_H 1024
+// #define INPUT_SIZE_W 2048
+// #define CONV_KERNEL_SIZE_H 3
+// #define CONV_KERNEL_SIZE_W 3
+
+// #define CONV_OUTPUT_HEIGHT ((INPUT_SIZE_H - CONV_KERNEL_SIZE_H + 2 * CONV2D_PADDING) / CONV2D_STRIDE + 1)
+// #define CONV_OUTPUT_WIDTH ((INPUT_SIZE_W - CONV_KERNEL_SIZE_W + 2 * CONV2D_PADDING) / CONV2D_STRIDE + 1)
+// #define POOLING_OUTPUT_HEIGHT ((CONV_OUTPUT_HEIGHT - POOLING_SIZE) / POOLING_STRIDE + 1)
+// #define POOLING_OUTPUT_WIDTH ((CONV_OUTPUT_WIDTH - POOLING_SIZE) / POOLING_STRIDE + 1)
+
+// #define FLATTENED_OUTPUT_SIZE (POOLING_OUTPUT_HEIGHT * POOLING_OUTPUT_WIDTH)
+
+// #define FULL_CONNECT_LAYER_SIZE_H FLATTENED_OUTPUT_SIZE
+// #define FULL_CONNECT_LAYER_SIZE_W 2048
+
+// const int x_h = 1;
+// const int x_w = FULL_CONNECT_LAYER_SIZE_H;
+// const int W_h  = FULL_CONNECT_LAYER_SIZE_H;
+// const int W_w= FULL_CONNECT_LAYER_SIZE_W;
+
+typedef float data_t;
+
+void conv2d(data_t *conv2d_input, data_t *conv2d_kernel, data_t *input_padded, data_t conv2d_bias, int stride, int padding, int input_h, int input_w, int kernel_h, int kernel_w, data_t *conv2d_output);
+void relu(data_t *relu_input, data_t *relu_output, int size);
+void max_pooling(data_t *max_pooling_input, int pool_size, int pool_stride, int input_h, int input_w, data_t *max_pooling_output);
+void dot_add(data_t *dot_add_input_x, data_t *dot_add_input_W, data_t *dot_add_input_b, data_t *dot_add_output, int x_h, int x_w, int W_h, int W_w);
+void softmax(data_t *softmax_input, data_t *exp_results, data_t *softmax_output, int size);
