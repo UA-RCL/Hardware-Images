@@ -2,3 +2,6 @@
 proj
 # ignore any vivado log/journal files created along the way
 vivado.*
+*/.Xil/
+*.jou
+*.log

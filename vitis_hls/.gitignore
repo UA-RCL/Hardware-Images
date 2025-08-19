@@ -6,6 +6,6 @@ ZIP/ZIP_prj/
 IPs
 # and our logging dotfile
 .vitis_hls.log
-mmult/*/vitis_hls.log
-Conv2D/*/vitis_hls.log
-ZIP/*/vitis_hls.log
+mmult/vitis_hls.log
+Conv2D/vitis_hls.log
+ZIP/vitis_hls.log

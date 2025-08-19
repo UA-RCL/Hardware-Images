@@ -11,3 +11,5 @@ pre-built/linux/
 *.log
 components/plnx_workspace
 components/yocto
+*/*/.Xil/
+*.log.old

@@ -33,22 +33,22 @@ config SUBSYSTEM_ENDIAN_LITTLE
 
 if SUBSYSTEM_DISTRO_PETALINUX
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.linuxcompselection
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.linuxcompselection
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.autoconfigsettings
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.autoconfigsettings
 
 endif
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.syshw
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.syshw
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.dtgsettings
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.dtgsettings
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.bootcompconfigurations
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.bootcompconfigurations
 
 if SUBSYSTEM_DISTRO_PETALINUX
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.imagepkgconfigurations
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.imagepkgconfigurations
 
 endif
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.yoctobuildsettings
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.yoctobuildsettings

@@ -9,7 +9,7 @@ config SYSTEM_ZYNQMP
         bool "ZYNQMP Configuration"
         help
           ZYNQMP Configuration for petalinux project.
-          All these config options will be in /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/config
+          All these config options will be in /home/vivado/project/petalinux/project-spec/configs/config
 
 config SUBSYSTEM_VARIANT_ZYNQMPEG
         bool
@@ -21,4 +21,4 @@ config SUBSYSTEM_DISTRO_PETALINUX
         default y
         help
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.main
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.main

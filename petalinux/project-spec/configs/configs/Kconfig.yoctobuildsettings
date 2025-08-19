@@ -27,13 +27,13 @@ endmenu
 endif
 
 if !SUBSYSTEM_DISTRO_PETALINUX
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.yoctomachinesettings
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.yoctomachinesettings
 endif
 
 if SUBSYSTEM_DISTRO_PETALINUX
 menu "Yocto Settings"
 
-source /home/vivado/project/sw/petalinux-base-8GB/project-spec/configs/configs/Kconfig.yoctomachinesettings
+source /home/vivado/project/petalinux/project-spec/configs/configs/Kconfig.yoctomachinesettings
 
 if SUBSYSTEM_SDT_FLOW
 config MC_PLNX_IMAGES_LOCATION
