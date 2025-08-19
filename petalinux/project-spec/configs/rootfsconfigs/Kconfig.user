@@ -1,0 +1,22 @@
+menu "user packages " 
+config gpio-demo  
+	 bool "gpio-demo"
+	 help
+	
+config gsl  
+	 bool "gsl"
+	 help
+	
+config peekpoke  
+	 bool "peekpoke"
+	 help
+	
+config sshfs-fuse  
+	 bool "sshfs-fuse"
+	 help
+	
+config u-dma-buf  
+	 bool "u-dma-buf"
+	 help
+	
+endmenu

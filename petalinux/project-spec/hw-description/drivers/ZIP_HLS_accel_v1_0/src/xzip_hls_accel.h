@@ -1,6 +1,9 @@
 // ==============================================================
-// Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2020.2 (64-bit)
-// Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+// Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.2 (64-bit)
+// Tool Version Limit: 2024.11
+// Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+// Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+// 
 // ==============================================================
 #ifndef XZIP_HLS_ACCEL_H
 #define XZIP_HLS_ACCEL_H
@@ -37,8 +40,12 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 #else
 typedef struct {
+#ifdef SDT
+    char *Name;
+#else
     u16 DeviceId;
-    u32 Ctrl_BaseAddress;
+#endif
+    u64 Ctrl_BaseAddress;
 } XZip_hls_accel_Config;
 #endif
 
@@ -72,8 +79,13 @@ typedef u32 word_type;
 
 /************************** Function Prototypes *****************************/
 #ifndef __linux__
+#ifdef SDT
+int XZip_hls_accel_Initialize(XZip_hls_accel *InstancePtr, UINTPTR BaseAddress);
+XZip_hls_accel_Config* XZip_hls_accel_LookupConfig(UINTPTR BaseAddress);
+#else
 int XZip_hls_accel_Initialize(XZip_hls_accel *InstancePtr, u16 DeviceId);
 XZip_hls_accel_Config* XZip_hls_accel_LookupConfig(u16 DeviceId);
+#endif
 int XZip_hls_accel_CfgInitialize(XZip_hls_accel *InstancePtr, XZip_hls_accel_Config *ConfigPtr);
 #else
 int XZip_hls_accel_Initialize(XZip_hls_accel *InstancePtr, const char* InstanceName);
