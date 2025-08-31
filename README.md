@@ -16,9 +16,15 @@ Build the all HLS IPs by running `build_IPs.sh` in `vitis_hls` and following the
 | fft_0_dma    | AXI_LITE    | 0x8000_0000 |
 | fft_0        | config_gpio | 0x8002_0000 |
 | fft_0        | reset_gpio  | 0x8001_0000 |
+| fft_1_dma    | AXI_LITE    | 0x8008_0000 |
+| fft_1        | config_gpio | 0x8006_0000 |
+| fft_1        | reset_gpio  | 0x8007_0000 |
 | ZIP_0_dma    | AXI_LITE    | 0x8003_0000 |
 | ZIP_0        | axi_control | 0x8004_0000 |
 | ZIP_0        | reset_gpio  | 0x8005_0000 |
+| ZIP_1_dma    | AXI_LITE    | 0x8009_0000 |
+| ZIP_1        | axi_control | 0x800B_0000 |
+| ZIP_1        | reset_gpio  | 0x800A_0000 |
 
 ## Petalinux
 
