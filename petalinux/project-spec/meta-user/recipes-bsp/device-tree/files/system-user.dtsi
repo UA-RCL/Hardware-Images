@@ -112,6 +112,12 @@
 &zip_0_dma {
   compatible = "generic-uio";
 };
+&fft_1_dma {
+  compatible = "generic-uio";
+};
+&zip_1_dma {
+  compatible = "generic-uio";
+};
 
 &sdhci0 {
 	no-1-8-v;

@@ -1,6 +1,6 @@
 
 ################################################################
-# This is a generated script based on design: fft1xzip1x
+# This is a generated script based on design: fft2xzip2x
 #
 # Though there are limitations about the generated script,
 # the main purpose of this utility is to make learning
@@ -41,7 +41,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 ################################################################
 
 # To test this script, run the following commands from Vivado Tcl console:
-# source fft1xzip1x_bd.tcl
+# source fft2xzip2x_bd.tcl
 
 # If there is no project opened, this script will create a
 # project, but make sure you do not have an existing project
@@ -55,7 +55,7 @@ if { $list_projs eq "" } {
 
 # CHANGE DESIGN NAME HERE
 variable design_name
-set design_name fft1xzip1x
+set design_name fft2xzip2x
 
 # If you do not already have an existing IP Integrator design open,
 # you can create a design using the following command:
@@ -1076,7 +1076,7 @@ Firmware| SA:0xFF410000; SIZE:640; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Writ
 SA:0xFF9A0000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware|SA:0xFF5E0000 ; SIZE:2560; UNIT:KB; RegionTZ:Secure ; WrAllowed:Read/Write; subsystemId:Secure Subsystem|SA:0xFFCC0000\
 ; SIZE:64; UNIT:KB; RegionTZ:Secure ; WrAllowed:Read/Write; subsystemId:Secure Subsystem|SA:0xFF180000 ; SIZE:768; UNIT:KB; RegionTZ:Secure ; WrAllowed:Read/Write; subsystemId:Secure Subsystem|SA:0xFF9A0000\
 ; SIZE:64; UNIT:KB; RegionTZ:Secure ; WrAllowed:Read/Write; subsystemId:Secure Subsystem} \
-    CONFIG.PSU__PROTECTION__MASTERS {USB1:NonSecure;1|USB0:NonSecure;1|S_AXI_LPD:NA;0|S_AXI_HPC1_FPD:NA;0|S_AXI_HPC0_FPD:NA;0|S_AXI_HP3_FPD:NA;0|S_AXI_HP2_FPD:NA;0|S_AXI_HP1_FPD:NA;1|S_AXI_HP0_FPD:NA;1|S_AXI_ACP:NA;0|S_AXI_ACE:NA;0|SD1:NonSecure;0|SD0:NonSecure;1|SATA1:NonSecure;0|SATA0:NonSecure;0|RPU1:Secure;1|RPU0:Secure;1|QSPI:NonSecure;0|PMU:NA;1|PCIe:NonSecure;0|NAND:NonSecure;0|LDMA:NonSecure;1|GPU:NonSecure;1|GEM3:NonSecure;0|GEM2:NonSecure;0|GEM1:NonSecure;0|GEM0:NonSecure;0|FDMA:NonSecure;1|DP:NonSecure;1|DAP:NA;1|Coresight:NA;1|CSU:NA;1|APU:NA;1}\
+    CONFIG.PSU__PROTECTION__MASTERS {USB1:NonSecure;1|USB0:NonSecure;1|S_AXI_LPD:NA;0|S_AXI_HPC1_FPD:NA;0|S_AXI_HPC0_FPD:NA;0|S_AXI_HP3_FPD:NA;1|S_AXI_HP2_FPD:NA;1|S_AXI_HP1_FPD:NA;1|S_AXI_HP0_FPD:NA;1|S_AXI_ACP:NA;0|S_AXI_ACE:NA;0|SD1:NonSecure;0|SD0:NonSecure;1|SATA1:NonSecure;0|SATA0:NonSecure;0|RPU1:Secure;1|RPU0:Secure;1|QSPI:NonSecure;0|PMU:NA;1|PCIe:NonSecure;0|NAND:NonSecure;0|LDMA:NonSecure;1|GPU:NonSecure;1|GEM3:NonSecure;0|GEM2:NonSecure;0|GEM1:NonSecure;0|GEM0:NonSecure;0|FDMA:NonSecure;1|DP:NonSecure;1|DAP:NA;1|Coresight:NA;1|CSU:NA;1|APU:NA;1}\
 \
     CONFIG.PSU__PROTECTION__MASTERS_TZ {GEM0:NonSecure|SD1:NonSecure|GEM2:NonSecure|GEM1:NonSecure|GEM3:NonSecure|PCIe:NonSecure|DP:NonSecure|NAND:NonSecure|GPU:NonSecure|USB1:NonSecure|USB0:NonSecure|LDMA:NonSecure|FDMA:NonSecure|QSPI:NonSecure|SD0:NonSecure}\
 \
@@ -1096,6 +1096,8 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
     CONFIG.PSU__SATA__PERIPHERAL__ENABLE {0} \
     CONFIG.PSU__SAXIGP2__DATA_WIDTH {128} \
     CONFIG.PSU__SAXIGP3__DATA_WIDTH {128} \
+    CONFIG.PSU__SAXIGP4__DATA_WIDTH {128} \
+    CONFIG.PSU__SAXIGP5__DATA_WIDTH {128} \
     CONFIG.PSU__SD0_COHERENCY {0} \
     CONFIG.PSU__SD0_ROUTE_THROUGH_FPD {0} \
     CONFIG.PSU__SD0__CLK_50_SDR_ITAP_DLY {0x15} \
@@ -1204,8 +1206,8 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
     CONFIG.PSU__USE__S_AXI_GP1 {0} \
     CONFIG.PSU__USE__S_AXI_GP2 {1} \
     CONFIG.PSU__USE__S_AXI_GP3 {1} \
-    CONFIG.PSU__USE__S_AXI_GP4 {0} \
-    CONFIG.PSU__USE__S_AXI_GP5 {0} \
+    CONFIG.PSU__USE__S_AXI_GP4 {1} \
+    CONFIG.PSU__USE__S_AXI_GP5 {1} \
     CONFIG.PSU__USE__S_AXI_GP6 {0} \
     CONFIG.PSU__USE__USB3_0_HUB {0} \
     CONFIG.PSU__USE__USB3_1_HUB {0} \
@@ -1290,7 +1292,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   # Create instance: axi_smc, and set properties
   set axi_smc [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 axi_smc ]
   set_property -dict [list \
-    CONFIG.NUM_MI {6} \
+    CONFIG.NUM_MI {12} \
     CONFIG.NUM_SI {1} \
   ] $axi_smc
 
@@ -1333,26 +1335,137 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   set_property CONFIG.NUM_SI {2} $axi_smc_2
 
 
+  # Create instance: fft_1_reset_logic, and set properties
+  set fft_1_reset_logic [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 fft_1_reset_logic ]
+  set_property CONFIG.C_SIZE {1} $fft_1_reset_logic
+
+
+  # Create instance: xfft_1, and set properties
+  set xfft_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft:9.1 xfft_1 ]
+  set_property -dict [list \
+    CONFIG.aresetn {true} \
+    CONFIG.complex_mult_type {use_mults_performance} \
+    CONFIG.data_format {floating_point} \
+    CONFIG.implementation_options {pipelined_streaming_io} \
+    CONFIG.number_of_stages_using_block_ram_for_data_and_phase_factors {6} \
+    CONFIG.output_ordering {natural_order} \
+    CONFIG.phase_factor_width {24} \
+    CONFIG.run_time_configurable_transform_length {true} \
+    CONFIG.super_sample_rates {1} \
+    CONFIG.target_clock_frequency {300} \
+    CONFIG.transform_length {8192} \
+  ] $xfft_1
+
+
+  # Create instance: fft_1_dma, and set properties
+  set fft_1_dma [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 fft_1_dma ]
+  set_property -dict [list \
+    CONFIG.c_include_sg {0} \
+    CONFIG.c_m_axi_mm2s_data_width {64} \
+    CONFIG.c_m_axis_mm2s_tdata_width {64} \
+    CONFIG.c_mm2s_burst_size {256} \
+    CONFIG.c_s2mm_burst_size {256} \
+    CONFIG.c_sg_length_width {26} \
+  ] $fft_1_dma
+
+
+  # Create instance: fft_1_config_gpio, and set properties
+  set fft_1_config_gpio [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 fft_1_config_gpio ]
+  set_property -dict [list \
+    CONFIG.C_ALL_OUTPUTS {1} \
+    CONFIG.C_ALL_OUTPUTS_2 {1} \
+    CONFIG.C_GPIO2_WIDTH {24} \
+    CONFIG.C_GPIO_WIDTH {1} \
+    CONFIG.C_IS_DUAL {1} \
+  ] $fft_1_config_gpio
+
+
+  # Create instance: fft_1_resetn_gpio, and set properties
+  set fft_1_resetn_gpio [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 fft_1_resetn_gpio ]
+  set_property -dict [list \
+    CONFIG.C_ALL_OUTPUTS {1} \
+    CONFIG.C_GPIO_WIDTH {1} \
+  ] $fft_1_resetn_gpio
+
+
+  # Create instance: axi_smc_3, and set properties
+  set axi_smc_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 axi_smc_3 ]
+  set_property CONFIG.NUM_SI {2} $axi_smc_3
+
+
+  # Create instance: zip_1_reset_logic, and set properties
+  set zip_1_reset_logic [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 zip_1_reset_logic ]
+  set_property CONFIG.C_SIZE {1} $zip_1_reset_logic
+
+
+  # Create instance: ZIP_HLS_accel_1, and set properties
+  set ZIP_HLS_accel_1 [ create_bd_cell -type ip -vlnv xilinx.com:hls:ZIP_HLS_accel:1.0 ZIP_HLS_accel_1 ]
+
+  # Create instance: zip_1_dma, and set properties
+  set zip_1_dma [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 zip_1_dma ]
+  set_property -dict [list \
+    CONFIG.c_include_sg {0} \
+    CONFIG.c_m_axi_mm2s_data_width {64} \
+    CONFIG.c_m_axis_mm2s_tdata_width {32} \
+    CONFIG.c_mm2s_burst_size {256} \
+    CONFIG.c_s2mm_burst_size {256} \
+    CONFIG.c_sg_length_width {26} \
+  ] $zip_1_dma
+
+
+  # Create instance: zip_1_resetn_gpio, and set properties
+  set zip_1_resetn_gpio [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 zip_1_resetn_gpio ]
+  set_property -dict [list \
+    CONFIG.C_ALL_OUTPUTS {1} \
+    CONFIG.C_GPIO_WIDTH {1} \
+  ] $zip_1_resetn_gpio
+
+
+  # Create instance: axi_smc_4, and set properties
+  set axi_smc_4 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 axi_smc_4 ]
+  set_property CONFIG.NUM_SI {2} $axi_smc_4
+
+
   # Create interface connections
   connect_bd_intf_net -intf_net ZIP_HLS_accel_0_OUTPUT_STREAM [get_bd_intf_pins ZIP_HLS_accel_0/OUTPUT_STREAM] [get_bd_intf_pins zip_0_dma/S_AXIS_S2MM]
+  connect_bd_intf_net -intf_net ZIP_HLS_accel_1_OUTPUT_STREAM [get_bd_intf_pins ZIP_HLS_accel_1/OUTPUT_STREAM] [get_bd_intf_pins zip_1_dma/S_AXIS_S2MM]
   connect_bd_intf_net -intf_net axi_smc_1_M00_AXI [get_bd_intf_pins axi_smc_1/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP0_FPD]
   connect_bd_intf_net -intf_net axi_smc_2_M00_AXI [get_bd_intf_pins axi_smc_2/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP1_FPD]
+  connect_bd_intf_net -intf_net axi_smc_3_M00_AXI [get_bd_intf_pins axi_smc_3/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP2_FPD]
+  connect_bd_intf_net -intf_net axi_smc_4_M00_AXI [get_bd_intf_pins axi_smc_4/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP3_FPD]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_smc/M00_AXI] [get_bd_intf_pins fft_0_config_gpio/S_AXI]
   connect_bd_intf_net -intf_net axi_smc_M01_AXI [get_bd_intf_pins axi_smc/M01_AXI] [get_bd_intf_pins fft_0_dma/S_AXI_LITE]
   connect_bd_intf_net -intf_net axi_smc_M02_AXI [get_bd_intf_pins axi_smc/M02_AXI] [get_bd_intf_pins fft_0_resetn_gpio/S_AXI]
   connect_bd_intf_net -intf_net axi_smc_M03_AXI [get_bd_intf_pins axi_smc/M03_AXI] [get_bd_intf_pins zip_0_dma/S_AXI_LITE]
   connect_bd_intf_net -intf_net axi_smc_M04_AXI [get_bd_intf_pins axi_smc/M04_AXI] [get_bd_intf_pins zip_0_resetn_gpio/S_AXI]
   connect_bd_intf_net -intf_net axi_smc_M05_AXI [get_bd_intf_pins axi_smc/M05_AXI] [get_bd_intf_pins ZIP_HLS_accel_0/s_axi_ctrl]
+  connect_bd_intf_net -intf_net axi_smc_M06_AXI [get_bd_intf_pins axi_smc/M06_AXI] [get_bd_intf_pins fft_1_config_gpio/S_AXI]
+  connect_bd_intf_net -intf_net axi_smc_M07_AXI [get_bd_intf_pins axi_smc/M07_AXI] [get_bd_intf_pins fft_1_resetn_gpio/S_AXI]
+  connect_bd_intf_net -intf_net axi_smc_M08_AXI [get_bd_intf_pins axi_smc/M08_AXI] [get_bd_intf_pins fft_1_dma/S_AXI_LITE]
+  connect_bd_intf_net -intf_net axi_smc_M09_AXI [get_bd_intf_pins axi_smc/M09_AXI] [get_bd_intf_pins zip_1_dma/S_AXI_LITE]
+  connect_bd_intf_net -intf_net axi_smc_M10_AXI [get_bd_intf_pins axi_smc/M10_AXI] [get_bd_intf_pins zip_1_resetn_gpio/S_AXI]
+  connect_bd_intf_net -intf_net axi_smc_M11_AXI [get_bd_intf_pins axi_smc/M11_AXI] [get_bd_intf_pins ZIP_HLS_accel_1/s_axi_ctrl]
   connect_bd_intf_net -intf_net fft_0_dma_M_AXIS_MM2S [get_bd_intf_pins xfft_0/S_AXIS_DATA] [get_bd_intf_pins fft_0_dma/M_AXIS_MM2S]
   connect_bd_intf_net -intf_net fft_0_dma_M_AXI_MM2S [get_bd_intf_pins fft_0_dma/M_AXI_MM2S] [get_bd_intf_pins axi_smc_1/S00_AXI]
   connect_bd_intf_net -intf_net fft_0_dma_M_AXI_S2MM [get_bd_intf_pins fft_0_dma/M_AXI_S2MM] [get_bd_intf_pins axi_smc_1/S01_AXI]
+  connect_bd_intf_net -intf_net fft_1_dma_M_AXIS_MM2S [get_bd_intf_pins xfft_1/S_AXIS_DATA] [get_bd_intf_pins fft_1_dma/M_AXIS_MM2S]
+  connect_bd_intf_net -intf_net fft_1_dma_M_AXI_MM2S [get_bd_intf_pins fft_1_dma/M_AXI_MM2S] [get_bd_intf_pins axi_smc_3/S00_AXI]
+  connect_bd_intf_net -intf_net fft_1_dma_M_AXI_S2MM [get_bd_intf_pins fft_1_dma/M_AXI_S2MM] [get_bd_intf_pins axi_smc_3/S01_AXI]
   connect_bd_intf_net -intf_net xfft_0_M_AXIS_DATA [get_bd_intf_pins xfft_0/M_AXIS_DATA] [get_bd_intf_pins fft_0_dma/S_AXIS_S2MM]
+  connect_bd_intf_net -intf_net xfft_1_M_AXIS_DATA [get_bd_intf_pins xfft_1/M_AXIS_DATA] [get_bd_intf_pins fft_1_dma/S_AXIS_S2MM]
   connect_bd_intf_net -intf_net zip_0_dma_M_AXIS_MM2S [get_bd_intf_pins ZIP_HLS_accel_0/INPUT_STREAM] [get_bd_intf_pins zip_0_dma/M_AXIS_MM2S]
   connect_bd_intf_net -intf_net zip_0_dma_M_AXI_MM2S [get_bd_intf_pins zip_0_dma/M_AXI_MM2S] [get_bd_intf_pins axi_smc_2/S00_AXI]
   connect_bd_intf_net -intf_net zip_0_dma_M_AXI_S2MM [get_bd_intf_pins zip_0_dma/M_AXI_S2MM] [get_bd_intf_pins axi_smc_2/S01_AXI]
+  connect_bd_intf_net -intf_net zip_1_dma_M_AXIS_MM2S [get_bd_intf_pins ZIP_HLS_accel_1/INPUT_STREAM] [get_bd_intf_pins zip_1_dma/M_AXIS_MM2S]
+  connect_bd_intf_net -intf_net zip_1_dma_M_AXI_MM2S [get_bd_intf_pins zip_1_dma/M_AXI_MM2S] [get_bd_intf_pins axi_smc_4/S00_AXI]
+  connect_bd_intf_net -intf_net zip_1_dma_M_AXI_S2MM [get_bd_intf_pins zip_1_dma/M_AXI_S2MM] [get_bd_intf_pins axi_smc_4/S01_AXI]
   connect_bd_intf_net -intf_net zynq_ultra_ps_e_0_M_AXI_HPM0_LPD [get_bd_intf_pins zynq_ultra_ps_e_0/M_AXI_HPM0_LPD] [get_bd_intf_pins axi_smc/S00_AXI]
 
   # Create port connections
+  connect_bd_net -net fft_0_config_gpio1_gpio2_io_o  [get_bd_pins fft_1_config_gpio/gpio2_io_o] \
+  [get_bd_pins xfft_1/s_axis_config_tdata]
+  connect_bd_net -net fft_0_config_gpio1_gpio_io_o  [get_bd_pins fft_1_config_gpio/gpio_io_o] \
+  [get_bd_pins xfft_1/s_axis_config_tvalid]
   connect_bd_net -net fft_0_config_gpio_gpio2_io_o  [get_bd_pins fft_0_config_gpio/gpio2_io_o] \
   [get_bd_pins xfft_0/s_axis_config_tdata]
   connect_bd_net -net fft_0_config_gpio_gpio_io_o  [get_bd_pins fft_0_config_gpio/gpio_io_o] \
@@ -1360,8 +1473,13 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_net -net fft_0_reset_logic_Res  [get_bd_pins fft_0_reset_logic/Res] \
   [get_bd_pins xfft_0/aresetn] \
   [get_bd_pins fft_0_dma/axi_resetn]
+  connect_bd_net -net fft_0_resetn_gpio1_gpio_io_o  [get_bd_pins fft_1_resetn_gpio/gpio_io_o] \
+  [get_bd_pins fft_1_reset_logic/Op1]
   connect_bd_net -net fft_0_resetn_gpio_gpio_io_o  [get_bd_pins fft_0_resetn_gpio/gpio_io_o] \
   [get_bd_pins fft_0_reset_logic/Op1]
+  connect_bd_net -net fft_1_reset_logic_Res  [get_bd_pins fft_1_reset_logic/Res] \
+  [get_bd_pins xfft_1/aresetn] \
+  [get_bd_pins fft_1_dma/axi_resetn]
   connect_bd_net -net rst_ps8_0_99M_peripheral_aresetn  [get_bd_pins rst_ps8_0_99M/peripheral_aresetn] \
   [get_bd_pins fft_0_reset_logic/Op2] \
   [get_bd_pins fft_0_resetn_gpio/s_axi_aresetn] \
@@ -1370,12 +1488,24 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   [get_bd_pins axi_smc_1/aresetn] \
   [get_bd_pins zip_0_reset_logic/Op2] \
   [get_bd_pins zip_0_resetn_gpio/s_axi_aresetn] \
-  [get_bd_pins axi_smc_2/aresetn]
+  [get_bd_pins axi_smc_2/aresetn] \
+  [get_bd_pins fft_1_reset_logic/Op2] \
+  [get_bd_pins axi_smc_3/aresetn] \
+  [get_bd_pins fft_1_config_gpio/s_axi_aresetn] \
+  [get_bd_pins fft_1_resetn_gpio/s_axi_aresetn] \
+  [get_bd_pins zip_1_reset_logic/Op2] \
+  [get_bd_pins axi_smc_4/aresetn] \
+  [get_bd_pins zip_1_resetn_gpio/s_axi_aresetn]
   connect_bd_net -net zip_0_reset_logic_Res  [get_bd_pins zip_0_reset_logic/Res] \
   [get_bd_pins ZIP_HLS_accel_0/ap_rst_n] \
   [get_bd_pins zip_0_dma/axi_resetn]
+  connect_bd_net -net zip_0_resetn_gpio1_gpio_io_o  [get_bd_pins zip_1_resetn_gpio/gpio_io_o] \
+  [get_bd_pins zip_1_reset_logic/Op1]
   connect_bd_net -net zip_0_resetn_gpio_gpio_io_o  [get_bd_pins zip_0_resetn_gpio/gpio_io_o] \
   [get_bd_pins zip_0_reset_logic/Op1]
+  connect_bd_net -net zip_1_reset_logic_Res  [get_bd_pins zip_1_reset_logic/Res] \
+  [get_bd_pins ZIP_HLS_accel_1/ap_rst_n] \
+  [get_bd_pins zip_1_dma/axi_resetn]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0  [get_bd_pins zynq_ultra_ps_e_0/pl_clk0] \
   [get_bd_pins rst_ps8_0_99M/slowest_sync_clk] \
   [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_lpd_aclk] \
@@ -1394,31 +1524,64 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   [get_bd_pins axi_smc_2/aclk] \
   [get_bd_pins zip_0_dma/m_axi_mm2s_aclk] \
   [get_bd_pins zip_0_dma/m_axi_s2mm_aclk] \
-  [get_bd_pins xfft_0/aclk]
+  [get_bd_pins xfft_0/aclk] \
+  [get_bd_pins fft_1_dma/m_axi_mm2s_aclk] \
+  [get_bd_pins axi_smc_3/aclk] \
+  [get_bd_pins zynq_ultra_ps_e_0/saxihp2_fpd_aclk] \
+  [get_bd_pins fft_1_config_gpio/s_axi_aclk] \
+  [get_bd_pins fft_1_resetn_gpio/s_axi_aclk] \
+  [get_bd_pins fft_1_dma/m_axi_s2mm_aclk] \
+  [get_bd_pins fft_1_dma/s_axi_lite_aclk] \
+  [get_bd_pins zip_1_dma/m_axi_mm2s_aclk] \
+  [get_bd_pins axi_smc_4/aclk] \
+  [get_bd_pins zynq_ultra_ps_e_0/saxihp3_fpd_aclk] \
+  [get_bd_pins zip_1_dma/m_axi_s2mm_aclk] \
+  [get_bd_pins zip_1_dma/s_axi_lite_aclk] \
+  [get_bd_pins zip_1_resetn_gpio/s_axi_aclk] \
+  [get_bd_pins ZIP_HLS_accel_1/ap_clk] \
+  [get_bd_pins xfft_1/aclk]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_resetn0  [get_bd_pins zynq_ultra_ps_e_0/pl_resetn0] \
   [get_bd_pins rst_ps8_0_99M/ext_reset_in]
 
   # Create address segments
   assign_bd_address -offset 0x80040000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs ZIP_HLS_accel_0/s_axi_ctrl/Reg] -force
+  assign_bd_address -offset 0x800B0000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs ZIP_HLS_accel_1/s_axi_ctrl/Reg] -force
+  assign_bd_address -offset 0x80060000 -range 0x00010000 -with_name SEG_fft_0_config_gpio1_Reg -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs fft_1_config_gpio/S_AXI/Reg] -force
   assign_bd_address -offset 0x80020000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs fft_0_config_gpio/S_AXI/Reg] -force
   assign_bd_address -offset 0x80000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs fft_0_dma/S_AXI_LITE/Reg] -force
+  assign_bd_address -offset 0x80070000 -range 0x00010000 -with_name SEG_fft_0_resetn_gpio1_Reg -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs fft_1_resetn_gpio/S_AXI/Reg] -force
   assign_bd_address -offset 0x80010000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs fft_0_resetn_gpio/S_AXI/Reg] -force
+  assign_bd_address -offset 0x80080000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs fft_1_dma/S_AXI_LITE/Reg] -force
   assign_bd_address -offset 0x80030000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs zip_0_dma/S_AXI_LITE/Reg] -force
   assign_bd_address -offset 0x80050000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs zip_0_resetn_gpio/S_AXI/Reg] -force
+  assign_bd_address -offset 0x80090000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs zip_1_dma/S_AXI_LITE/Reg] -force
+  assign_bd_address -offset 0x800A0000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs zip_1_resetn_gpio/S_AXI/Reg] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces zip_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_LOW] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces zip_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_LOW] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces fft_1_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP4/HP2_DDR_LOW] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces fft_1_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP4/HP2_DDR_LOW] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces zip_1_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP5/HP3_DDR_LOW] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces zip_1_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP5/HP3_DDR_LOW] -force
 
   # Exclude Address Segments
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces fft_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH]
+  exclude_bd_addr_seg -offset 0x000800000000 -range 0x000100000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH]
   exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces fft_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH]
+  exclude_bd_addr_seg -offset 0x000800000000 -range 0x000100000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH]
   exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces zip_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces fft_1_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP4/HP2_DDR_HIGH]
+  exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces fft_1_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP4/HP2_LPS_OCM]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces fft_1_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP4/HP2_DDR_HIGH]
+  exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces fft_1_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP4/HP2_LPS_OCM]
+  exclude_bd_addr_seg -offset 0x000800000000 -range 0x000100000000 -target_address_space [get_bd_addr_spaces zip_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH]
   exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces zip_0_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces zip_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH]
+  exclude_bd_addr_seg -offset 0x000800000000 -range 0x000100000000 -target_address_space [get_bd_addr_spaces zip_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH]
   exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces zip_0_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces zip_1_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP5/HP3_DDR_HIGH]
+  exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces zip_1_dma/Data_MM2S] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP5/HP3_LPS_OCM]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces zip_1_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP5/HP3_DDR_HIGH]
+  exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces zip_1_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP5/HP3_LPS_OCM]
 
 
   # Restore current instance
