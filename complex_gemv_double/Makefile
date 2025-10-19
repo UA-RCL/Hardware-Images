@@ -1,11 +1,11 @@
 PLATFORM := xilinx_u280_gen3x16_xdma_1_202211_1
-KERNEL_CONFIG_FILE :=krnl_build_options.cfg
 BUILD_DIR := ./build
 
 VPP_TEMP_DIRS :=vpp_temp_dir
 VPP_LOG_DIRS :=vpp_log_dir
 
-XCLBIN := binary.xclbin
+############## Kernel Source Files  Dependencies
+KERNEL_SRC_CPP := ./complex_gemv_double.cpp 
 
 ############## Check the version of gcc avaiable and select
 ifneq ($(shell expr $(shell g++ -dumpversion) \>= 5), 1)
@@ -17,12 +17,16 @@ ifneq ($(shell expr $(shell g++ -dumpversion) \>= 5), 1)
    endif
 endif
 
-
 ############## Kernel Compiler and Linker Flags
 # VPPFLAGS := -t $(TARGET)
 VPPFLAGS += --platform $(PLATFORM) -R1 --save-temps
 VPPFLAGS += --temp_dir $(BUILD_DIR)/$(VPP_TEMP_DIRS)
 VPPFLAGS += --log_dir $(BUILD_DIR)/$(VPP_LOG_DIRS)
+# VPPFLAGS += --profile.data all:all:all:all
+# VPPFLAGS += --profile.trace_memory $(TRACE_DDR)
+# ifeq ($(ENABLE_STALL_TRACE),yes)
+# 	VPPFLAGS += --profile.stall all:all:all
+# endif
 
 create_dirs: 
 	mkdir -p $(BUILD_DIR)
@@ -30,19 +34,14 @@ create_dirs:
 	mkdir -p $(BUILD_DIR)/$(VPP_LOG_DIRS)
 
 ############## Kernel XO and Xclbin File Generation
+# Compile Kernel 
+$(BUILD_DIR)/complex_gemv_double.xo: $(KERNEL_SRC_HEADERS) ${KERNEL_SRC_CPP}
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/$(VPP_TEMP_DIRS)
+	mkdir -p $(BUILD_DIR)/$(VPP_LOG_DIRS)
+	v++ $(VPPFLAGS) -c -k complex_gemv_double  $(KERNEL_INCLUDES) ${KERNEL_SRC_CPP} -o $@
 
-KERNEL_XOS := \
-  complex_gemm_float/build/complex_gemm_flt.xo \
-  complex_gemm_int/build/complex_gemm_int.xo \
-  complex_gemm_double/build/complex_gemm_double.xo \
-  complex_gemv_float/build/complex_gemv_flt.xo \
-  complex_gemv_int/build/complex_gemv_int.xo \
-  complex_gemv_double/build/complex_gemv_double.xo
-# Link Kernel
-$(BUILD_DIR)/$(XCLBIN):
-	v++ $(VPPFLAGS) --config $(KERNEL_CONFIG_FILE) -l -o $@ $(KERNEL_XOS)
-
-xclbin: $(BUILD_DIR)/$(XCLBIN)
+xo: $(BUILD_DIR)/complex_gemv_double.xo
 
 clean:
 	rm -rf $(BUILD_DIR)
