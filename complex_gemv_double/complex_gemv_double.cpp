@@ -15,15 +15,9 @@ typedef struct {
 const unsigned A_ROWS = 8;
 const unsigned A_COLS = 64;
 const unsigned B_ROWS = 64;
-const unsigned B_COLS = 8;
+const unsigned B_COLS = 1;
 const unsigned C_ROWS = A_ROWS;
 const unsigned C_COLS = B_COLS;
-
-// How many total values are we going to need to stream in? i.e. how many entries are in both the A and B matrices?
-#define INPUT_SIZE (A_ROWS*A_COLS + B_ROWS*B_COLS)
-
-// How many total values are we going to need to stream out? i.e. how many entries are in the C matrix?
-#define OUTPUT_SIZE  (C_ROWS * C_COLS)
 
 void wrapper_complex_gemv_double_hw(
     cedr_cmplx_double_type *input_1, // Matrix A
