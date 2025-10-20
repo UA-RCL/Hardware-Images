@@ -13,8 +13,8 @@ typedef struct {
 } cedr_cmplx_flt_type;
 
 const unsigned A_ROWS = 8;
-const unsigned A_COLS = 64;
-const unsigned B_ROWS = 64;
+const unsigned A_COLS = 8;
+const unsigned B_ROWS = 8;
 const unsigned B_COLS = 1;
 const unsigned C_ROWS = A_ROWS;
 const unsigned C_COLS = B_COLS;
