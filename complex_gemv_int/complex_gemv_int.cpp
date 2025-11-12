@@ -5,12 +5,22 @@
 #include "hls_stream.h"
 
 
-typedef int16_t data_t;
+typedef int data_t;
+typedef long long accum_t;  // Use 64-bit for intermediate accumulations
 
 typedef struct {
     data_t re;
     data_t im;
 } cedr_cmplx_int_type;
+
+// Saturation function: clamp 64-bit value to 32-bit int range
+inline data_t saturate_to_int(accum_t value) {
+    const accum_t INT_MAX_VAL = (accum_t)2147483647LL;
+    const accum_t INT_MIN_VAL = (accum_t)(-2147483647LL - 1);
+    if (value > INT_MAX_VAL) return INT_MAX_VAL;
+    if (value < INT_MIN_VAL) return INT_MIN_VAL;
+    return (data_t)value;
+}
 
 const unsigned A_ROWS = 8;
 const unsigned A_COLS = 8;
@@ -26,7 +36,7 @@ void wrapper_complex_gemv_int_hw(
 ) {
 #pragma HLS INLINE off
 
-    data_t resultr, resulti;
+    accum_t resultr, resulti;
 
 row_loop:
     for (int i = 0; i < A_ROWS; i++) {
@@ -43,14 +53,20 @@ row_loop:
             data_t b_re = input_2[j].re;
             data_t b_im = input_2[j].im;
 
+            // Use 64-bit intermediate for multiplications to prevent overflow
+            accum_t prod_re_re = (accum_t)a_re * (accum_t)b_re;
+            accum_t prod_im_im = (accum_t)a_im * (accum_t)b_im;
+            accum_t prod_re_im = (accum_t)a_re * (accum_t)b_im;
+            accum_t prod_im_re = (accum_t)a_im * (accum_t)b_re;
+
             // Complex multiply-accumulate
-            resultr += a_re * b_re - a_im * b_im;
-            resulti += a_re * b_im + a_im * b_re;
+            resultr += prod_re_re - prod_im_im;
+            resulti += prod_re_im + prod_im_re;
         }
 
-        // Write out final complex result for this row
-        output[i].re = resultr;
-        output[i].im = resulti;
+        // Saturate to 32-bit range to prevent undefined behavior
+        output[i].re = saturate_to_int(resultr);
+        output[i].im = saturate_to_int(resulti);
     }
 }
 

@@ -5,12 +5,22 @@
 #include "hls_stream.h"
 //#include "complex_matrix_multiply.h"
 
-typedef int16_t data_t;
+typedef int data_t;
+typedef long long accum_t;  // Use 64-bit for intermediate accumulations
 
 typedef struct {
     data_t re;
     data_t im;
 } cedr_cmplx_int_type;
+
+// Saturation function: clamp 64-bit value to 32-bit int range
+inline data_t saturate_to_int(accum_t value) {
+    const accum_t INT_MAX_VAL = (accum_t)2147483647LL;
+    const accum_t INT_MIN_VAL = (accum_t)(-2147483647LL - 1);
+    if (value > INT_MAX_VAL) return INT_MAX_VAL;
+    if (value < INT_MIN_VAL) return INT_MIN_VAL;
+    return (data_t)value;
+}
 
 const unsigned A_ROWS = 8;
 const unsigned A_COLS = 64;
@@ -24,8 +34,8 @@ void wrapper_complex_gemm_int_hw(
     cedr_cmplx_int_type *input_2,
     cedr_cmplx_int_type *output)
 {
-    data_t temp_sumr[B_COLS];
-    data_t temp_sumi[B_COLS];
+    accum_t temp_sumr[B_COLS];
+    accum_t temp_sumi[B_COLS];
 
 lreorder1:
     for (int i = 0; i < A_ROWS; i++) {
@@ -34,23 +44,30 @@ lreorder1:
         lreorder3:
             for (int j = 0; j < B_COLS; j++) {
 #pragma HLS PIPELINE II=1
-                data_t resultr = (k == 0) ? 0 : temp_sumr[j];
-                data_t resulti = (k == 0) ? 0 : temp_sumi[j];
+                accum_t resultr = (k == 0) ? 0 : temp_sumr[j];
+                accum_t resulti = (k == 0) ? 0 : temp_sumi[j];
 
                 data_t a_re = input_1[i * A_COLS + k].re;
                 data_t a_im = input_1[i * A_COLS + k].im;
                 data_t b_re = input_2[k * B_COLS + j].re;
                 data_t b_im = input_2[k * B_COLS + j].im;
 
-                resultr += a_re * b_re - a_im * b_im;
-                resulti += a_re * b_im + a_im * b_re;
+                // Use 64-bit intermediate for multiplications to prevent overflow
+                accum_t prod_re_re = (accum_t)a_re * (accum_t)b_re;
+                accum_t prod_im_im = (accum_t)a_im * (accum_t)b_im;
+                accum_t prod_re_im = (accum_t)a_re * (accum_t)b_im;
+                accum_t prod_im_re = (accum_t)a_im * (accum_t)b_re;
+
+                resultr += prod_re_re - prod_im_im;
+                resulti += prod_re_im + prod_im_re;
 
                 temp_sumr[j] = resultr;
                 temp_sumi[j] = resulti;
 
                 if (k == B_ROWS - 1) {
-                    output[i * B_COLS + j].re = resultr;
-                    output[i * B_COLS + j].im = resulti;
+                    // Saturate to 32-bit range to prevent undefined behavior
+                    output[i * B_COLS + j].re = saturate_to_int(resultr);
+                    output[i * B_COLS + j].im = saturate_to_int(resulti);
                 }
             }
         }
