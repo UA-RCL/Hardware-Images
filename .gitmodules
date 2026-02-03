@@ -1,0 +1,4 @@
+[submodule "L1_fft/Vitis_Libraries"]
+	path = L1_fft/Vitis_Libraries
+	url = https://github.com/Xilinx/Vitis_Libraries/
+	branch = 2023.2
