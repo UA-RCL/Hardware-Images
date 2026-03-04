@@ -1,0 +1,45 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.00027",
+   "Default View_TopLeft":"377,245",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port pcie_ref -pg 1 -lvl 0 -x -10 -y 670 -defaultsOSRD
+preplace port pcie_mgt -pg 1 -lvl 4 -x 1390 -y 540 -defaultsOSRD
+preplace port port-id_pcie_rstn -pg 1 -lvl 0 -x -10 -y 740 -defaultsOSRD
+preplace portBus pcie_clkreq -pg 1 -lvl 4 -x 1390 -y 810 -defaultsOSRD
+preplace inst xfft_0 -pg 1 -lvl 2 -x 610 -y 360 -defaultsOSRD
+preplace inst xdma_0 -pg 1 -lvl 3 -x 1150 -y 560 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 3 -x 1150 -y 810 -defaultsOSRD
+preplace inst util_ds_buf_0 -pg 1 -lvl 2 -x 610 -y 670 -defaultsOSRD
+preplace inst system_ila_0 -pg 1 -lvl 3 -x 1150 -y 200 -defaultsOSRD
+preplace inst axi_stream_v_mult_0 -pg 1 -lvl 2 -x 610 -y 180 -defaultsOSRD
+preplace inst c_counter_binary_0 -pg 1 -lvl 2 -x 610 -y 540 -defaultsOSRD
+preplace netloc Q 1 2 1 970 320n
+preplace netloc event_data_in_channel_halt 1 2 1 920 200n
+preplace netloc event_data_out_channel_halt 1 2 1 930 220n
+preplace netloc event_frame_started 1 2 1 800 240n
+preplace netloc event_status_channel_halt 1 2 1 940 260n
+preplace netloc event_tlast_missing 1 2 1 950 280n
+preplace netloc event_tlast_unexpected 1 2 1 900 300n
+preplace netloc pcie_rstn_1 1 0 3 10J 600 NJ 600 800J
+preplace netloc util_ds_buf_0_IBUF_DS_ODIV2 1 2 1 960 570n
+preplace netloc util_ds_buf_0_IBUF_OUT 1 2 1 980 590n
+preplace netloc xdma_0_axi_aclk 1 1 3 380 60 880 720 1330
+preplace netloc xdma_0_axi_aresetn 1 1 3 390 70 910 730 1320
+preplace netloc xlconstant_0_dout 1 3 1 NJ 810
+preplace netloc axi_stream_v_mult_0_m_axis 1 2 1 860 120n
+preplace netloc pcie_ref_1 1 0 2 NJ 670 NJ
+preplace netloc xdma_0_M_AXIS_H2C_0 1 1 3 400 80 980J 400 1320
+preplace netloc xdma_0_M_AXIS_H2C_1 1 1 3 410 90 960J 410 1350
+preplace netloc xdma_0_M_AXIS_H2C_2 1 1 3 420 100 870 710 1340
+preplace netloc xdma_0_pcie_mgt 1 3 1 1350J 530n
+preplace netloc xfft_0_M_AXIS_DATA 1 2 1 890 60n
+levelinfo -pg 1 -10 200 610 1150 1390
+pagesize -pg 1 -db -bbox -sgen -130 0 1600 870
+"
+}
+{
+   "da_clkrst_cnt":"5"
+}
