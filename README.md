@@ -35,3 +35,4 @@ Pre-built petalinux image files `boot.scr`, `BOOT.BIN`, and `image.ub` are avail
 
 - Include pdf file of block design
 - Check whether bsp is needed, if so how should it be generated 
+- Update the table with correct addresses
