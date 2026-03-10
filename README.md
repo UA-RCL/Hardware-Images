@@ -30,3 +30,8 @@ Build the all HLS IPs by running `build_IPs.sh` in `vitis_hls` and following the
 ## SD Card Image
 
 Pre-built petalinux image files `boot.scr`, `BOOT.BIN`, and `image.ub` are available under `SDCard`. 
+
+# TODO for This Branch
+
+- Include pdf file of block design
+- Check whether bsp is needed, if so how should it be generated 

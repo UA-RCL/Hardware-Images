@@ -205,7 +205,7 @@ set_property "ip_repo_paths" "[file normalize "$origin_dir/../vitis_hls/IPs"]" [
 update_ip_catalog -rebuild
 
 # Source our BD TCL
-source "$origin_dir/fft1xzip1x_bd.tcl"
+source "$origin_dir/conv2d1x_zip1x_relu1x_maxpool2d1x_bd.tcl"
 
 # Make the wrapper, add it to our fileset, and set it as the top module
 make_wrapper -files [get_files fft1xzip1x.bd] -top -import

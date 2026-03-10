@@ -87,7 +87,7 @@
     compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf1";
     // 1 MiB = 1048576 B = 0x100000
-    size = <0x00100000>;
+    size = <0x00800000>;
   };
   
   udmabuf2: udmabuf@0x08 {
@@ -106,7 +106,13 @@
 
 };
 
-&fft_0_dma {
+&maxpool2d_0_dma {
+  compatible = "generic-uio";
+};
+&relu_0_dma {
+  compatible = "generic-uio";
+};
+&conv2d_0_dma {
   compatible = "generic-uio";
 };
 &zip_0_dma {

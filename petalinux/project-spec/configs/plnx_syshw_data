@@ -4,7 +4,7 @@ processor:
     psu_cortexa53_0:
         arch: aarch64
         ip_name: psu_cortexa53
-        slaves_strings: ZIP_HLS_accel_0 fft_0_config_gpio fft_0_dma fft_0_resetn_gpio psu_acpu_gic psu_adma_0 psu_adma_1 psu_adma_2 psu_adma_3 psu_adma_4 psu_adma_5 psu_adma_6 psu_adma_7 psu_afi_0 psu_afi_1 psu_afi_2 psu_afi_3 psu_afi_4 psu_afi_5 psu_afi_6 psu_ams psu_apm_0 psu_apm_1 psu_apm_2 psu_apm_5 psu_apu psu_cci_gpv psu_cci_reg psu_coresight_0 psu_crf_apb psu_crl_apb psu_csu_0 psu_csudma psu_ctrl_ipi psu_ddr_0 psu_ddr_1 psu_ddr_phy psu_ddr_qos_ctrl psu_ddr_xmpu0_cfg psu_ddr_xmpu1_cfg psu_ddr_xmpu2_cfg psu_ddr_xmpu3_cfg psu_ddr_xmpu4_cfg psu_ddr_xmpu5_cfg psu_ddrc_0 psu_dp psu_dpdma psu_efuse psu_fpd_gpv psu_fpd_slcr psu_fpd_slcr_secure psu_fpd_xmpu_cfg psu_fpd_xmpu_sink psu_gdma_0 psu_gdma_1 psu_gdma_2 psu_gdma_3 psu_gdma_4 psu_gdma_5 psu_gdma_6 psu_gdma_7 psu_gpio_0 psu_gpu psu_i2c_0 psu_i2c_1 psu_iou_scntr psu_iou_scntrs psu_iousecure_slcr psu_iouslcr_0 psu_ipi_0 psu_lpd_slcr psu_lpd_slcr_secure psu_lpd_xppu psu_lpd_xppu_sink psu_mbistjtag psu_message_buffers psu_ocm psu_ocm_ram_0 psu_ocm_xmpu_cfg psu_pmu_global_0 psu_r5_0_atcm_global psu_r5_0_btcm_global psu_r5_1_atcm_global psu_r5_1_btcm_global psu_r5_tcm_ram_global psu_rcpu_gic psu_rpu psu_rsa psu_rtc psu_sd_0 psu_serdes psu_siou psu_smmu_gpv psu_smmu_reg psu_uart_1 psu_usb_0 psu_usb_1 psu_usb_xhci_0 psu_usb_xhci_1 zip_0_dma zip_0_resetn_gpio
+        slaves_strings: MaxPoolingKernel_0 ReLU_0 ZIP_HLS_accel_0 conv2d_0 conv2d_0_dma conv2d_0_dma1 conv2d_0_resetn_gpio maxpool2d_0_dma maxpool2d_0_resetn_gpio psu_acpu_gic psu_adma_0 psu_adma_1 psu_adma_2 psu_adma_3 psu_adma_4 psu_adma_5 psu_adma_6 psu_adma_7 psu_afi_0 psu_afi_1 psu_afi_2 psu_afi_3 psu_afi_4 psu_afi_5 psu_afi_6 psu_ams psu_apm_0 psu_apm_1 psu_apm_2 psu_apm_5 psu_apu psu_cci_gpv psu_cci_reg psu_coresight_0 psu_crf_apb psu_crl_apb psu_csu_0 psu_csudma psu_ctrl_ipi psu_ddr_0 psu_ddr_1 psu_ddr_phy psu_ddr_qos_ctrl psu_ddr_xmpu0_cfg psu_ddr_xmpu1_cfg psu_ddr_xmpu2_cfg psu_ddr_xmpu3_cfg psu_ddr_xmpu4_cfg psu_ddr_xmpu5_cfg psu_ddrc_0 psu_dp psu_dpdma psu_efuse psu_fpd_gpv psu_fpd_slcr psu_fpd_slcr_secure psu_fpd_xmpu_cfg psu_fpd_xmpu_sink psu_gdma_0 psu_gdma_1 psu_gdma_2 psu_gdma_3 psu_gdma_4 psu_gdma_5 psu_gdma_6 psu_gdma_7 psu_gpio_0 psu_gpu psu_i2c_0 psu_i2c_1 psu_iou_scntr psu_iou_scntrs psu_iousecure_slcr psu_iouslcr_0 psu_ipi_0 psu_lpd_slcr psu_lpd_slcr_secure psu_lpd_xppu psu_lpd_xppu_sink psu_mbistjtag psu_message_buffers psu_ocm psu_ocm_ram_0 psu_ocm_xmpu_cfg psu_pmu_global_0 psu_r5_0_atcm_global psu_r5_0_btcm_global psu_r5_1_atcm_global psu_r5_1_btcm_global psu_r5_tcm_ram_global psu_rcpu_gic psu_rpu psu_rsa psu_rtc psu_sd_0 psu_serdes psu_siou psu_smmu_gpv psu_smmu_reg psu_uart_1 psu_usb_0 psu_usb_1 psu_usb_xhci_0 psu_usb_xhci_1 relu_0_dma relu_0_resetn_gpio zip_0_dma zip_0_resetn_gpio
         slaves:
             psu_ddr_0:
                 device_type: memory
@@ -35,13 +35,23 @@ processor:
             psu_usb_0:
                 device_type: usb
                 ip_name: psu_usb
+            MaxPoolingKernel_0:
+                ip_name: MaxPoolingKernel
+            ReLU_0:
+                ip_name: ReLU
             ZIP_HLS_accel_0:
                 ip_name: ZIP_HLS_accel
-            fft_0_config_gpio:
-                ip_name: axi_gpio
-            fft_0_dma:
+            conv2d_0:
+                ip_name: conv2d
+            conv2d_0_dma:
                 ip_name: axi_dma
-            fft_0_resetn_gpio:
+            conv2d_0_dma1:
+                ip_name: axi_dma
+            conv2d_0_resetn_gpio:
+                ip_name: axi_gpio
+            maxpool2d_0_dma:
+                ip_name: axi_dma
+            maxpool2d_0_resetn_gpio:
                 ip_name: axi_gpio
             psu_acpu_gic:
                 ip_name: psu_acpu_gic
@@ -219,6 +229,10 @@ processor:
                 ip_name: psu_usb_xhci
             psu_usb_xhci_1:
                 ip_name: psu_usb_xhci
+            relu_0_dma:
+                ip_name: axi_dma
+            relu_0_resetn_gpio:
+                ip_name: axi_gpio
             zip_0_dma:
                 ip_name: axi_dma
             zip_0_resetn_gpio:
