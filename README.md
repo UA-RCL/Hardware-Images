@@ -13,12 +13,19 @@ Build the all HLS IPs by running `build_IPs.sh` in `vitis_hls` and following the
 
 | Accelerator | Interface | Address |
 |:---:|:---:|:---:|
-| fft_0_dma    | AXI_LITE    | 0x8000_0000 |
-| fft_0        | config_gpio | 0x8002_0000 |
-| fft_0        | reset_gpio  | 0x8001_0000 |
-| ZIP_0_dma    | AXI_LITE    | 0x8003_0000 |
-| ZIP_0        | axi_control | 0x8004_0000 |
-| ZIP_0        | reset_gpio  | 0x8005_0000 |
+| conv2d_0 | s_axi_control | 0x8000_0000 |
+| conv2d_0 | reset_gpio | 0x8001_0000 |
+| conv2d_0_dma | S_AXI_LITE | 0x8006_0000 |
+| conv2d_0_dma1 | S_AXI_LITE | 0x800C_0000 |
+| ReLU_0 | s_axi_control | 0x8002_0000 |
+| ReLU_0 | reset_gpio | 0x8008_0000 |
+| relu_0_dma | S_AXI_LITE | 0x8007_0000 |
+| ZIP_HLS_accel_0 | s_axi_ctrl | 0x8004_0000 |
+| ZIP_HLS_accel_0 | reset_gpio | 0x8005_0000 |
+| zip_0_dma | S_AXI_LITE | 0x8003_0000 |
+| MaxPoolingKernel_0 | s_axi_config | 0x8009_0000 |
+| MaxPoolingKernel_0 | reset_gpio | 0x800B_0000 |
+| maxpool2d_0_dma | S_AXI_LITE | 0x800A_0000 |
 
 ## Petalinux
 
@@ -30,9 +37,3 @@ Build the all HLS IPs by running `build_IPs.sh` in `vitis_hls` and following the
 ## SD Card Image
 
 Pre-built petalinux image files `boot.scr`, `BOOT.BIN`, and `image.ub` are available under `SDCard`. 
-
-# TODO for This Branch
-
-- Include pdf file of block design
-- Check whether bsp is needed, if so how should it be generated 
-- Update the table with correct addresses

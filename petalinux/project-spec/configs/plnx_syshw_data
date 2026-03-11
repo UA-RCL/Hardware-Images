@@ -1,5 +1,5 @@
 device_id: xczu3eg
-hw_design_name: fft1xzip1x_wrapper
+hw_design_name: conv2d1xrelu1xmaxpool2d1xzip1x_wrapper
 processor:
     psu_cortexa53_0:
         arch: aarch64

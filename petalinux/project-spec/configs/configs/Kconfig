@@ -9,7 +9,7 @@ config SYSTEM_ZYNQMP
         bool "ZYNQMP Configuration"
         help
           ZYNQMP Configuration for petalinux project.
-          All these config options will be in /mnt/data/Publications/PACT26/AUP-ZU3/petalinux/project-spec/configs/config
+          All these config options will be in /mnt/data/Publications/PACT26/tmp/Hardware-Images/petalinux/project-spec/configs/config
 
 config SUBSYSTEM_VARIANT_ZYNQMPEG
         bool
@@ -21,4 +21,4 @@ config SUBSYSTEM_DISTRO_PETALINUX
         default y
         help
 
-source /mnt/data/Publications/PACT26/AUP-ZU3/petalinux/project-spec/configs/configs/Kconfig.main
+source /mnt/data/Publications/PACT26/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.main
