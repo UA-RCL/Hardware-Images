@@ -1,0 +1,12 @@
+/include/ "system-conf.dtsi"
+
+/ {
+    udmabuf0: udmabuf@0x00 {
+        compatible = "ikwzm,u-dma-buf";
+        device-name = "udmabuf0";
+        size = <0x00100000>;
+    };
+
+};
+
+&fft_0_dma    { compatible = "generic-uio"; };

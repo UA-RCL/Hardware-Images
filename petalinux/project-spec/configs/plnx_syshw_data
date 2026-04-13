@@ -1,0 +1,49 @@
+device_id: xcvu37p
+hw_design_name: mb_preset_wrapper
+processor:
+    microblaze_0:
+        arch: microblaze
+        ip_name: microblaze
+        slaves_strings: axi_gpio_0 axi_iic_0 axi_timer_0 axi_uartlite_0 ddr4_0 fft_0_config_gpio fft_0_dma fft_0_resetn_gpio microblaze_0_axi_intc microblaze_0_local_memory_dlmb_bram_if_cntlr microblaze_0_local_memory_ilmb_bram_if_cntlr
+        instance_path: mb_preset_i/microblaze_0
+        linux_kernel_properties:
+            XILINX_MICROBLAZE0_FAMILY: virtexuplusHBM string
+            XILINX_MICROBLAZE0_USE_MSR_INSTR: 1 int
+            XILINX_MICROBLAZE0_USE_PCMP_INSTR: 1 int
+            XILINX_MICROBLAZE0_USE_BARREL: 1 int
+            XILINX_MICROBLAZE0_USE_DIV: 1 int
+            XILINX_MICROBLAZE0_USE_HW_MUL: 2 int
+            XILINX_MICROBLAZE0_USE_FPU: 1 int
+            XILINX_MICROBLAZE0_ENDIANNESS: 1 int
+            XILINX_MICROBLAZE0_DATASIZE: 32 int
+            XILINX_MICROBLAZE0_USE_REORDER_INSTR: 1 int
+            XILINX_MICROBLAZE0_AREA_OPTIMIZED: 0 int
+            XILINX_MICROBLAZE0_HW_VER: 11.0 string
+        slaves:
+            ddr4_0:
+                device_type: memory
+                ip_name: ddr4
+                baseaddr: 0x80000000
+                highaddr: 0xFFFFFFFF
+            axi_uartlite_0:
+                device_type: serial
+                ip_name: axi_uartlite
+                is_pl: 1
+            axi_gpio_0:
+                ip_name: axi_gpio
+            axi_iic_0:
+                ip_name: axi_iic
+            axi_timer_0:
+                ip_name: axi_timer
+            fft_0_config_gpio:
+                ip_name: axi_gpio
+            fft_0_dma:
+                ip_name: axi_dma
+            fft_0_resetn_gpio:
+                ip_name: axi_gpio
+            microblaze_0_axi_intc:
+                ip_name: axi_intc
+            microblaze_0_local_memory_dlmb_bram_if_cntlr:
+                ip_name: lmb_bram_if_cntlr
+            microblaze_0_local_memory_ilmb_bram_if_cntlr:
+                ip_name: lmb_bram_if_cntlr
