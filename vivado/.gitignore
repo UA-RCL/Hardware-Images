@@ -1,7 +1,26 @@
-# ignore generated project directory
-proj
-# ignore any vivado log/journal files created along the way
-vivado.*
-*/.Xil/
-*.jou
-*.log
+# Ignore HLS build folders
+mmult/mmult/
+Conv2D/conv_filter_prj/
+ZIP/ZIP_prj/
+Maxpool2D/maxpool2d_prj/
+ReLU/relu_prj/
+# Ignore IP export directory
+IPs
+# and our logging dotfile
+.vitis_hls.log
+mmult/vitis_hls.log
+Conv2D/vitis_hls.log
+ZIP/vitis_hls.log
+Maxpool2D/vitis_hls.log
+ReLU/vitis_hls.log
+proj/proj.runs/
+proj/proj.srcs/
+proj/proj.cache/
+proj/proj.hw/
+proj/proj.ip_user_files/
+proj/proj.ip_user_files/
+proj/proj.sim/
+ip_upgrade.log
+proj/proj.xpr
+proj/proj.gen/
+.Xil/

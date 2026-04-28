@@ -1,0 +1,171 @@
+/include/ "system-conf.dtsi"
+#include <dt-bindings/phy/phy.h>
+
+/ {
+  
+
+
+    fclk0: fclk0 {
+		status = "okay";
+		compatible = "xlnx,fclk";
+		clocks = <&zynqmp_clk PL0_REF>;
+	};
+
+	fclk1: fclk1 {
+		status = "okay";
+		compatible = "xlnx,fclk";
+		clocks = <&zynqmp_clk PL1_REF>;
+	};
+
+	fclk2: fclk2 {
+		status = "okay";
+		compatible = "xlnx,fclk";
+		clocks = <&zynqmp_clk PL2_REF>;
+	};
+
+	fclk3: fclk3 {
+		status = "okay";
+		compatible = "xlnx,fclk";
+		clocks = <&zynqmp_clk PL3_REF>;
+	};
+
+    udmabuf0: udmabuf@0x00 {
+        compatible = "ikwzm,u-dma-buf";
+        device-name = "udmabuf0";
+        // 1 MiB = 1048576 B = 0x100000
+        size = <0x01200000>;
+    };
+    
+    udmabuf1: udmabuf@0x04 {
+        compatible = "ikwzm,u-dma-buf";
+        device-name = "udmabuf1";
+        // 1 MiB = 1048576 B = 0x100000
+        size = <0x00800000>;
+    };
+    
+    udmabuf2: udmabuf@0x08 {
+        compatible = "ikwzm,u-dma-buf";
+        device-name = "udmabuf2";
+        // 1 MiB = 1048576 B = 0x100000
+        size = <0x00100000>;
+    };
+
+    udmabuf3: udmabuf@0x0C {
+        compatible = "ikwzm,u-dma-buf";
+        device-name = "udmabuf3";
+        // 1 MiB = 1048576 B = 0x100000
+        size = <0x00100000>;
+    };
+
+
+	chosen {
+		bootargs = " earlycon console=ttyPS0,115200 console=tty0 uio_pdrv_genirq.of_id=generic-uio clk_ignore_unused rootwait root=/dev/mmcblk0p2 rw";
+		stdout-path = "serial0:115200n8";
+	};
+
+        dp_clk:psgtr_dp_clock {
+                compatible = "fixed-clock";
+                #clock-cells = <0x00>;
+                clock-frequency = <27000000>;
+        };
+
+	usb_clk:psgtr_usb_clock {
+                compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+                clock-frequency = <100000000>;
+	};
+
+	ldo0:regulator-ldo0 {
+		compatible = "regulator-fixed";
+		regulator-name = "VCCp3V3_AIC_AVDD";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+	};
+
+	ldo1:regulator-ldo1 {
+		compatible = "regulator-fixed";
+		regulator-name = "VCCp1V8_AIC_DVDD";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-always-on;
+	};
+
+	ldo2:regulator-ldo2 {
+		compatible = "regulator-fixed";
+		regulator-name = "VCCp1V8_AIC_IOVDD";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-always-on;
+	};
+
+	ldo3:regulator-ldo3 {
+		compatible = "regulator-fixed";
+		regulator-name = "VCCp3V3_AIC_DRVDD";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+	};
+
+
+};
+
+&sdhci0 {
+	no-1-8-v;
+	disable-wp;
+};
+
+&psgtr {
+      /* dp 0-1, usb0, usb1 */
+      clocks = <&dp_clk>, <&usb_clk>;
+      clock-names = "ref0", "ref1";
+};
+
+&zynqmp_dpsub {
+	status = "okay";
+	phys = <&psgtr 1 PHY_TYPE_DP 0 0>, <&psgtr 0 PHY_TYPE_DP 1 0>;
+	phy-names = "dp-phy0", "dp-phy1";
+};
+
+&usb0 {
+	status = "okay";
+	phys = <&psgtr 2 PHY_TYPE_USB3 0 1>;
+};
+
+&dwc3_0 {
+	status = "okay";
+	dr_mode = "host";
+	snps,usb3_lpm_capable;
+	phy-names = "usb3-phy";
+	maximum-speed = "super-speed";
+};
+
+&usb1 {
+	status = "okay";
+	phys = <&psgtr 3 PHY_TYPE_USB3 1 1>;
+};
+
+&dwc3_1 {
+	status = "okay";
+	dr_mode = "host";
+	snps,usb3_lpm_capable;
+	phy-names = "usb3-phy";
+	maximum-speed = "super-speed";
+};
+
+&i2c0 {
+	bmp180: bmp180@77 {
+		compatible = "bosch,bmp180";
+		reg = <0x77>;
+		vddd-supply = <&ldo3>;
+		vdda-supply = <&ldo0>;
+	};
+};
+
+&zynqmp_dp_snd_card0 {
+	status = "disable";
+};
+
+&modepin_gpio {
+	gpio-line-names = "PS_MODE0", "PS_MODE1", "PS_MODE2", "PS_MODE3";
+};

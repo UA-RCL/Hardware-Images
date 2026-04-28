@@ -13,3 +13,7 @@ Conv2D/vitis_hls.log
 ZIP/vitis_hls.log
 Maxpool2D/vitis_hls.log
 ReLU/vitis_hls.log
+complex_gemv_dbl/complex_gemv_dbl/
+complex_gemv_dbl/vitis_hls.log
+complex_gemv_flt/complex_gemv_flt/
+complex_gemv_flt/vitis_hls.log
