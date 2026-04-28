@@ -24,3 +24,5 @@ Build the all HLS IPs by running `build_IPs.sh` in `vitis_hls` and following the
 ## SD Card Image
 
 Pre-built petalinux image files `boot.scr`, `BOOT.BIN`, and `image.ub` are available under `SDCard`. 
+
+**NOTE:** For more details on petalinux: https://docs.amd.com/r/2024.2-English/ug1144-petalinux-tools-reference-guide/Troubleshooting?tocId=4Qoeqct~snAHksraGz4How
