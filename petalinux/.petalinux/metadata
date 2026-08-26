@@ -1,5 +1,5 @@
 PETALINUX_VER=2024.2
-HARDWARE_PATH=/host-fs/mnt/data/Publications/PACT26/tmp/vcu128/vivado/1xfft_wrapper.xsa
-HDF_EXT=xsa
 VALIDATE_HW_CHKSUM=1
+HARDWARE_PATH=/host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/vivado/kpact-prototype.xsa
+HDF_EXT=xsa
 YOCTO_SDK=3d6043f17dd2ead2460de48c441dd8acb38e46e1c273ee5003528c64605c5a6d

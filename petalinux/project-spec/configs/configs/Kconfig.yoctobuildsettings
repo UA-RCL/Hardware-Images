@@ -27,13 +27,13 @@ endmenu
 endif
 
 if !SUBSYSTEM_DISTRO_PETALINUX
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.yoctomachinesettings
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.yoctomachinesettings
 endif
 
 if SUBSYSTEM_DISTRO_PETALINUX
 menu "Yocto Settings"
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.yoctomachinesettings
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.yoctomachinesettings
 
 if SUBSYSTEM_SDT_FLOW
 config MC_PLNX_IMAGES_LOCATION

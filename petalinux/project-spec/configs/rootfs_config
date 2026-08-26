@@ -774,6 +774,7 @@ CONFIG_Init-manager-sysvinit=y
 #
 # CONFIG_gpio-demo is not set
 # CONFIG_peekpoke is not set
+CONFIG_pm-app=y
 # CONFIG_u-dma-buf is not set
 
 #

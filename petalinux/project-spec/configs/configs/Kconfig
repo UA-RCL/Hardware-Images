@@ -9,11 +9,11 @@ config SYSTEM_MICROBLAZE
         bool "MICROBLAZE Configuration"
         help
           MICROBLAZE Configuration for petalinux project.
-          All these config options will be in /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/config
+          All these config options will be in /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/config
 
 config SUBSYSTEM_DISTRO_PETALINUX
         bool
         default y
         help
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.main
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.main

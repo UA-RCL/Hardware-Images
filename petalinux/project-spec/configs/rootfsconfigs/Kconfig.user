@@ -7,6 +7,10 @@ config peekpoke
 	 bool "peekpoke"
 	 help
 	
+config pm-app  
+	 bool "pm-app"
+	 help
+	
 config u-dma-buf  
 	 bool "u-dma-buf"
 	 help

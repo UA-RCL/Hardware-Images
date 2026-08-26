@@ -33,22 +33,22 @@ config SUBSYSTEM_ENDIAN_LITTLE
 
 if SUBSYSTEM_DISTRO_PETALINUX
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.linuxcompselection
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.linuxcompselection
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.autoconfigsettings
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.autoconfigsettings
 
 endif
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.syshw
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.syshw
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.dtgsettings
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.dtgsettings
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.bootcompconfigurations
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.bootcompconfigurations
 
 if SUBSYSTEM_DISTRO_PETALINUX
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.imagepkgconfigurations
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.imagepkgconfigurations
 
 endif
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/configs/Kconfig.yoctobuildsettings
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.yoctobuildsettings

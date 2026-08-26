@@ -4,7 +4,7 @@ processor:
     microblaze_0:
         arch: microblaze
         ip_name: microblaze
-        slaves_strings: axi_gpio_0 axi_iic_0 axi_timer_0 axi_uartlite_0 ddr4_0 fft_0_config_gpio fft_0_dma fft_0_resetn_gpio microblaze_0_axi_intc microblaze_0_local_memory_dlmb_bram_if_cntlr microblaze_0_local_memory_ilmb_bram_if_cntlr
+        slaves_strings: axi_gpio_0 axi_iic_0 axi_timer_0 axi_uartlite_0 ddr4_0 microblaze_0_axi_intc microblaze_0_local_memory_dlmb_bram_if_cntlr microblaze_0_local_memory_ilmb_bram_if_cntlr program_manager_top_0
         instance_path: mb_preset_i/microblaze_0
         linux_kernel_properties:
             XILINX_MICROBLAZE0_FAMILY: virtexuplusHBM string
@@ -35,15 +35,11 @@ processor:
                 ip_name: axi_iic
             axi_timer_0:
                 ip_name: axi_timer
-            fft_0_config_gpio:
-                ip_name: axi_gpio
-            fft_0_dma:
-                ip_name: axi_dma
-            fft_0_resetn_gpio:
-                ip_name: axi_gpio
             microblaze_0_axi_intc:
                 ip_name: axi_intc
             microblaze_0_local_memory_dlmb_bram_if_cntlr:
                 ip_name: lmb_bram_if_cntlr
             microblaze_0_local_memory_ilmb_bram_if_cntlr:
                 ip_name: lmb_bram_if_cntlr
+            program_manager_top_0:
+                ip_name: program_manager_top

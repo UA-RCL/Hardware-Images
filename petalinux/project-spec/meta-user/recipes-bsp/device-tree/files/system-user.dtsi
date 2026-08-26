@@ -1,12 +1,28 @@
 /include/ "system-conf.dtsi"
 
 / {
-    udmabuf0: udmabuf@0x00 {
-        compatible = "ikwzm,u-dma-buf";
-        device-name = "udmabuf0";
-        size = <0x00100000>;
-    };
+	udmabuf0: udmabuf@0x00 {
+		compatible = "ikwzm,u-dma-buf";
+		device-name = "udmabuf0";
+		size = <0x00100000>;
+	};
 
 };
 
-&fft_0_dma    { compatible = "generic-uio"; };
+/*
+ * program_manager_top is AXI-Lite only and free-running (ap_ctrl_none), with no
+ * interrupt. generic-uio gives userspace an mmap window onto its register block;
+ * there is no IRQ to read()/wait on, so pm-app polls the busy bitmap.
+ *
+ * NOTE: "generic-uio" alone is not enough. uio_pdrv_genirq ships with an empty
+ * of_match_table that is populated from its of_id module parameter, so the
+ * kernel command line must also carry:
+ *     uio_pdrv_genirq.of_id=generic-uio
+ * (set via CONFIG_SUBSYSTEM_EXTRA_BOOTARGS in project-spec/configs/config).
+ * Without it the node is never bound and /sys/class/uio stays empty.
+ *
+ * The label must match the node the device-tree generator emits from the XSA --
+ * normally the block-design instance name. Check the generated pl.dtsi if the
+ * build reports an unresolved reference here.
+ */
+&program_manager_top_0 { compatible = "generic-uio"; };

@@ -53,6 +53,21 @@ if { $list_projs eq "" } {
    set_property BOARD_PART xilinx.com:vcu128:part0:1.0 [current_project]
 }
 
+##################################################################
+# HLS IP REPOSITORY
+##################################################################
+# vitis_hls/IPs is produced by vitis_hls/build_IPs.sh and is .gitignore'd, so it
+# will not exist in a fresh clone. This must run before the CHECK IPs block
+# below, or program_manager_top will not be found in the catalog.
+set hls_ip_repo [file normalize "$script_folder/../vitis_hls/IPs"]
+if { ![file isdirectory $hls_ip_repo] } {
+   catch {common::send_gid_msg -ssname BD::TCL -id 2100 -severity "ERROR" "HLS IP repository <$hls_ip_repo> does not exist. Run vitis_hls/build_IPs.sh before sourcing this script."}
+   return 1
+}
+set_property ip_repo_paths [concat [get_property ip_repo_paths [current_project]] $hls_ip_repo] [current_project]
+update_ip_catalog -rebuild
+
+
 
 # CHANGE DESIGN NAME HERE
 variable design_name
@@ -141,9 +156,7 @@ xilinx.com:ip:mdm:3.2\
 xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:axi_gpio:2.0\
-xilinx.com:ip:axi_dma:7.1\
-xilinx.com:ip:util_vector_logic:2.0\
-xilinx.com:ip:xfft:9.1\
+xilinx.com:hls:program_manager_top:1.0\
 xilinx.com:ip:lmb_v10:3.0\
 xilinx.com:ip:lmb_bram_if_cntlr:4.0\
 xilinx.com:ip:blk_mem_gen:8.4\
@@ -379,7 +392,7 @@ proc create_root_design { parentCell } {
   set microblaze_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_0_axi_periph ]
   set_property -dict [list \
     CONFIG.M01_HAS_REGSLICE {1} \
-    CONFIG.NUM_MI {9} \
+    CONFIG.NUM_MI {7} \
   ] $microblaze_0_axi_periph
 
 
@@ -408,7 +421,7 @@ proc create_root_design { parentCell } {
   set axi_smc [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 axi_smc ]
   set_property -dict [list \
     CONFIG.NUM_CLKS {2} \
-    CONFIG.NUM_SI {4} \
+    CONFIG.NUM_SI {2} \
   ] $axi_smc
 
 
@@ -423,67 +436,17 @@ proc create_root_design { parentCell } {
   ] $axi_gpio_0
 
 
-  # Create instance: fft_0_dma, and set properties
-  set fft_0_dma [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 fft_0_dma ]
-  set_property -dict [list \
-    CONFIG.c_include_sg {0} \
-    CONFIG.c_m_axi_mm2s_data_width {64} \
-    CONFIG.c_m_axis_mm2s_tdata_width {64} \
-  ] $fft_0_dma
-
-
-  # Create instance: fft_0_reset_logic, and set properties
-  set fft_0_reset_logic [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 fft_0_reset_logic ]
-  set_property CONFIG.C_SIZE {1} $fft_0_reset_logic
-
-
-  # Create instance: fft_0_resetn_gpio, and set properties
-  set fft_0_resetn_gpio [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 fft_0_resetn_gpio ]
-  set_property -dict [list \
-    CONFIG.C_ALL_OUTPUTS {1} \
-    CONFIG.C_GPIO_WIDTH {1} \
-  ] $fft_0_resetn_gpio
-
-
-  # Create instance: fft_0_config_gpio, and set properties
-  set fft_0_config_gpio [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 fft_0_config_gpio ]
-  set_property -dict [list \
-    CONFIG.C_ALL_INPUTS {0} \
-    CONFIG.C_ALL_OUTPUTS {1} \
-    CONFIG.C_ALL_OUTPUTS_2 {1} \
-    CONFIG.C_GPIO2_WIDTH {24} \
-    CONFIG.C_GPIO_WIDTH {1} \
-    CONFIG.C_IS_DUAL {1} \
-  ] $fft_0_config_gpio
-
-
-  # Create instance: xfft_0, and set properties
-  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft:9.1 xfft_0 ]
-  set_property -dict [list \
-    CONFIG.aresetn {true} \
-    CONFIG.complex_mult_type {use_mults_performance} \
-    CONFIG.data_format {floating_point} \
-    CONFIG.implementation_options {pipelined_streaming_io} \
-    CONFIG.number_of_stages_using_block_ram_for_data_and_phase_factors {6} \
-    CONFIG.output_ordering {natural_order} \
-    CONFIG.phase_factor_width {24} \
-    CONFIG.run_time_configurable_transform_length {true} \
-    CONFIG.super_sample_rates {1} \
-    CONFIG.target_clock_frequency {100} \
-    CONFIG.transform_length {8192} \
-  ] $xfft_0
+  # Create instance: program_manager_top_0, and set properties
+  set program_manager_top_0 [ create_bd_cell -type ip -vlnv xilinx.com:hls:program_manager_top:1.0 program_manager_top_0 ]
 
 
   # Create interface connections
-  connect_bd_intf_net -intf_net axi_dma_2_M_AXIS_MM2S [get_bd_intf_pins xfft_0/S_AXIS_DATA] [get_bd_intf_pins fft_0_dma/M_AXIS_MM2S]
   connect_bd_intf_net -intf_net axi_gpio_0_GPIO [get_bd_intf_ports led_8bits] [get_bd_intf_pins axi_gpio_0/GPIO]
   connect_bd_intf_net -intf_net axi_iic_0_IIC [get_bd_intf_ports iic_0] [get_bd_intf_pins axi_iic_0/IIC]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_smc/M00_AXI] [get_bd_intf_pins ddr4_0/C0_DDR4_S_AXI]
   connect_bd_intf_net -intf_net axi_uartlite_0_UART [get_bd_intf_ports rs232_uart_0] [get_bd_intf_pins axi_uartlite_0/UART]
   connect_bd_intf_net -intf_net ddr4_0_C0_DDR4 [get_bd_intf_ports ddr4_sdram] [get_bd_intf_pins ddr4_0/C0_DDR4]
   connect_bd_intf_net -intf_net default_100mhz_clk_1 [get_bd_intf_ports default_100mhz_clk] [get_bd_intf_pins ddr4_0/C0_SYS_CLK]
-  connect_bd_intf_net -intf_net fft_0_dma_M_AXI_MM2S [get_bd_intf_pins fft_0_dma/M_AXI_MM2S] [get_bd_intf_pins axi_smc/S02_AXI]
-  connect_bd_intf_net -intf_net fft_0_dma_M_AXI_S2MM [get_bd_intf_pins fft_0_dma/M_AXI_S2MM] [get_bd_intf_pins axi_smc/S03_AXI]
   connect_bd_intf_net -intf_net microblaze_0_M_AXI_DC [get_bd_intf_pins microblaze_0/M_AXI_DC] [get_bd_intf_pins axi_smc/S00_AXI]
   connect_bd_intf_net -intf_net microblaze_0_M_AXI_IC [get_bd_intf_pins microblaze_0/M_AXI_IC] [get_bd_intf_pins axi_smc/S01_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_dp [get_bd_intf_pins microblaze_0_axi_periph/S00_AXI] [get_bd_intf_pins microblaze_0/M_AXI_DP]
@@ -492,23 +455,14 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M03_AXI [get_bd_intf_pins axi_uartlite_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M03_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M04_AXI [get_bd_intf_pins axi_timer_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M04_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M05_AXI [get_bd_intf_pins axi_gpio_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M05_AXI]
-  connect_bd_intf_net -intf_net microblaze_0_axi_periph_M06_AXI [get_bd_intf_pins fft_0_dma/S_AXI_LITE] [get_bd_intf_pins microblaze_0_axi_periph/M06_AXI]
-  connect_bd_intf_net -intf_net microblaze_0_axi_periph_M07_AXI [get_bd_intf_pins fft_0_resetn_gpio/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M07_AXI]
-  connect_bd_intf_net -intf_net microblaze_0_axi_periph_M08_AXI [get_bd_intf_pins fft_0_config_gpio/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M08_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_axi_periph_M06_AXI [get_bd_intf_pins program_manager_top_0/s_axi_control] [get_bd_intf_pins microblaze_0_axi_periph/M06_AXI]
   connect_bd_intf_net -intf_net microblaze_0_debug [get_bd_intf_pins mdm_1/MBDEBUG_0] [get_bd_intf_pins microblaze_0/DEBUG]
   connect_bd_intf_net -intf_net microblaze_0_dlmb_1 [get_bd_intf_pins microblaze_0/DLMB] [get_bd_intf_pins microblaze_0_local_memory/DLMB]
   connect_bd_intf_net -intf_net microblaze_0_ilmb_1 [get_bd_intf_pins microblaze_0/ILMB] [get_bd_intf_pins microblaze_0_local_memory/ILMB]
   connect_bd_intf_net -intf_net microblaze_0_intc_axi [get_bd_intf_pins microblaze_0_axi_periph/M00_AXI] [get_bd_intf_pins microblaze_0_axi_intc/s_axi]
   connect_bd_intf_net -intf_net microblaze_0_interrupt [get_bd_intf_pins microblaze_0_axi_intc/interrupt] [get_bd_intf_pins microblaze_0/INTERRUPT]
-  connect_bd_intf_net -intf_net xfft_0_M_AXIS_DATA [get_bd_intf_pins xfft_0/M_AXIS_DATA] [get_bd_intf_pins fft_0_dma/S_AXIS_S2MM]
 
   # Create port connections
-  connect_bd_net -net axi_gpio_2_gpio_io_o  [get_bd_pins fft_0_resetn_gpio/gpio_io_o] \
-  [get_bd_pins fft_0_reset_logic/Op1]
-  connect_bd_net -net axi_gpio_3_gpio2_io_o  [get_bd_pins fft_0_config_gpio/gpio2_io_o] \
-  [get_bd_pins xfft_0/s_axis_config_tdata]
-  connect_bd_net -net axi_gpio_3_gpio_io_o  [get_bd_pins fft_0_config_gpio/gpio_io_o] \
-  [get_bd_pins xfft_0/s_axis_config_tvalid]
   connect_bd_net -net axi_iic_0_iic2intc_irpt  [get_bd_pins axi_iic_0/iic2intc_irpt] \
   [get_bd_pins microblaze_0_xlconcat/In2]
   connect_bd_net -net axi_timer_0_interrupt  [get_bd_pins axi_timer_0/interrupt] \
@@ -543,14 +497,7 @@ proc create_root_design { parentCell } {
   [get_bd_pins axi_timer_0/s_axi_aclk] \
   [get_bd_pins axi_gpio_0/s_axi_aclk] \
   [get_bd_pins microblaze_0_axi_periph/M06_ACLK] \
-  [get_bd_pins microblaze_0_axi_periph/M07_ACLK] \
-  [get_bd_pins microblaze_0_axi_periph/M08_ACLK] \
-  [get_bd_pins fft_0_dma/s_axi_lite_aclk] \
-  [get_bd_pins fft_0_dma/m_axi_mm2s_aclk] \
-  [get_bd_pins fft_0_dma/m_axi_s2mm_aclk] \
-  [get_bd_pins fft_0_resetn_gpio/s_axi_aclk] \
-  [get_bd_pins fft_0_config_gpio/s_axi_aclk] \
-  [get_bd_pins xfft_0/aclk]
+  [get_bd_pins program_manager_top_0/ap_clk]
   connect_bd_net -net microblaze_0_intr  [get_bd_pins microblaze_0_xlconcat/dout] \
   [get_bd_pins microblaze_0_axi_intc/intr]
   connect_bd_net -net reset_1  [get_bd_ports reset] \
@@ -575,23 +522,14 @@ proc create_root_design { parentCell } {
   [get_bd_pins axi_timer_0/s_axi_aresetn] \
   [get_bd_pins axi_gpio_0/s_axi_aresetn] \
   [get_bd_pins microblaze_0_axi_periph/M06_ARESETN] \
-  [get_bd_pins microblaze_0_axi_periph/M07_ARESETN] \
-  [get_bd_pins microblaze_0_axi_periph/M08_ARESETN] \
-  [get_bd_pins fft_0_resetn_gpio/s_axi_aresetn] \
-  [get_bd_pins fft_0_config_gpio/s_axi_aresetn] \
-  [get_bd_pins fft_0_reset_logic/Op2]
+  [get_bd_pins program_manager_top_0/ap_rst_n]
   connect_bd_net -net rst_ddr4_0_333M_peripheral_aresetn  [get_bd_pins rst_ddr4_0_333M/peripheral_aresetn] \
   [get_bd_pins ddr4_0/c0_ddr4_aresetn] \
   [get_bd_pins microblaze_0_axi_periph/M01_ARESETN]
-  connect_bd_net -net util_vector_logic_1_Res  [get_bd_pins fft_0_reset_logic/Res] \
-  [get_bd_pins fft_0_dma/axi_resetn] \
-  [get_bd_pins xfft_0/aresetn]
 
   # Create address segments
-  assign_bd_address -offset 0x40020000 -range 0x00010000 -with_name SEG_axi_dma_2_Reg -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs fft_0_dma/S_AXI_LITE/Reg] -force
+  assign_bd_address -offset 0x40010000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs program_manager_top_0/s_axi_control/Reg] -force
   assign_bd_address -offset 0x40000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] -force
-  assign_bd_address -offset 0x40030000 -range 0x00010000 -with_name SEG_axi_gpio_2_Reg -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs fft_0_resetn_gpio/S_AXI/Reg] -force
-  assign_bd_address -offset 0x40010000 -range 0x00010000 -with_name SEG_axi_gpio_3_Reg -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs fft_0_config_gpio/S_AXI/Reg] -force
   assign_bd_address -offset 0x40800000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_iic_0/S_AXI/Reg] -force
   assign_bd_address -offset 0x41C00000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_timer_0/S_AXI/Reg] -force
   assign_bd_address -offset 0x40600000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_uartlite_0/S_AXI/Reg] -force
@@ -601,8 +539,6 @@ proc create_root_design { parentCell } {
   assign_bd_address -offset 0x41200000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs microblaze_0_axi_intc/S_AXI/Reg] -force
   assign_bd_address -offset 0x80000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs ddr4_0/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK] -force
   assign_bd_address -offset 0x00000000 -range 0x00020000 -target_address_space [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] -force
-  assign_bd_address -offset 0x80000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_MM2S] [get_bd_addr_segs ddr4_0/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK] -force
-  assign_bd_address -offset 0x80000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces fft_0_dma/Data_S2MM] [get_bd_addr_segs ddr4_0/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK] -force
 
 
   # Restore current instance

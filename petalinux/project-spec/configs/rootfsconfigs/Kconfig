@@ -1867,7 +1867,7 @@ config Init-manager-sysvinit
 endchoice
 endmenu
 
-source /host-fs/mnt/data/Publications/PACT26/tmp/vcu128/petalinux/project-spec/configs/rootfsconfigs/Kconfig.user
+source /host-fs/mnt/data/Projects/PROWESS/HW_prototype/Hardware-Images/petalinux/project-spec/configs/rootfsconfigs/Kconfig.user
 
 menu "PetaLinux RootFS Settings"
 config ADD_EXTRA_USERS
