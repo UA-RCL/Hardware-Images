@@ -86,7 +86,7 @@ config SUBSYSTEM_MEMORY_IP_NAME
 config SUBSYSTEM_MEMORY_PSU_DDR_1_BASEADDR
 	hex "System memory base address"
 	default 0x800000000
-	range 0x800000000 0x97dffffff
+	range 0x800000000 0x87dffffff
 	depends on SUBSYSTEM_MEMORY_PSU_DDR_1_SELECT
 	help
 	Start address of the system memory.
@@ -95,8 +95,8 @@ config SUBSYSTEM_MEMORY_PSU_DDR_1_BASEADDR
 
 config SUBSYSTEM_MEMORY_PSU_DDR_1_SIZE
 	hex "System memory size"
-	default 0x180000000
-	range 0x2000000 0x180000000
+	default 0x80000000
+	range 0x2000000 0x80000000
 	depends on SUBSYSTEM_MEMORY_PSU_DDR_1_SELECT
 	help
 	Size of the system memory. Minimum is 32MB, maximum is the size of
@@ -107,7 +107,7 @@ config SUBSYSTEM_MEMORY_PSU_DDR_1_U__BOOT_TEXTBASE_OFFSET
 	default 0x808000000 if SUBSYSTEM_ARCH_AARCH64
 	default 0x804000000 if SUBSYSTEM_ARCH_ARM
 	default 0x800100000 if SUBSYSTEM_ARCH_MICROBLAZE
-	range 0x800100000 0x117e0fffff
+	range 0x800100000 0x107e0fffff
 	depends on SUBSYSTEM_MEMORY_PSU_DDR_1_SELECT
 	depends on !SUBSYSTEM_COMPONENT_U__BOOT_NAME_NONE
 	help

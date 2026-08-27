@@ -219,8 +219,8 @@ CONFIG_SUBSYSTEM_RFS_FORMATS="cpio cpio.gz cpio.gz.u-boot ext4 tar.gz jffs2"
 #
 # Firmware Version Configuration
 #
-CONFIG_SUBSYSTEM_HOSTNAME="petalinux-base-8GB"
-CONFIG_SUBSYSTEM_PRODUCT="petalinux-base-8GB"
+CONFIG_SUBSYSTEM_HOSTNAME="petalinux-base-4GB"
+CONFIG_SUBSYSTEM_PRODUCT="petalinux-base-4GB"
 CONFIG_SUBSYSTEM_FW_VERSION="1.00"
 CONFIG_YOCTO_MACHINE_NAME="zynqmp-generic"
 CONFIG_YOCTO_INCLUDE_MACHINE_NAME=""

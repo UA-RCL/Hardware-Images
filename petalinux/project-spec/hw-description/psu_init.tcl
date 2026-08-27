@@ -1145,7 +1145,7 @@ set psu_ddr_init_data {
 
 		# Indicates the configuration of the device used in the system. - 00 - x4
     # device - 01 - x8 device - 10 - x16 device - 11 - x32 device
-		# PSU_DDRC_MSTR_DEVICE_CONFIG                                                     0x1
+		# PSU_DDRC_MSTR_DEVICE_CONFIG                                                     0x2
 
 		# Choose which registers are used. - 0 - Original registers - 1 - Shadow r
     # egisters
@@ -1230,8 +1230,8 @@ set psu_ddr_init_data {
 		# PSU_DDRC_MSTR_DDR3                                                              0x0
 
 		# Master Register
-		#(OFFSET, MASK, VALUE)      (0XFD070000, 0xE30FBE3DU ,0x41041010U)  */
-    mask_write 0XFD070000 0xE30FBE3D 0x41041010
+		#(OFFSET, MASK, VALUE)      (0XFD070000, 0xE30FBE3DU ,0x81041010U)  */
+    mask_write 0XFD070000 0xE30FBE3D 0x81041010
 		# Register : MRCTRL0 @ 0XFD070010</p>
 
 		# Setting this register bit to 1 triggers a mode register read or write op
@@ -2140,7 +2140,7 @@ set psu_ddr_init_data {
     # nk 'a' to bank 'b'For configurations with MEMC_FREQ_RATIO=2, program thi
     # s to (tRRD_L/2 or tRRD/2) and round it up to the next integer value. Uni
     # t: Clocks.
-		# PSU_DDRC_DRAMTMG4_T_RRD                                                         0x3
+		# PSU_DDRC_DRAMTMG4_T_RRD                                                         0x4
 
 		# tRP: Minimum time from precharge to activate of same bank. For MEMC_FREQ
     # _RATIO=1 configurations, t_rp should be set to RoundUp(tRP/tCK). For MEM
@@ -2150,8 +2150,8 @@ set psu_ddr_init_data {
 		# PSU_DDRC_DRAMTMG4_T_RP                                                          0xa
 
 		# SDRAM Timing Register 4
-		#(OFFSET, MASK, VALUE)      (0XFD070110, 0x1F0F0F1FU ,0x0903030AU)  */
-    mask_write 0XFD070110 0x1F0F0F1F 0x0903030A
+		#(OFFSET, MASK, VALUE)      (0XFD070110, 0x1F0F0F1FU ,0x0903040AU)  */
+    mask_write 0XFD070110 0x1F0F0F1F 0x0903040A
 		# Register : DRAMTMG5 @ 0XFD070114</p>
 
 		# This is the time before Self Refresh Exit that CK is maintained as a val
@@ -2288,7 +2288,7 @@ set psu_ddr_init_data {
     # ferent bank group. For configurations with MEMC_FREQ_RATIO=2, program th
     # is to (tRRD_S/2) and round it up to the next integer value. Present only
     #  in designs configured to support DDR4. Unit: Clocks.
-		# PSU_DDRC_DRAMTMG9_T_RRD_S                                                       0x2
+		# PSU_DDRC_DRAMTMG9_T_RRD_S                                                       0x4
 
 		# CWL + PL + BL/2 + tWTR_S Minimum time from write command to read command
     #  for different bank group. Includes time for bus turnaround, recovery ti
@@ -2303,8 +2303,8 @@ set psu_ddr_init_data {
 		# PSU_DDRC_DRAMTMG9_WR2RD_S                                                       0xc
 
 		# SDRAM Timing Register 9
-		#(OFFSET, MASK, VALUE)      (0XFD070124, 0x40070F3FU ,0x0002020CU)  */
-    mask_write 0XFD070124 0x40070F3F 0x0002020C
+		#(OFFSET, MASK, VALUE)      (0XFD070124, 0x40070F3FU ,0x0002040CU)  */
+    mask_write 0XFD070124 0x40070F3F 0x0002040C
 		# Register : DRAMTMG11 @ 0XFD07012C</p>
 
 		# tXMPDLL: This is the minimum Exit MPSM to commands requiring a locked DL
@@ -2720,17 +2720,17 @@ set psu_ddr_init_data {
     # to 30 Internal Base: 3 The selected HIF address bit for each of the bank
     #  address bits is determined by adding the internal base to the value of
     # this field.
-		# PSU_DDRC_ADDRMAP1_ADDRMAP_BANK_B1                                               0x1a
+		# PSU_DDRC_ADDRMAP1_ADDRMAP_BANK_B1                                               0x19
 
 		# Selects the HIF address bits used as bank address bit 0. Valid Range: 0
     # to 30 Internal Base: 2 The selected HIF address bit for each of the bank
     #  address bits is determined by adding the internal base to the value of
     # this field.
-		# PSU_DDRC_ADDRMAP1_ADDRMAP_BANK_B0                                               0x1a
+		# PSU_DDRC_ADDRMAP1_ADDRMAP_BANK_B0                                               0x19
 
 		# Address Map Register 1
-		#(OFFSET, MASK, VALUE)      (0XFD070204, 0x001F1F1FU ,0x001F1A1AU)  */
-    mask_write 0XFD070204 0x001F1F1F 0x001F1A1A
+		#(OFFSET, MASK, VALUE)      (0XFD070204, 0x001F1F1FU ,0x001F1919U)  */
+    mask_write 0XFD070204 0x001F1F1F 0x001F1919
 		# Register : ADDRMAP2 @ 0XFD070208</p>
 
 		# - Full bus width mode: Selects the HIF address bit used as column addres
@@ -2859,7 +2859,7 @@ set psu_ddr_init_data {
     # o 11, and 15 Internal Base: 17 The selected HIF address bit is determine
     # d by adding the internal base to the value of this field. If set to 15,
     # row address bit 11 is set to 0.
-		# PSU_DDRC_ADDRMAP5_ADDRMAP_ROW_B11                                               0x5
+		# PSU_DDRC_ADDRMAP5_ADDRMAP_ROW_B11                                               0x4
 
 		# Selects the HIF address bits used as row address bits 2 to 10. Valid Ran
     # ge: 0 to 11, and 15 Internal Base: 8 (for row address bit 2), 9 (for row
@@ -2874,17 +2874,17 @@ set psu_ddr_init_data {
     # o 11 Internal Base: 7 The selected HIF address bit for each of the row a
     # ddress bits is determined by adding the internal base to the value of th
     # is field.
-		# PSU_DDRC_ADDRMAP5_ADDRMAP_ROW_B1                                                0x5
+		# PSU_DDRC_ADDRMAP5_ADDRMAP_ROW_B1                                                0x4
 
 		# Selects the HIF address bits used as row address bit 0. Valid Range: 0 t
     # o 11 Internal Base: 6 The selected HIF address bit for each of the row a
     # ddress bits is determined by adding the internal base to the value of th
     # is field.
-		# PSU_DDRC_ADDRMAP5_ADDRMAP_ROW_B0                                                0x5
+		# PSU_DDRC_ADDRMAP5_ADDRMAP_ROW_B0                                                0x4
 
 		# Address Map Register 5
-		#(OFFSET, MASK, VALUE)      (0XFD070214, 0x0F0F0F0FU ,0x050F0505U)  */
-    mask_write 0XFD070214 0x0F0F0F0F 0x050F0505
+		#(OFFSET, MASK, VALUE)      (0XFD070214, 0x0F0F0F0FU ,0x040F0404U)  */
+    mask_write 0XFD070214 0x0F0F0F0F 0x040F0404
 		# Register : ADDRMAP6 @ 0XFD070218</p>
 
 		# Set this to 1 if there is an LPDDR3 SDRAM 6Gb or 12Gb device in use. - 1
@@ -2898,29 +2898,29 @@ set psu_ddr_init_data {
     # o 11, and 15 Internal Base: 21 The selected HIF address bit is determine
     # d by adding the internal base to the value of this field. If set to 15,
     # row address bit 15 is set to 0.
-		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B15                                               0x5
+		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B15                                               0x4
 
 		# Selects the HIF address bit used as row address bit 14. Valid Range: 0 t
     # o 11, and 15 Internal Base: 20 The selected HIF address bit is determine
     # d by adding the internal base to the value of this field. If set to 15,
     # row address bit 14 is set to 0.
-		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B14                                               0x5
+		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B14                                               0x4
 
 		# Selects the HIF address bit used as row address bit 13. Valid Range: 0 t
     # o 11, and 15 Internal Base: 19 The selected HIF address bit is determine
     # d by adding the internal base to the value of this field. If set to 15,
     # row address bit 13 is set to 0.
-		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B13                                               0x5
+		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B13                                               0x4
 
 		# Selects the HIF address bit used as row address bit 12. Valid Range: 0 t
     # o 11, and 15 Internal Base: 18 The selected HIF address bit is determine
     # d by adding the internal base to the value of this field. If set to 15,
     # row address bit 12 is set to 0.
-		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B12                                               0x5
+		# PSU_DDRC_ADDRMAP6_ADDRMAP_ROW_B12                                               0x4
 
 		# Address Map Register 6
-		#(OFFSET, MASK, VALUE)      (0XFD070218, 0x8F0F0F0FU ,0x05050505U)  */
-    mask_write 0XFD070218 0x8F0F0F0F 0x05050505
+		#(OFFSET, MASK, VALUE)      (0XFD070218, 0x8F0F0F0FU ,0x04040404U)  */
+    mask_write 0XFD070218 0x8F0F0F0F 0x04040404
 		# Register : ADDRMAP7 @ 0XFD07021C</p>
 
 		# Selects the HIF address bit used as row address bit 17. Valid Range: 0 t
@@ -2933,11 +2933,11 @@ set psu_ddr_init_data {
     # o 11, and 15 Internal Base: 22 The selected HIF address bit is determine
     # d by adding the internal base to the value of this field. If set to 15,
     # row address bit 16 is set to 0.
-		# PSU_DDRC_ADDRMAP7_ADDRMAP_ROW_B16                                               0x5
+		# PSU_DDRC_ADDRMAP7_ADDRMAP_ROW_B16                                               0x4
 
 		# Address Map Register 7
-		#(OFFSET, MASK, VALUE)      (0XFD07021C, 0x00000F0FU ,0x00000F05U)  */
-    mask_write 0XFD07021C 0x00000F0F 0x00000F05
+		#(OFFSET, MASK, VALUE)      (0XFD07021C, 0x00000F0FU ,0x00000F04U)  */
+    mask_write 0XFD07021C 0x00000F0F 0x00000F04
 		# Register : ADDRMAP8 @ 0XFD070220</p>
 
 		# Selects the HIF address bits used as bank group address bit 1. Valid Ran
@@ -2945,7 +2945,7 @@ set psu_ddr_init_data {
     # ch of the bank group address bits is determined by adding the internal b
     # ase to the value of this field. If set to 31, bank group address bit 1 i
     # s set to 0.
-		# PSU_DDRC_ADDRMAP8_ADDRMAP_BG_B1                                                 0x7
+		# PSU_DDRC_ADDRMAP8_ADDRMAP_BG_B1                                                 0x1f
 
 		# Selects the HIF address bits used as bank group address bit 0. Valid Ran
     # ge: 0 to 30 Internal Base: 2 The selected HIF address bit for each of th
@@ -2954,8 +2954,8 @@ set psu_ddr_init_data {
 		# PSU_DDRC_ADDRMAP8_ADDRMAP_BG_B0                                                 0x0
 
 		# Address Map Register 8
-		#(OFFSET, MASK, VALUE)      (0XFD070220, 0x00001F1FU ,0x00000700U)  */
-    mask_write 0XFD070220 0x00001F1F 0x00000700
+		#(OFFSET, MASK, VALUE)      (0XFD070220, 0x00001F1FU ,0x00001F00U)  */
+    mask_write 0XFD070220 0x00001F1F 0x00001F00
 		# Register : ADDRMAP9 @ 0XFD070224</p>
 
 		# Selects the HIF address bits used as row address bit 5. Valid Range: 0 t
@@ -2963,32 +2963,32 @@ set psu_ddr_init_data {
     # address bits is determined by adding the internal base to the value of t
     # his field. This register field is used only when ADDRMAP5.addrmap_row_b2
     # _10 is set to value 15.
-		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B5                                                0x5
+		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B5                                                0x4
 
 		# Selects the HIF address bits used as row address bit 4. Valid Range: 0 t
     # o 11 Internal Base: 10 The selected HIF address bit for each of the row
     # address bits is determined by adding the internal base to the value of t
     # his field. This register field is used only when ADDRMAP5.addrmap_row_b2
     # _10 is set to value 15.
-		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B4                                                0x5
+		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B4                                                0x4
 
 		# Selects the HIF address bits used as row address bit 3. Valid Range: 0 t
     # o 11 Internal Base: 9 The selected HIF address bit for each of the row a
     # ddress bits is determined by adding the internal base to the value of th
     # is field. This register field is used only when ADDRMAP5.addrmap_row_b2_
     # 10 is set to value 15.
-		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B3                                                0x5
+		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B3                                                0x4
 
 		# Selects the HIF address bits used as row address bit 2. Valid Range: 0 t
     # o 11 Internal Base: 8 The selected HIF address bit for each of the row a
     # ddress bits is determined by adding the internal base to the value of th
     # is field. This register field is used only when ADDRMAP5.addrmap_row_b2_
     # 10 is set to value 15.
-		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B2                                                0x5
+		# PSU_DDRC_ADDRMAP9_ADDRMAP_ROW_B2                                                0x4
 
 		# Address Map Register 9
-		#(OFFSET, MASK, VALUE)      (0XFD070224, 0x0F0F0F0FU ,0x05050505U)  */
-    mask_write 0XFD070224 0x0F0F0F0F 0x05050505
+		#(OFFSET, MASK, VALUE)      (0XFD070224, 0x0F0F0F0FU ,0x04040404U)  */
+    mask_write 0XFD070224 0x0F0F0F0F 0x04040404
 		# Register : ADDRMAP10 @ 0XFD070228</p>
 
 		# Selects the HIF address bits used as row address bit 9. Valid Range: 0 t
@@ -2996,32 +2996,32 @@ set psu_ddr_init_data {
     # address bits is determined by adding the internal base to the value of t
     # his field. This register field is used only when ADDRMAP5.addrmap_row_b2
     # _10 is set to value 15.
-		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B9                                               0x5
+		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B9                                               0x4
 
 		# Selects the HIF address bits used as row address bit 8. Valid Range: 0 t
     # o 11 Internal Base: 14 The selected HIF address bit for each of the row
     # address bits is determined by adding the internal base to the value of t
     # his field. This register field is used only when ADDRMAP5.addrmap_row_b2
     # _10 is set to value 15.
-		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B8                                               0x5
+		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B8                                               0x4
 
 		# Selects the HIF address bits used as row address bit 7. Valid Range: 0 t
     # o 11 Internal Base: 13 The selected HIF address bit for each of the row
     # address bits is determined by adding the internal base to the value of t
     # his field. This register field is used only when ADDRMAP5.addrmap_row_b2
     # _10 is set to value 15.
-		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B7                                               0x5
+		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B7                                               0x4
 
 		# Selects the HIF address bits used as row address bit 6. Valid Range: 0 t
     # o 11 Internal Base: 12 The selected HIF address bit for each of the row
     # address bits is determined by adding the internal base to the value of t
     # his field. This register field is used only when ADDRMAP5.addrmap_row_b2
     # _10 is set to value 15.
-		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B6                                               0x5
+		# PSU_DDRC_ADDRMAP10_ADDRMAP_ROW_B6                                               0x4
 
 		# Address Map Register 10
-		#(OFFSET, MASK, VALUE)      (0XFD070228, 0x0F0F0F0FU ,0x05050505U)  */
-    mask_write 0XFD070228 0x0F0F0F0F 0x05050505
+		#(OFFSET, MASK, VALUE)      (0XFD070228, 0x0F0F0F0FU ,0x04040404U)  */
+    mask_write 0XFD070228 0x0F0F0F0F 0x04040404
 		# Register : ADDRMAP11 @ 0XFD07022C</p>
 
 		# Selects the HIF address bits used as row address bit 10. Valid Range: 0
@@ -3029,11 +3029,11 @@ set psu_ddr_init_data {
     #  address bits is determined by adding the internal base to the value of
     # this field. This register field is used only when ADDRMAP5.addrmap_row_b
     # 2_10 is set to value 15.
-		# PSU_DDRC_ADDRMAP11_ADDRMAP_ROW_B10                                              0x5
+		# PSU_DDRC_ADDRMAP11_ADDRMAP_ROW_B10                                              0x4
 
 		# Address Map Register 11
-		#(OFFSET, MASK, VALUE)      (0XFD07022C, 0x0000000FU ,0x00000005U)  */
-    mask_write 0XFD07022C 0x0000000F 0x00000005
+		#(OFFSET, MASK, VALUE)      (0XFD07022C, 0x0000000FU ,0x00000004U)  */
+    mask_write 0XFD07022C 0x0000000F 0x00000004
 		# Register : ODTCFG @ 0XFD070240</p>
 
 		# Cycles to hold ODT for a write command. The minimum supported value is 2
@@ -4771,7 +4771,7 @@ set psu_ddr_init_data {
 		# PSU_DDR_PHY_DTPR0_RESERVED_31_29                                                0x0
 
 		# Activate to activate command delay (different banks)
-		# PSU_DDR_PHY_DTPR0_TRRD                                                          0x6
+		# PSU_DDR_PHY_DTPR0_TRRD                                                          0x8
 
 		# Reserved. Return zeroes on reads.
 		# PSU_DDR_PHY_DTPR0_RESERVED_23                                                   0x0
@@ -4792,8 +4792,8 @@ set psu_ddr_init_data {
 		# PSU_DDR_PHY_DTPR0_TRTP                                                          0x9
 
 		# DRAM Timing Parameters Register 0
-		#(OFFSET, MASK, VALUE)      (0XFD080110, 0xFFFFFFFFU ,0x06261109U)  */
-    mask_write 0XFD080110 0xFFFFFFFF 0x06261109
+		#(OFFSET, MASK, VALUE)      (0XFD080110, 0xFFFFFFFFU ,0x08261109U)  */
+    mask_write 0XFD080110 0xFFFFFFFF 0x08261109
 		# Register : DTPR1 @ 0XFD080114</p>
 
 		# Reserved. Return zeroes on reads.
@@ -5597,11 +5597,11 @@ set psu_ddr_init_data {
 		# Register : BISTLSR @ 0XFD080414</p>
 
 		# LFSR seed for pseudo-random BIST patterns
-		# PSU_DDR_PHY_BISTLSR_SEED                                                        0x12342000
+		# PSU_DDR_PHY_BISTLSR_SEED                                                        0x12341000
 
 		# BIST LFSR Seed Register
-		#(OFFSET, MASK, VALUE)      (0XFD080414, 0xFFFFFFFFU ,0x12342000U)  */
-    mask_write 0XFD080414 0xFFFFFFFF 0x12342000
+		#(OFFSET, MASK, VALUE)      (0XFD080414, 0xFFFFFFFFU ,0x12341000U)  */
+    mask_write 0XFD080414 0xFFFFFFFF 0x12341000
 		# Register : RIOCR5 @ 0XFD0804F4</p>
 
 		# Reserved. Return zeroes on reads.

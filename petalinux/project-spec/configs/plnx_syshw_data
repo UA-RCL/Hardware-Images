@@ -15,7 +15,7 @@ processor:
                 device_type: memory
                 ip_name: psu_ddr
                 baseaddr: 0x800000000
-                highaddr: 0x97FFFFFFF
+                highaddr: 0x87FFFFFFF
             psu_uart_1:
                 device_type: serial
                 ip_name: psu_uart

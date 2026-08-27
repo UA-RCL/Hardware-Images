@@ -1,4 +1,12 @@
 menu "user packages " 
+config libgomp  
+	 bool "libgomp"
+	 help
+	
+config gdb  
+	 bool "gdb"
+	 help
+	
 config gpio-demo  
 	 bool "gpio-demo"
 	 help

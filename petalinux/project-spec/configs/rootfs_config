@@ -1037,7 +1037,7 @@ CONFIG_pciutils=y
 #
 # python3-numpy 
 #
-# CONFIG_python3-numpy is not set
+CONFIG_python3-numpy=y
 # CONFIG_python3-numpy-dbg is not set
 # CONFIG_python3-numpy-dev is not set
 
@@ -2308,7 +2308,7 @@ CONFIG_libstdcPLUSPLUS=y
 #
 # gdb 
 #
-# CONFIG_gdb is not set
+CONFIG_gdb=y
 # CONFIG_gdb-dev is not set
 # CONFIG_gdbserver is not set
 # CONFIG_gdb-dbg is not set
@@ -2726,7 +2726,7 @@ CONFIG_packagegroup-core-boot=y
 #
 # python3 
 #
-# CONFIG_python3 is not set
+CONFIG_python3=y
 # CONFIG_python3-crypt is not set
 # CONFIG_python3-unixadmin is not set
 # CONFIG_python3-io is not set
@@ -2735,7 +2735,7 @@ CONFIG_packagegroup-core-boot=y
 # CONFIG_python3-pprint is not set
 # CONFIG_python3-datetime is not set
 # CONFIG_python3-2to3 is not set
-# CONFIG_python3-modules is not set
+CONFIG_python3-modules=y
 # CONFIG_python3-xml is not set
 # CONFIG_python3-numbers is not set
 # CONFIG_python3-pyvenv is not set
@@ -2770,10 +2770,10 @@ CONFIG_packagegroup-core-boot=y
 # CONFIG_python3-html is not set
 # CONFIG_python3-image is not set
 # CONFIG_python3-difflib is not set
-# CONFIG_python3-dev is not set
+CONFIG_python3-dev=y
 # CONFIG_python3-syslog is not set
 # CONFIG_python3-curses is not set
-# CONFIG_libpython3 is not set
+CONFIG_libpython3=y
 # CONFIG_python3-logging is not set
 # CONFIG_python3-profile is not set
 # CONFIG_python3-xmlrpc is not set
@@ -3999,6 +3999,7 @@ CONFIG_Init-manager-systemd=y
 #
 # user packages 
 #
+CONFIG_libgomp=y
 # CONFIG_gpio-demo is not set
 CONFIG_gsl=y
 # CONFIG_peekpoke is not set
