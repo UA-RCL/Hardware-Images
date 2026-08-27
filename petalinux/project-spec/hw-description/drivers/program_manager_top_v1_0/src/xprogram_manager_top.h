@@ -111,6 +111,8 @@ void XProgram_manager_top_Set_valid_signal(XProgram_manager_top *InstancePtr, u3
 u32 XProgram_manager_top_Get_valid_signal(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_mask_out(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_mask_out_vld(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_cfg_status(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_cfg_status_vld(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_map_out_bits_BaseAddress(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_map_out_bits_HighAddress(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_map_out_bits_TotalBytes(XProgram_manager_top *InstancePtr);

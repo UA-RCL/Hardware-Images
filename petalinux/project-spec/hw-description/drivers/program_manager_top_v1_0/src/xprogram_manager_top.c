@@ -177,6 +177,26 @@ u32 XProgram_manager_top_Get_busy_mask_out_vld(XProgram_manager_top *InstancePtr
     return Data & 0x1;
 }
 
+u32 XProgram_manager_top_Get_cfg_status(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_DATA);
+    return Data;
+}
+
+u32 XProgram_manager_top_Get_cfg_status_vld(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_CTRL);
+    return Data & 0x1;
+}
+
 u32 XProgram_manager_top_Get_busy_map_out_bits_BaseAddress(XProgram_manager_top *InstancePtr) {
     Xil_AssertNonvoid(InstancePtr != NULL);
     Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);

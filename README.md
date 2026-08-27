@@ -17,7 +17,7 @@ Two layers, with the boundary at the AXI-Lite command bus:
 | --- | --- |
 | `src/program_manager.cpp` | AXI-Lite registers, the command bus, edge detection, and all targeting |
 | `include/dispatch.hpp` | address decode: is this command for this PE, and is the bank legal |
-| `include/layout_config.h` | the compiled-in cluster/bank layout — manager-side only |
+| `include/layout_config.h` | the power-up default cluster/bank layout — manager-side only |
 | `include/pe_unit.hpp` | one PE: a countdown timer, with no knowledge of the grid |
 | `include/grid_utils.hpp` | busy-bitmap packing |
 
@@ -25,7 +25,40 @@ A PE receives `start` / `clear` / `cycles` and nothing else, so it can be
 synthesized and tested on its own. It is a real RTL submodule (`INLINE off`);
 build with `PE_FLAT=1` to inline it back into the manager.
 
-Grid size is a build knob rather than a source edit:
+## Cluster layout
+
+Which PEs belong to which cluster is **not** compiled into the bitstream. The
+manager holds a runtime table that `pm-app` uploads from `/etc/pm-layout.conf` at
+startup, so re-clustering the grid is a text edit and a restart — no Vitis HLS, no
+Vivado, no new bitstream.
+
+```
+grid 8 8
+
+cluster 0  at 0 0  size 4 8  banks 2  kernels 101 102
+cluster 1  at 4 0  size 4 8  banks 3  kernels 201 202 203
+```
+
+A cluster is one or more rectangles given as origin + size; repeat a line with the
+same id to build a non-rectangular cluster. `banks` is how many kernel banks are
+resident, and it is what the hardware enforces — a `RUN` naming a bank at or above
+it is refused. `kernels` is display metadata; the hardware has never acted on
+`bank_kernel_id`.
+
+Any PE that no rectangle covers is a **spare**: it belongs to no cluster, matches
+no cluster dispatch, and refuses every `RUN`. Overlapping rectangles from different
+clusters are a parse error rather than last-one-wins.
+
+The file above reproduces the layout that used to be compiled in, which is also
+what `layout_config.h` still provides as the power-up default — so the hardware is
+usable before any host has talked to it, and a first boot with the shipped file
+behaves exactly as it did before the table existed.
+
+In the shell: `layout` prints the current cluster map, `load <file>` re-reads and
+re-uploads without restarting. `pm-app -c <file>` overrides the default path.
+
+Grid **size** is still a build knob, because `DIM_X`/`DIM_Y` size the hardware's
+register arrays and the unrolled dispatch loop:
 
 ```
 make csim GRID_DIM=16      # functional check at 16x16
@@ -33,9 +66,10 @@ make ip   GRID_DIM=16      # synthesize it
 make layout-header GRID_DIM=16   # regenerate pm-app's pm_layout.h to match
 ```
 
-Changing it re-runs HLS and needs a new bitstream. `pm_layout.h` is generated and
-committed because bitbake builds `pm-app` out of its own `files/` directory and
-cannot reach across the tree.
+Changing it re-runs HLS and needs a new bitstream. A layout file partitions the
+compiled grid; it cannot grow it, which is why its `grid` line is checked rather
+than obeyed. `pm_layout.h` is generated and committed because bitbake builds
+`pm-app` out of its own `files/` directory and cannot reach across the tree.
 
 ## HLS Files
 

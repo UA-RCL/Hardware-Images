@@ -3,8 +3,13 @@ LDLIBS += -lreadline
 
 all: $(APP)
 
-$(APP): pm-app.o
+OBJS = pm-app.o layout.o
+
+$(APP): $(OBJS)
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+
+pm-app.o: pm-app.c layout.h pm_layout.h
+layout.o: layout.c layout.h pm_layout.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

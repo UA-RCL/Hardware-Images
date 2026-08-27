@@ -4,12 +4,17 @@
 #include <stdint.h>
 
 // =========================================================
-// STATIC GRID / CLUSTER / KERNEL LAYOUT
+// POWER-UP DEFAULT GRID / CLUSTER / KERNEL LAYOUT
 // =========================================================
-// This is baked into the bitstream at HLS compile time. Editing the
-// layout means re-running synthesis, in exchange for a program manager
-// with zero host-side "upload" traffic: the grid initializes itself
-// from GRID_LAYOUT on every RESET.
+// This is no longer "the" layout: the manager holds a runtime cluster table that
+// the host uploads with MODE_CONFIG commands from /etc/pm-layout.conf, so
+// re-clustering the grid does not need HLS. What is baked in here is only the
+// default in force from configuration until the host commits a table of its own,
+// which keeps a freshly programmed bitstream usable with no host at all.
+//
+// Grid *dimensions* remain compile-time: DIM_X/DIM_Y size the register arrays and
+// the unrolled dispatch loop. A layout file partitions the compiled grid; it
+// cannot grow it.
 //
 // Manager-side only. PEs (pe_unit.hpp) do not include this header -- the
 // manager decodes targets and bank validity on their behalf.
@@ -36,7 +41,8 @@ struct PEInit {
     uint8_t  num_loaded;                // number of valid entries in bank_kernel_id
 };
 
-// Two example clusters:
+// Two default clusters, mirrored by the shipped pm-layout.conf so that the first
+// boot with a layout file behaves identically to one without:
 //  - Cluster 0: left half of the grid (x < DIM_X/2), kernels {101, 102}
 //  - Cluster 1: right half of the grid (x >= DIM_X/2), kernels {201, 202, 203}
 inline const PEInit &grid_layout_entry(int x, int y) {

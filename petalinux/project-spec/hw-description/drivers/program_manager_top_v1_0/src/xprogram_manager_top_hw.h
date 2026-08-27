@@ -46,6 +46,11 @@
 // 0x54 : Control signal of busy_mask_out
 //        bit 0  - busy_mask_out_ap_vld (Read/COR)
 //        others - reserved
+// 0x68 : Data signal of cfg_status
+//        bit 31~0 - cfg_status[31:0] (Read)
+// 0x6c : Control signal of cfg_status
+//        bit 0  - cfg_status_ap_vld (Read/COR)
+//        others - reserved
 // 0x60 ~
 // 0x67 : Memory 'busy_map_out_bits' (2 * 32b)
 //        Word n : bit [31:0] - busy_map_out_bits[n]
@@ -70,6 +75,9 @@
 #define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MASK_OUT_DATA     0x50
 #define XPROGRAM_MANAGER_TOP_CONTROL_BITS_BUSY_MASK_OUT_DATA     32
 #define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MASK_OUT_CTRL     0x54
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_DATA        0x68
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_CFG_STATUS_DATA        32
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_CTRL        0x6c
 #define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MAP_OUT_BITS_BASE 0x60
 #define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MAP_OUT_BITS_HIGH 0x67
 #define XPROGRAM_MANAGER_TOP_CONTROL_WIDTH_BUSY_MAP_OUT_BITS     32
