@@ -105,6 +105,10 @@ void XProgram_manager_top_Set_cluster_id(XProgram_manager_top *InstancePtr, u32 
 u32 XProgram_manager_top_Get_cluster_id(XProgram_manager_top *InstancePtr);
 void XProgram_manager_top_Set_bank_id(XProgram_manager_top *InstancePtr, u32 Data);
 u32 XProgram_manager_top_Get_bank_id(XProgram_manager_top *InstancePtr);
+void XProgram_manager_top_Set_kernel_id(XProgram_manager_top *InstancePtr, u32 Data);
+u32 XProgram_manager_top_Get_kernel_id(XProgram_manager_top *InstancePtr);
+void XProgram_manager_top_Set_instr_count(XProgram_manager_top *InstancePtr, u32 Data);
+u32 XProgram_manager_top_Get_instr_count(XProgram_manager_top *InstancePtr);
 void XProgram_manager_top_Set_cycles(XProgram_manager_top *InstancePtr, u32 Data);
 u32 XProgram_manager_top_Get_cycles(XProgram_manager_top *InstancePtr);
 void XProgram_manager_top_Set_valid_signal(XProgram_manager_top *InstancePtr, u32 Data);
@@ -113,6 +117,10 @@ u32 XProgram_manager_top_Get_busy_mask_out(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_mask_out_vld(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_cfg_status(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_cfg_status_vld(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_load_status(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_load_status_vld(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_load_last(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_load_last_vld(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_map_out_bits_BaseAddress(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_map_out_bits_HighAddress(XProgram_manager_top *InstancePtr);
 u32 XProgram_manager_top_Get_busy_map_out_bits_TotalBytes(XProgram_manager_top *InstancePtr);
@@ -122,6 +130,15 @@ u32 XProgram_manager_top_Write_busy_map_out_bits_Words(XProgram_manager_top *Ins
 u32 XProgram_manager_top_Read_busy_map_out_bits_Words(XProgram_manager_top *InstancePtr, int offset, word_type *data, int length);
 u32 XProgram_manager_top_Write_busy_map_out_bits_Bytes(XProgram_manager_top *InstancePtr, int offset, char *data, int length);
 u32 XProgram_manager_top_Read_busy_map_out_bits_Bytes(XProgram_manager_top *InstancePtr, int offset, char *data, int length);
+u32 XProgram_manager_top_Get_kernel_map_out_bits_BaseAddress(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_kernel_map_out_bits_HighAddress(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_kernel_map_out_bits_TotalBytes(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_kernel_map_out_bits_BitWidth(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Get_kernel_map_out_bits_Depth(XProgram_manager_top *InstancePtr);
+u32 XProgram_manager_top_Write_kernel_map_out_bits_Words(XProgram_manager_top *InstancePtr, int offset, word_type *data, int length);
+u32 XProgram_manager_top_Read_kernel_map_out_bits_Words(XProgram_manager_top *InstancePtr, int offset, word_type *data, int length);
+u32 XProgram_manager_top_Write_kernel_map_out_bits_Bytes(XProgram_manager_top *InstancePtr, int offset, char *data, int length);
+u32 XProgram_manager_top_Read_kernel_map_out_bits_Bytes(XProgram_manager_top *InstancePtr, int offset, char *data, int length);
 
 #ifdef __cplusplus
 }

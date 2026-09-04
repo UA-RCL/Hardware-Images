@@ -6,3 +6,5 @@ IPs
 .vitis_hls.log
 
 **/vitis_hls.log
+# g++ C-simulation binaries (make csim / make pe-test)
+build.csim/

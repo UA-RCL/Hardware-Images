@@ -1,1 +1,4 @@
 myproj/*
+
+# Exported hardware -- a build output, not a source
+*.xsa

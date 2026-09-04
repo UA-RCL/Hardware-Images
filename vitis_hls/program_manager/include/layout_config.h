@@ -6,11 +6,12 @@
 // =========================================================
 // POWER-UP DEFAULT GRID / CLUSTER / KERNEL LAYOUT
 // =========================================================
-// This is no longer "the" layout: the manager holds a runtime cluster table that
-// the host uploads with MODE_CONFIG commands from /etc/pm-layout.conf, so
-// re-clustering the grid does not need HLS. What is baked in here is only the
-// default in force from configuration until the host commits a table of its own,
-// which keeps a freshly programmed bitstream usable with no host at all.
+// This is no longer "the" layout: the manager holds runtime cluster and kernel
+// residency tables that the host uploads with MODE_CONFIG commands from
+// /etc/pm-layout.conf, so re-clustering the grid and moving kernels around it do
+// not need HLS. What is baked in here is only the default in force from
+// configuration until the host commits tables of its own, which keeps a freshly
+// programmed bitstream usable with no host at all.
 //
 // Grid *dimensions* remain compile-time: DIM_X/DIM_Y size the register arrays and
 // the unrolled dispatch loop. A layout file partitions the compiled grid; it
@@ -37,10 +38,16 @@
 
 struct PEInit {
     uint8_t  cluster_id;
-    uint16_t bank_kernel_id[MAX_BANKS]; // kernel ID tag resident in each bank (0 = unused slot)
+    uint16_t bank_kernel_id[MAX_BANKS]; // kernel ID resident in each bank (0 = empty slot)
     uint8_t  num_loaded;                // number of valid entries in bank_kernel_id
 };
 
+// bank_kernel_id is now the power-up default for the residency table -- it is what
+// eff_kernel() falls back to, so a bank is resident here exactly when it holds a
+// non-zero id. That reproduces the old `bank < num_loaded` rule; num_loaded itself
+// is kept only because it still reads as documentation of the same fact. Ids must
+// stay in 1..255: the runtime table is a byte wide per bank.
+//
 // Two default clusters, mirrored by the shipped pm-layout.conf so that the first
 // boot with a layout file behaves identically to one without:
 //  - Cluster 0: left half of the grid (x < DIM_X/2), kernels {101, 102}

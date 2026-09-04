@@ -156,6 +156,7 @@ xilinx.com:ip:mdm:3.2\
 xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:axi_gpio:2.0\
+xilinx.com:ip:axi_dma:7.1\
 xilinx.com:hls:program_manager_top:1.0\
 xilinx.com:ip:lmb_v10:3.0\
 xilinx.com:ip:lmb_bram_if_cntlr:4.0\
@@ -392,7 +393,7 @@ proc create_root_design { parentCell } {
   set microblaze_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_0_axi_periph ]
   set_property -dict [list \
     CONFIG.M01_HAS_REGSLICE {1} \
-    CONFIG.NUM_MI {7} \
+    CONFIG.NUM_MI {8} \
   ] $microblaze_0_axi_periph
 
 
@@ -421,7 +422,7 @@ proc create_root_design { parentCell } {
   set axi_smc [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 axi_smc ]
   set_property -dict [list \
     CONFIG.NUM_CLKS {2} \
-    CONFIG.NUM_SI {2} \
+    CONFIG.NUM_SI {3} \
   ] $axi_smc
 
 
@@ -438,6 +439,37 @@ proc create_root_design { parentCell } {
 
   # Create instance: program_manager_top_0, and set properties
   set program_manager_top_0 [ create_bd_cell -type ip -vlnv xilinx.com:hls:program_manager_top:1.0 program_manager_top_0 ]
+
+  # Create instance: axi_dma_0 -- the instruction path into the manager.
+  #
+  # MM2S only (memory -> stream), simple mode: no scatter-gather descriptors, so
+  # pm-app drives it from userspace with four register writes and no kernel
+  # driver. Simple mode also asserts TLAST on the final beat of each transfer,
+  # which is exactly the framing the manager closes a load on.
+  #
+  # The stream is 64 bits wide to match the manager's ap_axiu<64,0,0,0> port --
+  # one VLIW instruction per beat. The whole address map fits in 32 bits (DDR is
+  # 0x80000000..0xFFFFFFFF) and a 23-bit length register covers transfers up to
+  # 8 MiB, well past the 1 MiB staging buffer.
+  #
+  # Synchronous clocking (c_prmry_is_aclk_async 0). Note that s_axi_lite_aclk and
+  # m_axi_mm2s_aclk are BOTH exposed regardless -- sync mode means they must carry
+  # the same clock, not that the pin disappears -- so both are tied to
+  # microblaze_0_Clk below. Leaving either floating fails validate_bd_design with
+  # BD 41-758.
+  set axi_dma_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 axi_dma_0 ]
+  set_property -dict [list \
+    CONFIG.c_include_sg {0} \
+    CONFIG.c_sg_include_stscntrl_strm {0} \
+    CONFIG.c_include_mm2s {1} \
+    CONFIG.c_include_s2mm {0} \
+    CONFIG.c_m_axi_mm2s_data_width {64} \
+    CONFIG.c_m_axis_mm2s_tdata_width {64} \
+    CONFIG.c_mm2s_burst_size {16} \
+    CONFIG.c_addr_width {32} \
+    CONFIG.c_sg_length_width {23} \
+    CONFIG.c_prmry_is_aclk_async {0} \
+  ] $axi_dma_0
 
 
   # Create interface connections
@@ -456,6 +488,11 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M04_AXI [get_bd_intf_pins axi_timer_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M04_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M05_AXI [get_bd_intf_pins axi_gpio_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M05_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M06_AXI [get_bd_intf_pins program_manager_top_0/s_axi_control] [get_bd_intf_pins microblaze_0_axi_periph/M06_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_axi_periph_M07_AXI [get_bd_intf_pins axi_dma_0/S_AXI_LITE] [get_bd_intf_pins microblaze_0_axi_periph/M07_AXI]
+  # The DMA reads DDR through the same SmartConnect the MicroBlaze uses...
+  connect_bd_intf_net -intf_net axi_dma_0_M_AXI_MM2S [get_bd_intf_pins axi_dma_0/M_AXI_MM2S] [get_bd_intf_pins axi_smc/S02_AXI]
+  # ...and hands the instructions straight to the manager's stream port.
+  connect_bd_intf_net -intf_net axi_dma_0_M_AXIS_MM2S [get_bd_intf_pins axi_dma_0/M_AXIS_MM2S] [get_bd_intf_pins program_manager_top_0/instr_in]
   connect_bd_intf_net -intf_net microblaze_0_debug [get_bd_intf_pins mdm_1/MBDEBUG_0] [get_bd_intf_pins microblaze_0/DEBUG]
   connect_bd_intf_net -intf_net microblaze_0_dlmb_1 [get_bd_intf_pins microblaze_0/DLMB] [get_bd_intf_pins microblaze_0_local_memory/DLMB]
   connect_bd_intf_net -intf_net microblaze_0_ilmb_1 [get_bd_intf_pins microblaze_0/ILMB] [get_bd_intf_pins microblaze_0_local_memory/ILMB]
@@ -497,7 +534,10 @@ proc create_root_design { parentCell } {
   [get_bd_pins axi_timer_0/s_axi_aclk] \
   [get_bd_pins axi_gpio_0/s_axi_aclk] \
   [get_bd_pins microblaze_0_axi_periph/M06_ACLK] \
-  [get_bd_pins program_manager_top_0/ap_clk]
+  [get_bd_pins program_manager_top_0/ap_clk] \
+  [get_bd_pins microblaze_0_axi_periph/M07_ACLK] \
+  [get_bd_pins axi_dma_0/s_axi_lite_aclk] \
+  [get_bd_pins axi_dma_0/m_axi_mm2s_aclk]
   connect_bd_net -net microblaze_0_intr  [get_bd_pins microblaze_0_xlconcat/dout] \
   [get_bd_pins microblaze_0_axi_intc/intr]
   connect_bd_net -net reset_1  [get_bd_ports reset] \
@@ -522,13 +562,20 @@ proc create_root_design { parentCell } {
   [get_bd_pins axi_timer_0/s_axi_aresetn] \
   [get_bd_pins axi_gpio_0/s_axi_aresetn] \
   [get_bd_pins microblaze_0_axi_periph/M06_ARESETN] \
-  [get_bd_pins program_manager_top_0/ap_rst_n]
+  [get_bd_pins program_manager_top_0/ap_rst_n] \
+  [get_bd_pins microblaze_0_axi_periph/M07_ARESETN] \
+  [get_bd_pins axi_dma_0/axi_resetn]
   connect_bd_net -net rst_ddr4_0_333M_peripheral_aresetn  [get_bd_pins rst_ddr4_0_333M/peripheral_aresetn] \
   [get_bd_pins ddr4_0/c0_ddr4_aresetn] \
   [get_bd_pins microblaze_0_axi_periph/M01_ARESETN]
 
   # Create address segments
   assign_bd_address -offset 0x40010000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs program_manager_top_0/s_axi_control/Reg] -force
+  # Keep this in step with PM_DMA_BASE_ADDR in recipes-apps/pm-app/files/dma.h.
+  assign_bd_address -offset 0x40400000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_dma_0/S_AXI_LITE/Reg] -force
+  # The DMA must see the whole DDR aperture: its source buffer is whatever
+  # physical address u-dma-buf (or the reserved-memory node) hands out.
+  assign_bd_address -offset 0x80000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces axi_dma_0/Data_MM2S] [get_bd_addr_segs ddr4_0/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK] -force
   assign_bd_address -offset 0x40000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] -force
   assign_bd_address -offset 0x40800000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_iic_0/S_AXI/Reg] -force
   assign_bd_address -offset 0x41C00000 -range 0x00010000 -target_address_space [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs axi_timer_0/S_AXI/Reg] -force

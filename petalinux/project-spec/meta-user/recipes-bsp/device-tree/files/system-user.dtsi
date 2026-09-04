@@ -1,10 +1,42 @@
 /include/ "system-conf.dtsi"
 
 / {
+	/*
+	 * Instruction staging buffer for the AXI DMA that feeds
+	 * program_manager_top's AXI-Stream port. pm-app writes 64-bit VLIW words
+	 * here and hands the DMA the physical address, so the memory must be
+	 * contiguous and uncached -- the DMA reads DDR directly and knows nothing
+	 * about the MicroBlaze's caches.
+	 *
+	 * u-dma-buf is the preferred route: it publishes the physical address in
+	 * /sys/class/u-dma-buf/udmabuf0/phys_addr, which is what dma.c reads. It
+	 * needs CONFIG_u-dma-buf=y in project-spec/configs/rootfs_config, or the
+	 * module is not in the image and pm-app falls back to the reserved window
+	 * below. Keep the size in step with PM_BUF_SIZE in
+	 * recipes-apps/pm-app/files/dma.h.
+	 */
 	udmabuf0: udmabuf@0x00 {
 		compatible = "ikwzm,u-dma-buf";
 		device-name = "udmabuf0";
 		size = <0x00100000>;
+	};
+
+	/*
+	 * The fallback the same buffer size is carved out of when u-dma-buf is
+	 * not loaded: pm-app mmaps this physical window through /dev/mem with
+	 * O_SYNC. no-map keeps Linux out of it entirely, which is what makes a
+	 * fixed address safe to hardcode as PM_BUF_PHYS_FALLBACK in dma.h.
+	 * It sits at the very top of the 2 GB DDR aperture (0x80000000 + 2 GB).
+	 */
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		pm_instr_buf: pm-instr-buf@ff000000 {
+			no-map;
+			reg = <0xff000000 0x00100000>;
+		};
 	};
 
 };
@@ -26,3 +58,10 @@
  * build reports an unresolved reference here.
  */
 &program_manager_top_0 { compatible = "generic-uio"; };
+
+/*
+ * The AXI DMA is driven straight from userspace in simple mode (four registers,
+ * no scatter-gather, no interrupt), so the Xilinx axidma kernel driver must NOT
+ * claim it -- pm-app maps its registers through /dev/mem like the manager's.
+ */
+&axi_dma_0 { compatible = "generic-uio"; };

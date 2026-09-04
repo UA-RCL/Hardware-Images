@@ -2,9 +2,10 @@
 # Userspace driver for the PE-array program manager (program_manager_top).
 #
 SUMMARY = "PE-array program manager userspace driver"
-DESCRIPTION = "Interactive shell for program_manager_top: uploads the cluster \
-layout from /etc/pm-layout.conf, issues RESET/RUN commands over a /dev/mem \
-mapping and prints the PE occupancy map."
+DESCRIPTION = "Interactive shell for program_manager_top: uploads the cluster and \
+kernel residency tables from /etc/pm-layout.conf, streams instructions into the \
+array through the AXI DMA, issues RESET/RUN commands over a /dev/mem mapping and \
+prints the PE occupancy map."
 SECTION = "PETALINUX/apps"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
@@ -15,6 +16,8 @@ DEPENDS = "readline"
 SRC_URI = "file://pm-app.c \
            file://layout.c \
            file://layout.h \
+           file://dma.c \
+           file://dma.h \
            file://pm_layout.h \
            file://pm-layout.conf \
            file://Makefile \
@@ -34,8 +37,9 @@ do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/pm-app ${D}${bindir}
 
-    # The cluster layout is read at runtime, so editing it on the target and
-    # restarting pm-app is enough to re-cluster the grid -- no rebuild.
+    # The layout is read at runtime, so editing it on the target and restarting
+    # pm-app is enough to re-cluster the grid and move kernels around it -- no
+    # rebuild.
     install -d ${D}${sysconfdir}
     install -m 0644 ${S}/pm-layout.conf ${D}${sysconfdir}/pm-layout.conf
 }

@@ -22,11 +22,37 @@ MAX_BANKS ?= 4
 DIMFLAGS  := -DDIM_X=$(GRID_DIM) -DDIM_Y=$(GRID_DIM) -DMAX_BANKS=$(MAX_BANKS)
 
 PM_APP_DIR := ../petalinux/project-spec/meta-user/recipes-apps/pm-app/files
-CXXFLAGS   := -std=c++11 -Wall -I$(INC_DIR) $(DIMFLAGS)
+
+# The design now takes instructions on an AXI4-Stream port, so the sources include
+# <hls_stream.h> and <ap_axi_sdata.h>. Those are header-only and build fine under
+# plain g++ -- but they need C++14 and they need to be found. Vitis HLS 2024.2 ships
+# them under Vitis/<ver>/include, not Vitis_HLS/<ver>/include; override HLS_INC if
+# your install differs.
+# An unset XILINX_* expands to "/include", which simply does not match, so the
+# glob fallback runs: collect every Vitis install it can see and take the highest
+# version number. Sourcing settings64.sh makes all of that moot.
+HLS_SEARCH := /*/Xilinx/Vitis/*/include /*/*/Xilinx/Vitis/*/include \
+              /opt/*/Xilinx/Vitis/*/include /tools/Xilinx/Vitis/*/include
+HLS_INC ?= $(firstword \
+             $(wildcard $(XILINX_HLS)/include $(XILINX_VITIS)/include) \
+             $(shell ls -d $(HLS_SEARCH) 2>/dev/null | \
+                     sed 's|\(.*\)/\([^/]*\)/include|\2 &|' | \
+                     sort -V | tail -1 | cut -d' ' -f2))
+
+# -Wno-unknown-pragmas: the #pragma HLS lines are meant to be ignored here.
+# -Wno-comment: floating_point_v7_1_bitacc_cmodel.h has a multi-line // banner.
+CXXFLAGS   := -std=c++14 -Wall -Wno-unknown-pragmas -Wno-comment \
+              -I$(INC_DIR) -I$(HLS_INC) $(DIMFLAGS)
+
+check-hls-inc:
+	@test -f "$(HLS_INC)/hls_stream.h" || { \
+	  echo "ERROR: hls_stream.h not found (HLS_INC=$(HLS_INC))."; \
+	  echo "       Source settings64.sh, or pass HLS_INC=/path/to/Vitis/<ver>/include."; \
+	  exit 1; }
 
 HDRS := $(wildcard $(INC_DIR)/*.hpp) $(wildcard $(INC_DIR)/*.h)
 
-.PHONY: all test csim pe-test ip layout-header help clean
+.PHONY: all test csim pe-test ip layout-header help clean check-hls-inc
 
 help:
 	@echo "make test           pe-test + csim"
@@ -37,6 +63,7 @@ help:
 	@echo "make clean          remove simulation and HLS project artifacts"
 	@echo ""
 	@echo "GRID_DIM=$(GRID_DIM) MAX_BANKS=$(MAX_BANKS)   (override on the command line)"
+	@echo "HLS_INC=$(HLS_INC)"
 	@echo "PE_FLAT=1 make ip   inline the PE back into the manager (fallback)"
 
 all: test
@@ -44,7 +71,7 @@ all: test
 test: pe-test csim
 
 ############## Single-PE unit test -- plain g++, no manager, no grid.
-pe-test: $(TEST_DIR)/main_pe_unit.cpp $(HDRS)
+pe-test: $(TEST_DIR)/main_pe_unit.cpp $(HDRS) | check-hls-inc
 	mkdir -p $(BUILD)
 	g++ $(CXXFLAGS) $(TEST_DIR)/main_pe_unit.cpp -o $(BUILD)/pe_unit_test
 	$(BUILD)/pe_unit_test
@@ -53,7 +80,7 @@ pe-test: $(TEST_DIR)/main_pe_unit.cpp $(HDRS)
 # Compiles the same sources the HLS IP is built from; the #pragma HLS lines are
 # ignored as unknown pragmas. Prints the PE occupancy map, which should match
 # what pm-app prints on the target for the same command sequence.
-csim: $(TEST_DIR)/main_csim.cpp $(SRC_DIR)/program_manager.cpp $(HDRS)
+csim: $(TEST_DIR)/main_csim.cpp $(SRC_DIR)/program_manager.cpp $(HDRS) | check-hls-inc
 	mkdir -p $(BUILD)
 	g++ $(CXXFLAGS) $(TEST_DIR)/main_csim.cpp $(SRC_DIR)/program_manager.cpp -o $(BUILD)/csim_test
 	$(BUILD)/csim_test

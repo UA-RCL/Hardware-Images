@@ -34,52 +34,86 @@
 //        bit 7~0 - bank_id[7:0] (Read/Write)
 //        others  - reserved
 // 0x3c : reserved
-// 0x40 : Data signal of cycles
-//        bit 31~0 - cycles[31:0] (Read/Write)
+// 0x40 : Data signal of kernel_id
+//        bit 7~0 - kernel_id[7:0] (Read/Write)
+//        others  - reserved
 // 0x44 : reserved
-// 0x48 : Data signal of valid_signal
+// 0x48 : Data signal of instr_count
+//        bit 31~0 - instr_count[31:0] (Read/Write)
+// 0x4c : reserved
+// 0x50 : Data signal of cycles
+//        bit 31~0 - cycles[31:0] (Read/Write)
+// 0x54 : reserved
+// 0x58 : Data signal of valid_signal
 //        bit 0  - valid_signal[0] (Read/Write)
 //        others - reserved
-// 0x4c : reserved
-// 0x50 : Data signal of busy_mask_out
+// 0x5c : reserved
+// 0x60 : Data signal of busy_mask_out
 //        bit 31~0 - busy_mask_out[31:0] (Read)
-// 0x54 : Control signal of busy_mask_out
+// 0x64 : Control signal of busy_mask_out
 //        bit 0  - busy_mask_out_ap_vld (Read/COR)
 //        others - reserved
-// 0x68 : Data signal of cfg_status
+// 0x80 : Data signal of cfg_status
 //        bit 31~0 - cfg_status[31:0] (Read)
-// 0x6c : Control signal of cfg_status
+// 0x84 : Control signal of cfg_status
 //        bit 0  - cfg_status_ap_vld (Read/COR)
 //        others - reserved
-// 0x60 ~
-// 0x67 : Memory 'busy_map_out_bits' (2 * 32b)
+// 0x90 : Data signal of load_status
+//        bit 31~0 - load_status[31:0] (Read)
+// 0x94 : Control signal of load_status
+//        bit 0  - load_status_ap_vld (Read/COR)
+//        others - reserved
+// 0xa0 : Data signal of load_last
+//        bit 31~0 - load_last[31:0] (Read)
+// 0xa4 : Control signal of load_last
+//        bit 0  - load_last_ap_vld (Read/COR)
+//        others - reserved
+// 0x70 ~
+// 0x77 : Memory 'busy_map_out_bits' (2 * 32b)
 //        Word n : bit [31:0] - busy_map_out_bits[n]
+// 0x78 ~
+// 0x7f : Memory 'kernel_map_out_bits' (2 * 32b)
+//        Word n : bit [31:0] - kernel_map_out_bits[n]
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_MODE_DATA              0x10
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_MODE_DATA              8
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_TARGET_MODE_DATA       0x18
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_TARGET_MODE_DATA       8
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_PE_X_DATA              0x20
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_PE_X_DATA              8
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_PE_Y_DATA              0x28
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_PE_Y_DATA              8
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CLUSTER_ID_DATA        0x30
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_CLUSTER_ID_DATA        8
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BANK_ID_DATA           0x38
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_BANK_ID_DATA           8
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CYCLES_DATA            0x40
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_CYCLES_DATA            32
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_VALID_SIGNAL_DATA      0x48
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_VALID_SIGNAL_DATA      1
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MASK_OUT_DATA     0x50
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_BUSY_MASK_OUT_DATA     32
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MASK_OUT_CTRL     0x54
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_DATA        0x68
-#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_CFG_STATUS_DATA        32
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_CTRL        0x6c
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MAP_OUT_BITS_BASE 0x60
-#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MAP_OUT_BITS_HIGH 0x67
-#define XPROGRAM_MANAGER_TOP_CONTROL_WIDTH_BUSY_MAP_OUT_BITS     32
-#define XPROGRAM_MANAGER_TOP_CONTROL_DEPTH_BUSY_MAP_OUT_BITS     2
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_MODE_DATA                0x10
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_MODE_DATA                8
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_TARGET_MODE_DATA         0x18
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_TARGET_MODE_DATA         8
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_PE_X_DATA                0x20
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_PE_X_DATA                8
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_PE_Y_DATA                0x28
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_PE_Y_DATA                8
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CLUSTER_ID_DATA          0x30
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_CLUSTER_ID_DATA          8
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BANK_ID_DATA             0x38
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_BANK_ID_DATA             8
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_ID_DATA           0x40
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_KERNEL_ID_DATA           8
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_INSTR_COUNT_DATA         0x48
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_INSTR_COUNT_DATA         32
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CYCLES_DATA              0x50
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_CYCLES_DATA              32
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_VALID_SIGNAL_DATA        0x58
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_VALID_SIGNAL_DATA        1
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MASK_OUT_DATA       0x60
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_BUSY_MASK_OUT_DATA       32
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MASK_OUT_CTRL       0x64
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_DATA          0x80
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_CFG_STATUS_DATA          32
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_CTRL          0x84
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_STATUS_DATA         0x90
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_LOAD_STATUS_DATA         32
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_STATUS_CTRL         0x94
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_LAST_DATA           0xa0
+#define XPROGRAM_MANAGER_TOP_CONTROL_BITS_LOAD_LAST_DATA           32
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_LAST_CTRL           0xa4
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MAP_OUT_BITS_BASE   0x70
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MAP_OUT_BITS_HIGH   0x77
+#define XPROGRAM_MANAGER_TOP_CONTROL_WIDTH_BUSY_MAP_OUT_BITS       32
+#define XPROGRAM_MANAGER_TOP_CONTROL_DEPTH_BUSY_MAP_OUT_BITS       2
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE 0x78
+#define XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_HIGH 0x7f
+#define XPROGRAM_MANAGER_TOP_CONTROL_WIDTH_KERNEL_MAP_OUT_BITS     32
+#define XPROGRAM_MANAGER_TOP_CONTROL_DEPTH_KERNEL_MAP_OUT_BITS     2
 

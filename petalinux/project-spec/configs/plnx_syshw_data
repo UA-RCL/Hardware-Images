@@ -4,7 +4,7 @@ processor:
     microblaze_0:
         arch: microblaze
         ip_name: microblaze
-        slaves_strings: axi_gpio_0 axi_iic_0 axi_timer_0 axi_uartlite_0 ddr4_0 microblaze_0_axi_intc microblaze_0_local_memory_dlmb_bram_if_cntlr microblaze_0_local_memory_ilmb_bram_if_cntlr program_manager_top_0
+        slaves_strings: axi_dma_0 axi_gpio_0 axi_iic_0 axi_timer_0 axi_uartlite_0 ddr4_0 microblaze_0_axi_intc microblaze_0_local_memory_dlmb_bram_if_cntlr microblaze_0_local_memory_ilmb_bram_if_cntlr program_manager_top_0
         instance_path: mb_preset_i/microblaze_0
         linux_kernel_properties:
             XILINX_MICROBLAZE0_FAMILY: virtexuplusHBM string
@@ -29,6 +29,8 @@ processor:
                 device_type: serial
                 ip_name: axi_uartlite
                 is_pl: 1
+            axi_dma_0:
+                ip_name: axi_dma
             axi_gpio_0:
                 ip_name: axi_gpio
             axi_iic_0:

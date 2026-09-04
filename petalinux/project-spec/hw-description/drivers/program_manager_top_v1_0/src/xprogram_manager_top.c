@@ -123,6 +123,40 @@ u32 XProgram_manager_top_Get_bank_id(XProgram_manager_top *InstancePtr) {
     return Data;
 }
 
+void XProgram_manager_top_Set_kernel_id(XProgram_manager_top *InstancePtr, u32 Data) {
+    Xil_AssertVoid(InstancePtr != NULL);
+    Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    XProgram_manager_top_WriteReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_ID_DATA, Data);
+}
+
+u32 XProgram_manager_top_Get_kernel_id(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_ID_DATA);
+    return Data;
+}
+
+void XProgram_manager_top_Set_instr_count(XProgram_manager_top *InstancePtr, u32 Data) {
+    Xil_AssertVoid(InstancePtr != NULL);
+    Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    XProgram_manager_top_WriteReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_INSTR_COUNT_DATA, Data);
+}
+
+u32 XProgram_manager_top_Get_instr_count(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_INSTR_COUNT_DATA);
+    return Data;
+}
+
 void XProgram_manager_top_Set_cycles(XProgram_manager_top *InstancePtr, u32 Data) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
@@ -194,6 +228,46 @@ u32 XProgram_manager_top_Get_cfg_status_vld(XProgram_manager_top *InstancePtr) {
     Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 
     Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_CFG_STATUS_CTRL);
+    return Data & 0x1;
+}
+
+u32 XProgram_manager_top_Get_load_status(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_STATUS_DATA);
+    return Data;
+}
+
+u32 XProgram_manager_top_Get_load_status_vld(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_STATUS_CTRL);
+    return Data & 0x1;
+}
+
+u32 XProgram_manager_top_Get_load_last(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_LAST_DATA);
+    return Data;
+}
+
+u32 XProgram_manager_top_Get_load_last_vld(XProgram_manager_top *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XProgram_manager_top_ReadReg(InstancePtr->Control_BaseAddress, XPROGRAM_MANAGER_TOP_CONTROL_ADDR_LOAD_LAST_CTRL);
     return Data & 0x1;
 }
 
@@ -288,6 +362,101 @@ u32 XProgram_manager_top_Read_busy_map_out_bits_Bytes(XProgram_manager_top *Inst
 
     for (i = 0; i < length; i++) {
         *(data + i) = *(char *)(InstancePtr->Control_BaseAddress + XPROGRAM_MANAGER_TOP_CONTROL_ADDR_BUSY_MAP_OUT_BITS_BASE + offset + i);
+    }
+    return length;
+}
+
+u32 XProgram_manager_top_Get_kernel_map_out_bits_BaseAddress(XProgram_manager_top *InstancePtr) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    return (InstancePtr->Control_BaseAddress + XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE);
+}
+
+u32 XProgram_manager_top_Get_kernel_map_out_bits_HighAddress(XProgram_manager_top *InstancePtr) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    return (InstancePtr->Control_BaseAddress + XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_HIGH);
+}
+
+u32 XProgram_manager_top_Get_kernel_map_out_bits_TotalBytes(XProgram_manager_top *InstancePtr) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    return (XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_HIGH - XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + 1);
+}
+
+u32 XProgram_manager_top_Get_kernel_map_out_bits_BitWidth(XProgram_manager_top *InstancePtr) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    return XPROGRAM_MANAGER_TOP_CONTROL_WIDTH_KERNEL_MAP_OUT_BITS;
+}
+
+u32 XProgram_manager_top_Get_kernel_map_out_bits_Depth(XProgram_manager_top *InstancePtr) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    return XPROGRAM_MANAGER_TOP_CONTROL_DEPTH_KERNEL_MAP_OUT_BITS;
+}
+
+u32 XProgram_manager_top_Write_kernel_map_out_bits_Words(XProgram_manager_top *InstancePtr, int offset, word_type *data, int length) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr -> IsReady == XIL_COMPONENT_IS_READY);
+
+    int i;
+
+    if ((offset + length)*4 > (XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_HIGH - XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + 1))
+        return 0;
+
+    for (i = 0; i < length; i++) {
+        *(int *)(InstancePtr->Control_BaseAddress + XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + (offset + i)*4) = *(data + i);
+    }
+    return length;
+}
+
+u32 XProgram_manager_top_Read_kernel_map_out_bits_Words(XProgram_manager_top *InstancePtr, int offset, word_type *data, int length) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr -> IsReady == XIL_COMPONENT_IS_READY);
+
+    int i;
+
+    if ((offset + length)*4 > (XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_HIGH - XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + 1))
+        return 0;
+
+    for (i = 0; i < length; i++) {
+        *(data + i) = *(int *)(InstancePtr->Control_BaseAddress + XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + (offset + i)*4);
+    }
+    return length;
+}
+
+u32 XProgram_manager_top_Write_kernel_map_out_bits_Bytes(XProgram_manager_top *InstancePtr, int offset, char *data, int length) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr -> IsReady == XIL_COMPONENT_IS_READY);
+
+    int i;
+
+    if ((offset + length) > (XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_HIGH - XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + 1))
+        return 0;
+
+    for (i = 0; i < length; i++) {
+        *(char *)(InstancePtr->Control_BaseAddress + XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + offset + i) = *(data + i);
+    }
+    return length;
+}
+
+u32 XProgram_manager_top_Read_kernel_map_out_bits_Bytes(XProgram_manager_top *InstancePtr, int offset, char *data, int length) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr -> IsReady == XIL_COMPONENT_IS_READY);
+
+    int i;
+
+    if ((offset + length) > (XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_HIGH - XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + 1))
+        return 0;
+
+    for (i = 0; i < length; i++) {
+        *(data + i) = *(char *)(InstancePtr->Control_BaseAddress + XPROGRAM_MANAGER_TOP_CONTROL_ADDR_KERNEL_MAP_OUT_BITS_BASE + offset + i);
     }
     return length;
 }
