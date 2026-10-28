@@ -1,0 +1,162 @@
+{
+  "Adder.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Adder.v",
+    "sha256": "ed6cb3ae388bfd5a1161da423f62743c10244e0e664723fc9cd101828ed3177f",
+    "local_sha256": "ed6cb3ae388bfd5a1161da423f62743c10244e0e664723fc9cd101828ed3177f"
+  },
+  "Buffer.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Buffer.v",
+    "sha256": "87e3952c3b6a5bf122f349b6bf53db2b6373f196e2ead03e7b0e398ca33ca7d2",
+    "local_sha256": "87e3952c3b6a5bf122f349b6bf53db2b6373f196e2ead03e7b0e398ca33ca7d2"
+  },
+  "CSRAM.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/CSRAM.v",
+    "sha256": "fa5ee4dea7df4513bef26324bfa646d5b6acd1de294746feddf72a74c893d054",
+    "local_sha256": "fa5ee4dea7df4513bef26324bfa646d5b6acd1de294746feddf72a74c893d054"
+  },
+  "Comp.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Comp.v",
+    "sha256": "5bf6d37a394ca837aff1c008bd21ffaa8811b698ef9fdc2935432073825cb5ea",
+    "local_sha256": "5bf6d37a394ca837aff1c008bd21ffaa8811b698ef9fdc2935432073825cb5ea"
+  },
+  "Core.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Core.v",
+    "sha256": "f5f3756a42aec2514416640e2c7866ab2857347a88fa20503baea03d1fe7628f",
+    "local_sha256": "f5f3756a42aec2514416640e2c7866ab2857347a88fa20503baea03d1fe7628f"
+  },
+  "Counter.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Counter.v",
+    "sha256": "ee752bc06d98682f4ac321060313f7aa6f5a550f821933627432e2069a92bc98",
+    "local_sha256": "ee752bc06d98682f4ac321060313f7aa6f5a550f821933627432e2069a92bc98"
+  },
+  "EnReg.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/EnReg.v",
+    "sha256": "d5255b4d2d8d87ae637a0348d86c4d54127e067cf5255d29f741c89e10e971f7",
+    "local_sha256": "d5255b4d2d8d87ae637a0348d86c4d54127e067cf5255d29f741c89e10e971f7"
+  },
+  "ForwardEastWest.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/ForwardEastWest.v",
+    "sha256": "50b1d2cc0d3acf18274e6ac359583f4880dc04a65b00da993fc8f87f0a73b383",
+    "local_sha256": "50b1d2cc0d3acf18274e6ac359583f4880dc04a65b00da993fc8f87f0a73b383"
+  },
+  "ForwardNorthSouth.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/ForwardNorthSouth.v",
+    "sha256": "7514a9f4e88bd19a685094acd43d6925b6f6d598a2303a041e124d9e682fc02f",
+    "local_sha256": "7514a9f4e88bd19a685094acd43d6925b6f6d598a2303a041e124d9e682fc02f"
+  },
+  "FromLocal.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/FromLocal.v",
+    "sha256": "5770d34dda6adaca06e347ae6ff006c677691905b3b2ab60805732bcae30e322",
+    "local_sha256": "5770d34dda6adaca06e347ae6ff006c677691905b3b2ab60805732bcae30e322"
+  },
+  "IntegratorUnit.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/IntegratorUnit.v",
+    "sha256": "511fb97900aeb5a4aa5363d088571963dadaf7681b01b102c3e778267a0e406c",
+    "local_sha256": "511fb97900aeb5a4aa5363d088571963dadaf7681b01b102c3e778267a0e406c"
+  },
+  "LocalIn.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/LocalIn.v",
+    "sha256": "787711983a525a0bdb8a2a73e951fd52b63644aba54c357289a0289576408d61",
+    "local_sha256": "787711983a525a0bdb8a2a73e951fd52b63644aba54c357289a0289576408d61"
+  },
+  "Merge2.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Merge2.v",
+    "sha256": "7e62a54884dcd238bfe52d70a3921e025fce70502c7e1cdfb9f2693fea04b794",
+    "local_sha256": "7e62a54884dcd238bfe52d70a3921e025fce70502c7e1cdfb9f2693fea04b794"
+  },
+  "Merge3.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Merge3.v",
+    "sha256": "be0e441a60b6341ac8c6db6d75430f7198b7de53abae83d429af21b2ff11cb3c",
+    "local_sha256": "be0e441a60b6341ac8c6db6d75430f7198b7de53abae83d429af21b2ff11cb3c"
+  },
+  "Mux2to1.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Mux2to1.v",
+    "sha256": "fdf238737211d331819cb8b532bb94e13b9090416db2e5e4d654f0ddd3813f2a",
+    "local_sha256": "fdf238737211d331819cb8b532bb94e13b9090416db2e5e4d654f0ddd3813f2a"
+  },
+  "NeuronBlock.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/NeuronBlock.v",
+    "sha256": "712643738a735ad1a1297e9a16cc0842aef1a8e5f185de3f28abbdeeeb02c985",
+    "local_sha256": "712643738a735ad1a1297e9a16cc0842aef1a8e5f185de3f28abbdeeeb02c985"
+  },
+  "OutputBus.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/OutputBus.v",
+    "sha256": "b26ece91cc581ca9fa63c550b78073cee9bc6193474b8cc8d52604254424f576",
+    "local_sha256": "b26ece91cc581ca9fa63c550b78073cee9bc6193474b8cc8d52604254424f576"
+  },
+  "PacketFetch.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/PacketFetch.v",
+    "sha256": "7c26d24ee3b0165963548c744cfc80c62fa7ef085628bdb3359a2117a620f96c",
+    "compatibility_change": "port/address widths: bit_num -> $clog2(NUMBER_OF_INPUT_WORDS)",
+    "reset_fix": "initialize and reset packet_read_error, which otherwise stays X until an error",
+    "local_sha256": "83802805be6e368c9e94d3cdc064aa3bc50dcbb4959a608c8c88e4fd81fe2184"
+  },
+  "PathDecoder2Way.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/PathDecoder2Way.v",
+    "sha256": "eda7035b79609769c42ce3db4c49b76d1743068e513ecb275231e1ec24b30e7b",
+    "local_sha256": "eda7035b79609769c42ce3db4c49b76d1743068e513ecb275231e1ec24b30e7b"
+  },
+  "PathDecoder3Way.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/PathDecoder3Way.v",
+    "sha256": "68636c42be5a5dd00760f6dccae9f940e0c06a42a727f38592f6362c1acfa284",
+    "local_sha256": "68636c42be5a5dd00760f6dccae9f940e0c06a42a727f38592f6362c1acfa284"
+  },
+  "RANCNetwork.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/RANCNetwork.v",
+    "sha256": "3c66747e010e92c1f96963dee913168bce4b22204a89312b1a2701c2a7848faf",
+    "burst_fix": "fetch only after an accepted complete burst; qualify TLAST by handshake; completion pulse; backpressure during completion",
+    "local_sha256": "6f40f03f0d982d2fb85a2e0479ca2df72f301f1db12a87163deb5cbce34141be"
+  },
+  "RANCNetworkGrid.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/RANCNetworkGrid.v",
+    "sha256": "e35686e6b9bbdfcff28cf336e120f9fcf93f5cba1846e54d96dae655950b2d93",
+    "local_sha256": "e35686e6b9bbdfcff28cf336e120f9fcf93f5cba1846e54d96dae655950b2d93"
+  },
+  "RANCNetwork_S00_AXIS.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/RANCNetwork_S00_AXIS.v",
+    "sha256": "4682c9743b19eb8471026f1b01b7b2d0829a562fa9e57ad1eb8601b4e1eb15d6",
+    "compatibility_change": "port/address widths: bit_num -> $clog2(NUMBER_OF_INPUT_WORDS)",
+    "burst_fix": "fetch only after an accepted complete burst; qualify TLAST by handshake; completion pulse; backpressure during completion",
+    "local_sha256": "a3cc41205ea59b441509f8b0c536bd54d400025a1b5a1fa5db2092c2375c9f9a"
+  },
+  "Router.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Router.v",
+    "sha256": "11047b2000c4a3e2e468bdf16885877d6b3f04a733a9f3b4c06d3b46c5c09d6f",
+    "local_sha256": "11047b2000c4a3e2e468bdf16885877d6b3f04a733a9f3b4c06d3b46c5c09d6f"
+  },
+  "Scheduler.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/Scheduler.v",
+    "sha256": "b69cf532ce5e723daab980f2781204876731e708c5940d05b76db3d1c48d1d43",
+    "local_sha256": "b69cf532ce5e723daab980f2781204876731e708c5940d05b76db3d1c48d1d43"
+  },
+  "SchedulerSRAM.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/SchedulerSRAM.v",
+    "sha256": "a8256715c3fb0a420de1d674ff55d94a8ca69460b88ae43038e99ed0f3a44aa9",
+    "local_sha256": "a8256715c3fb0a420de1d674ff55d94a8ca69460b88ae43038e99ed0f3a44aa9"
+  },
+  "ThresholdResetUnit.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/ThresholdResetUnit.v",
+    "sha256": "16a1212d00852f36c229b04b2a8025d69f79b04268b973b63e6ab4cb0de15fed",
+    "local_sha256": "16a1212d00852f36c229b04b2a8025d69f79b04268b973b63e6ab4cb0de15fed"
+  },
+  "TokenController.v": {
+    "source": "public_ranc_fork/hardware/IP/RANCNetwork/src/sources/TokenController.v",
+    "sha256": "7d8e4dcbd89b01867bd162cc9a23444d1315fa90412499ce748809edd3682d7d",
+    "local_sha256": "7d8e4dcbd89b01867bd162cc9a23444d1315fa90412499ce748809edd3682d7d"
+  },
+  "AXI-StreamPacketBuffer.v": {
+    "source": "public_ranc_fork/hardware/IP/AXI-StreamPacketBuffer/src/design/AXI-StreamPacketBuffer.v",
+    "sha256": "9f4c1e1d1c11bb93bf14e6b1c6c53bd61724c0ebc54cadc6b02656aff135fecb",
+    "local_sha256": "9f4c1e1d1c11bb93bf14e6b1c6c53bd61724c0ebc54cadc6b02656aff135fecb"
+  },
+  "AXI-StreamPacketBuffer_M00_AXIS.v": {
+    "source": "public_ranc_fork/hardware/IP/AXI-StreamPacketBuffer/src/design/AXI-StreamPacketBuffer_M00_AXIS.v",
+    "sha256": "47c3bed10a2a41182153371528c50f592584af0dbce54754902206cc3c75b78e",
+    "local_sha256": "47c3bed10a2a41182153371528c50f592584af0dbce54754902206cc3c75b78e"
+  },
+  "DoubleBuffer.v": {
+    "source": "public_ranc_fork/hardware/IP/AXI-StreamPacketBuffer/src/design/DoubleBuffer.v",
+    "sha256": "68b5d3f02b62cd79e6f873f8e7654af7392ceeae4b48120711a47884b715e087",
+    "local_sha256": "68b5d3f02b62cd79e6f873f8e7654af7392ceeae4b48120711a47884b715e087"
+  }
+}

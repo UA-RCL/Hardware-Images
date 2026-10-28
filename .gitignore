@@ -1,0 +1,35 @@
+# Python caches
+__pycache__/
+*.pyc
+
+# Generated Vivado/XSim products; retain the shipped hardware handoff.
+/build/*
+!/build/ranc_aup.xsa
+.Xil/
+*.jou
+*.log
+*.log.old
+*.str
+*.pb
+
+# Local Vitis platform/BSP/application workspace and JTAG extraction.
+/vitis/build/
+/vitis/.metadata/
+
+# Linux cross-build outputs.
+/linux/build/
+
+# PetaLinux/Yocto generated workspaces and images.
+/petalinux/build/
+/petalinux/components/
+/petalinux/images/
+/petalinux/.Xil/
+/petalinux/project-spec/configs/config.old
+/petalinux/project-spec/configs/rootfs_config.old
+/petalinux/project-spec/configs/.statistics
+/petalinux/project-spec/configs/configs/
+/petalinux/project-spec/configs/rootfsconfigs/
+/petalinux/project-spec/hw-description/extracted/
+
+# Keep release inputs and prebuilt deployment files visible to Git:
+# *.bsp, SDCard/, vitis/prebuilt/, and both handoff/ directories.
