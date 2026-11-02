@@ -1,0 +1,14 @@
+{
+  "source_repository": "https://github.com/UA-RCL/RANC",
+  "source_tutorial": "hardware/Docs/streaming/streaming.md",
+  "xsa_sha256": "eff034789747bfabbe2d1608b0292cf3cfebb294ae7ec135148a45936eb00632",
+  "elf_sha256": "2c48c290fd94f279900b40309843d14aff0641d7e8dc2fb95dd5d69bdee1a354",
+  "board": "AUP-ZU3, xczu3eg-sfvc784-2-e",
+  "tool_version": "2024.2",
+  "physical_verification_date": "2026-10-30",
+  "accuracy": {
+    "correct": 9526,
+    "images": 10000
+  },
+  "source_memories": "Original streaming tutorial, with explicit 367-to-368-bit reset insertion and output-route migration"
+}

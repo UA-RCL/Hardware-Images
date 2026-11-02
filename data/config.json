@@ -1,0 +1,1 @@
+{"num_neurons": 256, "num_axons": 256, "num_cores_x": 6, "num_cores_y": 1, "num_weights": 4, "max_tick_offset": 16, "neuron_reset_type": 0, "neuron_block_trace_verbosity": 0, "token_controller_trace_verbosity": 0, "scheduler_trace_verbosity": 0, "core_controller_trace_verbosity": 0}

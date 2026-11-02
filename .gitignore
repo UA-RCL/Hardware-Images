@@ -1,0 +1,14 @@
+# Regenerable Vivado, XSim, board-run and Vitis workspaces.
+/build/
+/vitis/build/
+/simulator/build/
+.Xil/
+*.jou
+*.log
+*.log.old
+*.str
+*.pb
+__pycache__/
+*.pyc
+!/results/evidence/**/*.log
+# Shipped hardware, ELF, model data, figures and compact evidence remain tracked.

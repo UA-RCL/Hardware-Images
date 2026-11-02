@@ -1,0 +1,11 @@
+{
+  "images": 10000,
+  "simulator_rows": 10004,
+  "pipeline_offset": 2,
+  "all_output_bits_match": true,
+  "predictions_match": true,
+  "correct": 9526,
+  "accuracy": 0.9526,
+  "trace_sha256": "9f4381994c85db50b0b37514304a6583b91e3428b195fd69f9f0015b806a2370",
+  "physical_board_verified": false
+}

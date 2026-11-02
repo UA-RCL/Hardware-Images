@@ -1,0 +1,78 @@
+{
+  "source": "https://github.com/UA-RCL/RANC/tree/master/hardware/Docs/streaming/data",
+  "dataset_images": 10000,
+  "total_packets": 1706025,
+  "max_packets_per_image": 389,
+  "zero_packet_images": 0,
+  "selected_images": 16,
+  "selected_packets": 2464,
+  "max_input_axon": 255,
+  "max_delay": 0,
+  "grid": [
+    6,
+    1
+  ],
+  "compute_cores": 5,
+  "output_core": [
+    5,
+    0
+  ],
+  "potential_width": 9,
+  "csram_row_bits": 368,
+  "legacy_rows_migrated": 1280,
+  "reset_mode_assumption": "absolute (0), legacy tutorial behavior",
+  "output_channels": 256,
+  "output_route_migration": "core4: legacy dy*10+axon -> bus5 axon 0..249",
+  "labels_available": true,
+  "classification_accuracy_verified": false,
+  "sources": {
+    "count.bin": {
+      "bytes": 40000,
+      "sha256": "0a5052bbaff339dd1dee1f87ac871765c65b6892d4b610da9903eed09aef83ae"
+    },
+    "csram_000.mem": {
+      "bytes": 94788,
+      "sha256": "40653a0122c34c92b34827920c6946477b619a4d8739e321edd6acdb829a6f55"
+    },
+    "csram_001.mem": {
+      "bytes": 94788,
+      "sha256": "0f9920ae5456412ffcded9e8b941ce13d859c708515cc1dcfc6e16d91d9a79f8"
+    },
+    "csram_002.mem": {
+      "bytes": 94788,
+      "sha256": "b85c7595169c90f73972abc480b57b9a4bb42848cfc2bf7d6f8630f5bf69e746"
+    },
+    "csram_003.mem": {
+      "bytes": 94788,
+      "sha256": "93d30d4eae9dfcd5d78680409466acb3590f25677f0ae6cb32245544e6e768dc"
+    },
+    "csram_004.mem": {
+      "bytes": 94788,
+      "sha256": "2f6f9415717c9888c7e158e82e0dbfc3d19e8f4b3aa0ef4514c499dd63135d23"
+    },
+    "data.bin": {
+      "bytes": 6824100,
+      "sha256": "fcfe0ea5ffda6230a3fc12c05c5d83928add7dae253ce85a4d7102e28bc31902"
+    },
+    "tc_000.mem": {
+      "bytes": 768,
+      "sha256": "f8188e0830df735ce10198901b8b9228bfeefa66c5be70395f5b5716e06c722e"
+    },
+    "tc_001.mem": {
+      "bytes": 768,
+      "sha256": "f8188e0830df735ce10198901b8b9228bfeefa66c5be70395f5b5716e06c722e"
+    },
+    "tc_002.mem": {
+      "bytes": 768,
+      "sha256": "f8188e0830df735ce10198901b8b9228bfeefa66c5be70395f5b5716e06c722e"
+    },
+    "tc_003.mem": {
+      "bytes": 768,
+      "sha256": "f8188e0830df735ce10198901b8b9228bfeefa66c5be70395f5b5716e06c722e"
+    },
+    "tc_004.mem": {
+      "bytes": 768,
+      "sha256": "f8188e0830df735ce10198901b8b9228bfeefa66c5be70395f5b5716e06c722e"
+    }
+  }
+}

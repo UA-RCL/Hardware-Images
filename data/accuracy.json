@@ -1,0 +1,72 @@
+{
+  "images": 10000,
+  "packet_order_verified": true,
+  "partition_starts": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      12
+    ],
+    [
+      12,
+      0
+    ],
+    [
+      12,
+      12
+    ]
+  ],
+  "pixel_threshold": 128,
+  "correct": 9526,
+  "accuracy": 0.9526,
+  "reference": "Direct evaluation of original five CSRAM/instruction memories",
+  "same_as_original_training_accuracy": "Unknown: no original saved prediction/accuracy artifact",
+  "source_mnist_sha256": "731c5ac602752760c8e48fbffcf8c3b850d9dc2a2aedcf2cc48468fc17b673d1",
+  "official_keras_archive_verified": true,
+  "dataset_reference": "https://github.com/keras-team/keras/blob/master/keras/src/datasets/mnist.py",
+  "cores": [
+    {
+      "core": 0,
+      "connected_neurons": 64,
+      "potential_min": -34,
+      "potential_max": 23,
+      "scan_prefix_lower_bound": -36,
+      "scan_prefix_upper_bound": 29
+    },
+    {
+      "core": 1,
+      "connected_neurons": 64,
+      "potential_min": -37,
+      "potential_max": 19,
+      "scan_prefix_lower_bound": -46,
+      "scan_prefix_upper_bound": 31
+    },
+    {
+      "core": 2,
+      "connected_neurons": 64,
+      "potential_min": -34,
+      "potential_max": 22,
+      "scan_prefix_lower_bound": -41,
+      "scan_prefix_upper_bound": 32
+    },
+    {
+      "core": 3,
+      "connected_neurons": 64,
+      "potential_min": -36,
+      "potential_max": 28,
+      "scan_prefix_lower_bound": -43,
+      "scan_prefix_upper_bound": 33
+    },
+    {
+      "core": 4,
+      "connected_neurons": 250,
+      "potential_min": -65,
+      "potential_max": 42,
+      "scan_prefix_lower_bound": -79,
+      "scan_prefix_upper_bound": 65
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "xsa": "vitis/hardware/ranc_aup.xsa",
+  "xsa_sha256": "eff034789747bfabbe2d1608b0292cf3cfebb294ae7ec135148a45936eb00632",
+  "elf": [
+    "vitis/prebuilt/mnist_verify.elf"
+  ],
+  "elf_sha256": "2c48c290fd94f279900b40309843d14aff0641d7e8dc2fb95dd5d69bdee1a354",
+  "full_dataset": true,
+  "includes_bitstream": true,
+  "board_tested": true,
+  "note": "Shipped physical-board-verified pair; local rebuilds produce vitis/build/latest_full.json"
+}

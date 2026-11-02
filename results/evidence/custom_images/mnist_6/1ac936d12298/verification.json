@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-10-30T18:49:24.769470-07:00",
+  "image": "vitis/mnist_6.png",
+  "image_sha256": "3109f49667e7e2f55557149e693f2feb50548277aabb774e8107aef9a78cf6ed",
+  "bitmap_sha256": "1ac936d12298ad4392638647ebbdea7f1b22d1fc515acf4191c4628dea5cfa3e",
+  "size": [
+    28,
+    28
+  ],
+  "pixel_threshold": 128,
+  "inverted": false,
+  "active_pixels": 120,
+  "packets": 194,
+  "simulator_prediction": 6,
+  "simulator_votes": [
+    0,
+    1,
+    4,
+    2,
+    5,
+    5,
+    15,
+    1,
+    1,
+    0
+  ],
+  "simulator_mask": [
+    8421440,
+    4198932,
+    2147745793,
+    1049601,
+    393552,
+    100995136,
+    2164310032,
+    2101508
+  ],
+  "expected_digit": null,
+  "physical_board_verified": true,
+  "uart_command": "results/evidence/custom_images/mnist_6/1ac936d12298/uart_command.txt",
+  "physical_prediction": 6,
+  "physical_votes": [
+    0,
+    1,
+    4,
+    2,
+    5,
+    5,
+    15,
+    1,
+    1,
+    0
+  ],
+  "physical_mask": [
+    8421440,
+    4198932,
+    2147745793,
+    1049601,
+    393552,
+    100995136,
+    2164310032,
+    2101508
+  ],
+  "inference_us": 2058,
+  "job_us": 4124,
+  "request_sequence": 7,
+  "hardware_step_tag": 10027,
+  "elf_sha256": "2c48c290fd94f279900b40309843d14aff0641d7e8dc2fb95dd5d69bdee1a354",
+  "xsa_sha256": "eff034789747bfabbe2d1608b0292cf3cfebb294ae7ec135148a45936eb00632",
+  "all_output_spikes_match": true,
+  "board_log": "results/evidence/custom_images/mnist_6/1ac936d12298/board.log",
+  "label_match": null
+}

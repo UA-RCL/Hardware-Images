@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-10-30T18:49:18.129522-07:00",
+  "image": "vitis/mnist_other_sample.png",
+  "image_sha256": "e7ca5c56a5421b80617e9be4cd33e4c20ebc538e5d7b77f0208024bcc7577a07",
+  "bitmap_sha256": "b136d5c00ce6f147f8cf3e16ba34c398b157d8168f57698741de576b54db02e2",
+  "size": [
+    28,
+    28
+  ],
+  "pixel_threshold": 128,
+  "inverted": false,
+  "active_pixels": 63,
+  "packets": 126,
+  "simulator_prediction": 4,
+  "simulator_votes": [
+    0,
+    1,
+    3,
+    1,
+    15,
+    6,
+    2,
+    4,
+    8,
+    5
+  ],
+  "simulator_mask": [
+    32784,
+    4231236,
+    134496289,
+    11540736,
+    68356289,
+    822366320,
+    2151710724,
+    2148609
+  ],
+  "expected_digit": null,
+  "physical_board_verified": true,
+  "uart_command": "results/evidence/custom_images/mnist_other_sample/b136d5c00ce6/uart_command.txt",
+  "physical_prediction": 4,
+  "physical_votes": [
+    0,
+    1,
+    3,
+    1,
+    15,
+    6,
+    2,
+    4,
+    8,
+    5
+  ],
+  "physical_mask": [
+    32784,
+    4231236,
+    134496289,
+    11540736,
+    68356289,
+    822366320,
+    2151710724,
+    2148609
+  ],
+  "inference_us": 2058,
+  "job_us": 4124,
+  "request_sequence": 6,
+  "hardware_step_tag": 10023,
+  "elf_sha256": "2c48c290fd94f279900b40309843d14aff0641d7e8dc2fb95dd5d69bdee1a354",
+  "xsa_sha256": "eff034789747bfabbe2d1608b0292cf3cfebb294ae7ec135148a45936eb00632",
+  "all_output_spikes_match": true,
+  "board_log": "results/evidence/custom_images/mnist_other_sample/b136d5c00ce6/board.log",
+  "label_match": null
+}

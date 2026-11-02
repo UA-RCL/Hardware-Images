@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-10-30T18:41:53.290165-07:00",
+  "physical_board_verified": true,
+  "method": "JTAG reads of A53-published actual DMA verification results and XTime measurements",
+  "images": 10000,
+  "correct": 9526,
+  "accuracy": 0.9526,
+  "verified_steps": 10001,
+  "launch_options": {
+    "images": 10000,
+    "interactive": false,
+    "verbose": false,
+    "xsa_sha256": "eff034789747bfabbe2d1608b0292cf3cfebb294ae7ec135148a45936eb00632",
+    "elf_sha256": "2c48c290fd94f279900b40309843d14aff0641d7e8dc2fb95dd5d69bdee1a354",
+    "request_sequence": 2
+  },
+  "resident_run_number": 2,
+  "hardware_step_tag": 10007,
+  "timing": {
+    "application_us": 10345753,
+    "test_us": 10343636,
+    "setup_us": 2117,
+    "avg_image_latency_us": 2068,
+    "amortized_us_per_image": 1034,
+    "first_image_latency_us": 2063,
+    "min_image_latency_us": 2063,
+    "max_image_latency_us": 2074,
+    "counter_hz": 33333328,
+    "sum_image_latency_us": 20684652,
+    "mean_image_latency_us_from_sum": 2068.4652,
+    "amortized_us_per_image_from_total": 1034.3636
+  },
+  "timing_notes": "Application: job entry to results-ready, before final UART reporting; excludes idle command wait and one-time initialization. Setup includes two blank flush steps. Test: timed DMA/verification loop. Mean latency: input submission to verified prediction. Amortized: test time/images.",
+  "xsa_sha256": "eff034789747bfabbe2d1608b0292cf3cfebb294ae7ec135148a45936eb00632",
+  "elf_sha256": "2c48c290fd94f279900b40309843d14aff0641d7e8dc2fb95dd5d69bdee1a354",
+  "result_address": "0x00000000006e5dc0",
+  "logs": "results/evidence/full_dataset"
+}
