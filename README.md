@@ -37,17 +37,16 @@ cd AUP-ZU3-mnist-classifier
 The figure uses the actual two PNG submissions and recorded FPGA results.
 Read each column top to bottom: patches → hidden spikes → output spikes → votes.
 
-[![Real digit 4 and 6: image patches, hidden spikes and output votes](results/mnist/mnist_spike_flow.png)](results/mnist/mnist_spike_explainer.html)
+[![Real digit 4 and 6: image patches, hidden spikes and output votes](results/mnist/mnist_spike_flow.png)](https://ua-rcl.github.io/Hardware-Images/)
 
-**[Interactive HTML viewer](results/mnist/mnist_spike_explainer.html)** ·
+**[Open the interactive viewer online](https://ua-rcl.github.io/Hardware-Images/)** ·
 [PNG](results/mnist/mnist_spike_flow.png) · [SVG](results/mnist/mnist_spike_flow.svg)
 
-GitHub displays the PNG directly. Its normal HTML file view shows source;
-download the HTML and open it in a browser, or open your local checkout:
-
-```bash
-xdg-open results/mnist/mnist_spike_explainer.html
-```
+Click the figure or viewer link to use the hosted interactive page directly in
+your browser. No download or local server is needed. The repository owner must
+complete the one-time [GitHub Pages setup](#publish-the-interactive-viewer) below
+before this URL becomes available. The self-contained
+[HTML source](results/mnist/mnist_spike_explainer.html) is retained for offline use.
 
 The HTML works offline. Switch between 4 and 6, hover over pixels for patch/axon
 destinations, and click hidden or output neurons to inspect signed contributions,
@@ -64,6 +63,22 @@ Each output spike adds one vote to its digit. A row in the 25×10 grid may vote
 for several classes; these are spike counts, not probabilities. The largest
 class count wins, with lowest-index tie breaking. Training is already encoded
 in the supplied connections and signed weights.
+
+### Publish the interactive viewer
+
+After committing and pushing this branch:
+
+1. Open **UA-RCL/Hardware-Images → Settings → Pages**.
+2. Under **Build and deployment**, choose **Deploy from a branch**.
+3. Select branch **`AUP-ZU3-mnist-classifier`** and folder **`/(root)`**.
+4. Click **Save**, then wait for the Pages deployment to finish.
+
+The viewer will be served at **https://ua-rcl.github.io/Hardware-Images/**.
+The root `index.html` forwards to the existing interactive HTML; `.nojekyll`
+publishes the static files directly. No duplicated viewer or Python/server
+process is needed for hosting. Future pushes to the selected source branch
+update the hosted page. GitHub Pages uses one publishing source for this
+repository. See [GitHub's publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## Repository contents
 

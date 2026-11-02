@@ -24,10 +24,18 @@
     "offline_HTML": "PASS: browser renders and switches both cases",
     "source_syntax": "PASS: Python, Bash and JavaScript",
     "clean_checkout_portability": "PASS: publication-only copy in /tmp; checksums, prebuilt release, fresh simulator, JTAG prepare-only, PNG and full fixture generation",
-    "prebuilt_default_after_packaging": "PASS: original board-tested pair selected; rebuild metadata remains archived in ignored build/packaging/"
+    "prebuilt_default_after_packaging": "PASS: original board-tested pair selected; rebuild metadata remains archived in ignored build/packaging/",
+    "github_pages_local_preview": "PASS: branch-root index redirects under /Hardware-Images/ to the rendered interactive viewer; tested with temporary localhost HTTP and headless Chrome"
   },
   "rebuilt_elf_sha256": "d48dd7c1e1ec929255cfe68ef96e7c70fcc173504f8e9102fc29c2262400b1d7",
   "shipped_pair": "vitis/prebuilt/artifacts.json; identical to the recorded physical-board-tested release",
   "physical_board_retested": false,
-  "note": "Rebuild success and local simulations do not replace physical verification of a new ELF/XSA."
+  "note": "Rebuild success and local simulations do not replace physical verification of a new ELF/XSA.",
+  "github_pages": {
+    "url": "https://ua-rcl.github.io/Hardware-Images/",
+    "source_branch": "AUP-ZU3-mnist-classifier",
+    "source_folder": "/",
+    "remote_configuration_changed": false,
+    "deployment_status": "Prepared locally; enable Pages and push to deploy"
+  }
 }
