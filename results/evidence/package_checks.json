@@ -1,6 +1,6 @@
 {
   "timestamp": "2026-11-02T16:06:01.062797-07:00",
-  "branch": "AUP-ZUP3-mnist-classifier",
+  "branch": "AUP-ZU3-mnist-classifier",
   "checks": {
     "cpu_smoke": "PASS: 16 images, 20 rows, 1266 spikes",
     "cpu_full": {

@@ -1,6 +1,6 @@
 # AUP RANC MNIST classifier — Vivado / Vitis 2024.2
 
-This branch, **`AUP-ZUP3-mnist-classifier`**, contains a working MNIST classifier
+This branch, **`AUP-ZU3-mnist-classifier`**, contains a working MNIST classifier
 for the **AUP-ZU3 (`xczu3eg-sfvc784-2-e`)**. One A53 bare-metal application sends
 image spikes through AXI DMA to RANC in programmable logic, reads the output
 spikes and decodes a digit class. It stays resident for repeated tests.
@@ -18,9 +18,9 @@ TensorFlow installation or training is required on the board.
 After this branch is published, obtain a clean checkout with:
 
 ```bash
-git clone --branch AUP-ZUP3-mnist-classifier --single-branch \
-  https://github.com/UA-RCL/Hardware-Images.git AUP-ZUP3-mnist-classifier
-cd AUP-ZUP3-mnist-classifier
+git clone --branch AUP-ZU3-mnist-classifier --single-branch \
+  https://github.com/UA-RCL/Hardware-Images.git AUP-ZU3-mnist-classifier
+cd AUP-ZU3-mnist-classifier
 ```
 
 | What you want to do | Start with |
