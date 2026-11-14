@@ -209,10 +209,69 @@ choice
 	If your preferred primary ethernet is not on the list, please select"
 	'manual'.
 
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT
+	bool "axi_ethernet_0"
+
 config SUBSYSTEM_ETHERNET_MANUAL_SELECT
 	bool "manual"
 
 endchoice
+
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_MAC_AUTO
+	bool "Randomise MAC address"
+	default y if SUBSYSTEM_ARCH_MICROBLAZE
+	default n
+	depends on SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT
+	help
+	randomise MAC address for the primary ethernet.
+
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_MAC_PATTERN
+	string "Template for randomised MAC address"
+	default "00:0a:35:00:??:??"
+	depends on SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT && SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_MAC_AUTO
+	help
+	Pattern for generating random MAC addresses - question mark
+	characters will be replaced by random hex digits
+
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_MAC
+	string "Ethernet MAC address"
+	default "ff:ff:ff:ff:ff:ff"
+	depends on SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT && !SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_MAC_AUTO
+	help
+	Default mac set to ff:ff:ff:ff:ff:ff invalid mac address to read from EEPROM
+	if you want change with desired value you can change, example: 00:0a:35:00:22:01
+
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_USE_DHCP
+	bool "Obtain IP address automatically"
+	default y
+	depends on SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT
+	help
+	Set this option if you would like your SUBSYSTEM to use DHCP for
+	obtaining an IP address.
+
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_IP_ADDRESS
+	string "Static IP address"
+	default "192.168.0.10"
+	depends on SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT && !SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_USE_DHCP
+	help
+	The IP address of your main network interface when static network
+	address assignment is used.
+
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_IP_NETMASK
+	string "Static IP netmask"
+	default "255.255.255.0"
+	depends on SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT && !SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_USE_DHCP
+	help
+	Default netmask when static network address assignment is used.
+	In case of systemd please specify netmask value like CIDR notation Eg: 24 instead of 255.255.255.0
+	In case of sysvinit please specify netmask value like dot-decimal notation Eg: 255.255.255.0 instead of 24
+
+config SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_IP_GATEWAY
+	string "Static IP gateway"
+	default "192.168.0.1"
+	depends on SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_SELECT && !SUBSYSTEM_ETHERNET_AXI_ETHERNET_0_USE_DHCP
+	help
+	Default gateway when static network address assignment is used.
 
 endmenu
 
