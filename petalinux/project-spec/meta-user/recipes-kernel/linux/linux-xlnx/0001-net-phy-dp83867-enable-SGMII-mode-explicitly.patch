@@ -1,0 +1,51 @@
+From: Umut Suluhan
+Subject: [PATCH] net: phy: dp83867: enable SGMII mode explicitly
+
+The driver relies on the SGMII enable strap. On the VCU128 that strap is
+not set, so the PHY powers up in RGMII mode: the SGMII link to the
+PCS/PMA core never comes up and no traffic passes. Set the SGMII enable
+bit in PHYCR and clear the RGMII enable bit in RGMIICTL when the
+interface mode is SGMII.
+
+Upstream-Status: Pending
+---
+--- a/drivers/net/phy/dp83867.c
++++ b/drivers/net/phy/dp83867.c
+@@ -75,6 +75,7 @@
+ #define MII_DP83867_MICR_JABBER_INT_EN		BIT(0)
+ 
+ /* RGMIICTL bits */
++#define DP83867_RGMII_EN			BIT(7)
+ #define DP83867_RGMII_TX_CLK_DELAY_EN		BIT(1)
+ #define DP83867_RGMII_RX_CLK_DELAY_EN		BIT(0)
+ 
+@@ -106,6 +107,7 @@
+ #define DP83867_PHYCR_TX_FIFO_DEPTH_MASK	GENMASK(15, 14)
+ #define DP83867_PHYCR_RX_FIFO_DEPTH_MASK	GENMASK(13, 12)
+ #define DP83867_PHYCR_RESERVED_MASK		BIT(11)
++#define DP83867_PHYCR_SGMII_EN			BIT(11)
+ #define DP83867_PHYCR_FORCE_LINK_GOOD		BIT(10)
+ 
+ /* RGMIIDCTL bits */
+@@ -857,6 +859,21 @@
+ 			       dp83867->io_impedance);
+ 
+ 	if (phydev->interface == PHY_INTERFACE_MODE_SGMII) {
++		/* Do not rely on the SGMII enable strap: on boards where it is
++		 * not set (e.g. VCU128) the PHY powers up in RGMII mode and the
++		 * SGMII link to the MAC never comes up. Select SGMII and turn
++		 * the RGMII interface off explicitly.
++		 */
++		ret = phy_set_bits(phydev, MII_DP83867_PHYCTRL,
++				   DP83867_PHYCR_SGMII_EN);
++		if (ret)
++			return ret;
++
++		ret = phy_clear_bits_mmd(phydev, DP83867_DEVADDR,
++					 DP83867_RGMIICTL, DP83867_RGMII_EN);
++		if (ret)
++			return ret;
++
+ 		/* For support SPEED_10 in SGMII mode
+ 		 * DP83867_10M_SGMII_RATE_ADAPT bit
+ 		 * has to be cleared by software. That
