@@ -16,6 +16,7 @@ iface atml0 inet dhcp
 # Wired or wireless interfaces including predictable names
 auto eth0
 iface eth0 inet dhcp
+	udhcpc_opts -b
 iface eth1 inet dhcp
 
 # Busybox ifupdown won't process /en* correctly
