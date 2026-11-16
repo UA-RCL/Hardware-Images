@@ -33,22 +33,22 @@ config SUBSYSTEM_ENDIAN_LITTLE
 
 if SUBSYSTEM_DISTRO_PETALINUX
 
-source /host-fs/mnt/data/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.linuxcompselection
+source /scratch/umut/vcu128_eth/petalinux/project-spec/configs/configs/Kconfig.linuxcompselection
 
-source /host-fs/mnt/data/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.autoconfigsettings
+source /scratch/umut/vcu128_eth/petalinux/project-spec/configs/configs/Kconfig.autoconfigsettings
 
 endif
 
-source /host-fs/mnt/data/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.syshw
+source /scratch/umut/vcu128_eth/petalinux/project-spec/configs/configs/Kconfig.syshw
 
-source /host-fs/mnt/data/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.dtgsettings
+source /scratch/umut/vcu128_eth/petalinux/project-spec/configs/configs/Kconfig.dtgsettings
 
-source /host-fs/mnt/data/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.bootcompconfigurations
+source /scratch/umut/vcu128_eth/petalinux/project-spec/configs/configs/Kconfig.bootcompconfigurations
 
 if SUBSYSTEM_DISTRO_PETALINUX
 
-source /host-fs/mnt/data/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.imagepkgconfigurations
+source /scratch/umut/vcu128_eth/petalinux/project-spec/configs/configs/Kconfig.imagepkgconfigurations
 
 endif
 
-source /host-fs/mnt/data/tmp/Hardware-Images/petalinux/project-spec/configs/configs/Kconfig.yoctobuildsettings
+source /scratch/umut/vcu128_eth/petalinux/project-spec/configs/configs/Kconfig.yoctobuildsettings

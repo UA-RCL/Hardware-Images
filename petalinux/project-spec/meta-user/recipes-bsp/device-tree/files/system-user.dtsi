@@ -31,3 +31,14 @@
         };
     };
 };
+
+&axi_ethernet_0 {
+    pcs-handle = <&pcs_phy>;
+};
+
+&axi_ethernet_mdio {
+    pcs_phy: ethernet-phy@1 {
+        compatible = "ethernet-phy-id0174.0c00";
+        reg = <1>;
+    };
+};
